@@ -1,0 +1,144 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'assets/bootstrap-5.3.1-dist/css/bootstrap.min.css' %}">
+
+    <link rel="icon" href="{% static 'icon.ico' %}" type="image/x-icon">
+
+    <!--icons-->
+    <link rel="stylesheet" href="{% static 'assets/bootstrap-icons/bootstrap-icons.css' %}">
+    <title>Confirm Order</title>
+
+    <link rel="stylesheet" href="{% static 'assets/style.css' %}">
+
+    <style>
+        body {
+            /*font-family: Verdana, Geneva, Tahoma, sans-serif;*/
+            font-family: Arial, Helvetica, sans-serif;
+        }
+    </style>
+
+
+
+
+</head>
+
+<body>
+
+
+    <div class="container">
+
+
+        {% include 'messages.html' %}
+        <!-- Cart Items -->
+        <div class="row mt-5">
+
+<!--Logo-->
+<a href="{% url 'home' %}"> <img src="{% static 'logo22.png' %}" class="rounded mx-auto d-block mt-2"
+    style="width: 200px;" alt="logo" loading="lazy"></a>
+
+            <h5 class="text-center mt-2">www.myshopcomplex.com</h5>
+
+            {% if persons %}
+            <h2 class="text-center mb-5">vendor: <span class="text-primary"> {{person.slug}}</span></h2>
+
+
+
+            {% for persons in persons %}
+
+
+            <h3>Purchaser: <span class="text-secondary"> {{person.purchaser}} - {{persons.phone}}</span></h3>
+            <hr>
+
+
+            {% for cart_item in cart_items %}
+
+
+
+            {% if cart_item.purchaser == cart_item.purchaser %}
+
+            <div class="col-md-6 my-2">
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4 d-flex justify-content-center align-items-center">
+                            <img src="{{ cart_item.cart_image.url }}" class="img-fluid rounded-start"
+                                alt="{{ cart_item.name }}">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ cart_item.name }}</h5>
+
+                                {% if cart_item.size %}
+                                <p class="card-text">Size: {{ cart_item.size }}</p>
+                                {% endif %}
+
+                                {% if cart_item.color %}
+                                <p class="card-text">Colour: {{ cart_item.color }}</p>
+                                {% endif %}
+                                <!-- You can add more details as needed -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Move these elements inside the for loop -->
+            <div class="col-md-2 my-2">Qty:
+                <input type="number" class="text-center " value="{{cart_item.quantity}}" readonly style="width: 60px;">
+            </div>
+            <div class="col-md-2 my-2">
+                <p class="me-4"><small class="me-3"> x </small>{{ user.currency }}{{cart_item.price|floatformat:2}}</p>
+            </div>
+
+            <hr>
+            {% endif %}
+            {% endfor %}
+            {% endfor %}
+
+
+        </div>
+        <!-- End Cart Items -->
+
+
+        <!-- Total -->
+        <div class="row mt-2 mb-5">
+            <div class="col-md-6 offset-md-6">
+                <div class="d-flex justify-content-between">
+                    <div class="display-6 fw-bold mx-2">Total: {{ user.currency }}{{cart_total|floatformat:2}}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- End Total -->
+
+
+        <!-- </center> -->
+
+        <!-- End Buttons -->
+        {% else %}
+        <center>
+            <p>Not Found</p>
+        </center>
+
+        {% endif %}
+
+
+
+
+
+
+
+
+    </div>
+
+
+
+
+    <script src="{% static 'assets/bootstrap-5.3.1-dist/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+
+</html>

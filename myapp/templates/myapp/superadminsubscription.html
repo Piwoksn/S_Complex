@@ -1,0 +1,145 @@
+{% extends 'superadminwrapper.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+
+    {% include 'messages.html' %}
+    <div class="row my-3 g-0">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="card shadow border-secondary">
+                <div class="card-header text-center">
+                    <h2> Add Subscription </h2>
+                </div>
+                <div class="card-body">
+
+                    <div class="col-sm-12 mt-3">
+                        <label for="plan" class="form-label">User Email</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="user" aria-label="user">
+                        </div>
+                        <div class="invalid-feedback">Please enter User ID</div>
+                    </div>
+
+                    <div class="col-sm-12 mt-3">
+                        <label for="plan" class="form-label">Reference No:</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="ref" aria-label="user">
+                        </div>
+                        <div class="invalid-feedback">Please enter Ref No.</div>
+                    </div>
+
+
+                    <div class="dropdown col-lg-6 mb-3 mt-2">
+
+                        <select class="form-select" name="naira_plan" id="floatingSelect" aria-label="currency"
+                            required>
+                            <option selected>Naira Plan</option>
+                            <option value="Gold">Gold
+                            </option>
+                            <option value="Silver">Silver
+                            </option>
+                            <option value="Bronze">Bronze
+                            </option>
+                            <option value="Platinum">Platinum
+                            </option>
+                            <option value="Basic">Basic
+                            </option>
+                        </select>
+
+                    </div>
+
+                    <div class="dropdown col-lg-6 mb-3 mt-2">
+
+                        <select class="form-select" name="dollar_plan" id="floatingSelect" aria-label="currency"
+                            required>
+                            <option selected>Dollar Plan</option>
+                            <option value="Gold">Gold
+                            </option>
+                            <option value="Silver">Silver
+                            </option>
+                            <option value="Bronze">Bronze
+                            </option>
+                            <option value="Platinum">Platinum
+                            </option>
+                            <option value="Basic">Basic
+                            </option>
+                        </select>
+
+                    </div>
+
+
+
+                    <div class="col-sm-12 mt-3">
+                        <button class="btn btn-primary w-100 mb-2" name="subscriptionbutton" type="submit"><i
+                                class="bi bi-plus"></i> Add </button>
+                    </div>
+
+
+                </div>
+            </div>
+        </form>
+
+
+        <form action="{% url 'superadmincancelsub' %}" method="POST">
+            {% csrf_token %}
+            <div class="card shadow border-secondary">
+                <div class="card-header text-center">
+                    <h2> Cancel Subscription</h2>
+                </div>
+                <div class="card-body">
+
+                    <div class="col-sm-12 mt-3">
+                        <label for="plan" class="form-label">User Email</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="user" aria-label="user">
+                        </div>
+                        <div class="invalid-feedback">Please enter User ID</div>
+                    </div>
+
+                    <div class="col-sm-12 mt-3">
+                        <button class="btn btn-danger w-100 mb-2" name="dollarbutton" type="submit"><i
+                                class="bi bi-trash"></i> Cancel
+                            Subscription </button>
+                    </div>
+
+
+                </div>
+            </div>
+        </form>
+        <form action="{% url 'superadmincoin' %}" method="POST">
+            {% csrf_token %}
+            <div class="card shadow border-secondary">
+                <div class="card-header text-center">
+                    <h2> Gift Coin</h2>
+                </div>
+                <div class="card-body">
+
+                    <div class="col-sm-12 mt-3">
+                        <label for="plan" class="form-label">User Email</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="user" aria-label="user">
+                        </div>
+                        <div class="invalid-feedback">Please enter User ID</div>
+                    </div>
+                    <div class="col-sm-12 mt-3">
+                        <label for="plan" class="form-label">Amount</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control" name="amount" aria-label="user">
+                        </div>
+                        <div class="invalid-feedback">Please enter Amount</div>
+                    </div>
+
+                    <div class="col-sm-12 mt-3">
+                        <button class="btn btn-success w-100 mb-2" name="dollarbutton" type="submit"><i
+                                class="bi bi-gift"></i> Gift Coin </button>
+                    </div>
+
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock content %}

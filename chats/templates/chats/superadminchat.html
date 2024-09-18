@@ -1,0 +1,46 @@
+{% extends 'superadminwrapper.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+
+    <div class="row my-5 g-0">
+        {% include 'messages.html' %}
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="card shadow border-secondary">
+                <div class="card-header text-center">
+                    <h2>Create Chat</h2>
+                </div>
+                <div class="card-body">
+
+                    <div class="col-sm-12 mt-3">
+                        <label for="plan" class="form-label">Chat With: </label>
+                        <div class="input-group">
+                            <span class="input-group-text">@</span>
+                            <input type="text" class="form-control" name="email" aria-label="itemprice">
+                        </div>
+                        <div class="invalid-feedback">Please enter a valid email</div>
+                    </div>
+
+                    <div class="col-sm-12 form-floating mt-3">
+                        <textarea class="form-control" placeholder="Your Message..." id="floatingTextarea2" name="chat"
+                            style="height: 100px"></textarea>
+                        <label for="floatingTextarea2">Your Message...</label>
+                    </div>
+
+
+                    <div class="col-sm-12 mt-3">
+                        <button class="btn btn-info w-100 mb-2" name="nairabutton" type="submit">Send</button>
+                    </div>
+
+
+                </div>
+            </div>
+        </form>
+
+
+
+    </div>
+</div>
+{% endblock content %}

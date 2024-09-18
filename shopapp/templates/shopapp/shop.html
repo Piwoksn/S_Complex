@@ -1,0 +1,136 @@
+{% extends 'shopwrapper.html' %}
+
+{% block content %}
+
+
+
+<style>
+    @font-face {
+        font-family: crystal;
+        src: url(/static/assets/Crystal/Crystal.ttf);
+    }
+</style>
+
+<!-- Main -->
+<div class="container">
+    <div class="row my-3">
+        <div class="col-12 text-center">
+            <img src="{{ user.logo.url }}" class="rounded" alt="logo" style="max-width: 16%; margin: auto;">
+            <h2 class="text-center mt-2 shopowner mb-5 gradient-text fs-2 text-wrap" style="font-family: crystal;">
+                {{ user.businessname }}
+            </h2>
+        </div>
+        {% include 'messages.html' %}
+    </div>
+
+    <div class="row">
+
+        {% if categories %}
+
+        {% for category in categories %}
+        <div class="col-12">
+            <h3 id="category_{{ forloop.counter }}" class="gradient-textheader fs-2 mb-0 pb-0">{{category.itemcategory}}
+            </h3>
+            <hr class="mb-3 mt-0 pt-0">
+        </div>
+        {% for item in shop reversed %}
+        {% if item.itemcategory == category.itemcategory %}
+        <div class="col-6 col-md-4 col-lg-3 px-0" id="product_{{ item.id }}">
+            <a href="{% url 'product' item.id %}">
+                <div class="card border">
+                    <div class="img-container">
+                        <img src="{{ item.itemimage.url }}" class="card-img-top rounded-start" alt="product Image">
+                    </div>
+                    <div
+                        class="card-body border-top{% if not request.resolver_match.url_name == 'product' %} card-body-md-lg{% endif %} mb-2">
+                        <h5 class="card-title pt-1 mt-1 pb-0 mb-0">{{ item.itemname }}</h5>
+                        {% if item.itemdiscount %}
+                        <p class="card-text text-danger text-decoration-line-through p-0 m-0"
+                            style="font-weight: bolder;">
+                            {{ user.currency }}{{ item.itemprice|floatformat:2 }}
+                        </p>
+                        <h5 class="card-text" style="font-weight: bolder;">
+                            {{ user.currency }}{{ item.itemamount|floatformat:2 }}
+                        </h5>
+
+                        {% else %}
+                        <h5 class="card-text " style="font-weight: bolder;">
+                            {{ user.currency }}{{ item.itemamount|floatformat:2 }}
+                            </span>
+                        </h5>
+
+                        {% endif %}
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endfor %}
+
+
+        {% else %}
+        <p class="text-center p-3">Shop is Empty! Add items</p>
+        {% endif %}
+
+    </div>
+</div>
+
+
+
+
+<style>
+    .img-container {
+        height: 270px;
+        /* Set the desired height for the card images */
+        overflow: hidden;
+    }
+
+    .img-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        /* object-fit: contain; */
+        /* Ensure the image covers the fixed height */
+    }
+
+    .card-body-md-lg {
+        height: 100px;
+    }
+
+    body.shop .gradient-text {
+        background-image: linear-gradient(90deg, #2110b4, #ff0000);
+        -webkit-background-clip: text;
+        /* For webkit browsers */
+        background-clip: text;
+        color: transparent;
+        font-size: 36px;
+    }
+
+    .gradient-textheader {
+        background-image: linear-gradient(360deg, #2110b4, #ff0000);
+        -webkit-background-clip: text;
+        /* For webkit browsers */
+        background-clip: text;
+        color: transparent;
+        font-size: 36px;
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Check if there is a 'product_id' query parameter in the URL
+        var queryParams = new URLSearchParams(window.location.search);
+        if (queryParams.has("product_id")) {
+            // Get the product ID from the query parameter
+            var productId = queryParams.get("product_id");
+            // Find the product element with the matching ID and scroll to it
+            var productElement = document.getElementById("product_" + productId);
+            if (productElement) {
+                productElement.scrollIntoView();
+            }
+        }
+    });
+</script>
+
+{% endblock content %}

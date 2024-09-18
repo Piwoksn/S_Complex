@@ -1,0 +1,74 @@
+{% extends 'shopwrapper.html' %}
+
+{% block content %}
+<!-- Main -->
+<div class="container">
+    <h3 class="mt-3">Search Result:</h3>
+
+    {% if categories %}
+    {% for category in categories %}
+    <h3 class="mt-3 gradient-textheader fs-2 mb-0 pb-0">{{ category.itemcategory }}</h3>
+    <hr id="category_{{ forloop.counter }}" class="mb-3 mt-0 pt-0">
+
+    <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+        {% for item in shop %}
+        {% if item.itemcategory == category.itemcategory %}
+        <div class="col px-0">
+            <a href="{% url 'product' item.id %}" class="text-decoration-none">
+                <div class="card border">
+                    <div class="img-container">
+                        <img src="{{ item.itemimage.url }}" class="card-img-top rounded-start" alt="Product Image">
+                    </div>
+                    <div class="card-body border-top" style="height: 100px;">
+                        <h5 class="card-title pt-1 mt-1 pb-0 mb-0">{{ item.itemname }}</h5>
+                        {% if item.itemdiscount %}
+                        <p class="card-text text-danger text-decoration-line-through p-0 m-0"
+                            style="font-weight: bolder;">
+                            {{ user.currency }}{{ item.itemprice|floatformat:2 }}
+                        </p>
+                        <h5 class="card-text" style="font-weight: bolder;">
+                            {{ user.currency }}{{ item.itemamount|floatformat:2 }}
+                        </h5>
+                        {% else %}
+                        <h5 class="card-text" style="font-weight: bolder;">
+                            {{ user.currency }}{{ item.itemamount|floatformat:2 }}
+                        </h5>
+                        {% endif %}
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+    {% endfor %}
+
+    {% else %}
+    <center class="py-5 my-5">
+        <p>Item not found!</p>
+    </center>
+    {% endif %}
+</div>
+
+<style>
+    .img-container {
+        height: 270px;
+        overflow: hidden;
+    }
+
+    .img-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .gradient-textheader {
+        background-image: linear-gradient(360deg, #2110b4, #ff0000);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        font-size: 36px;
+    }
+</style>
+
+{% endblock content %}

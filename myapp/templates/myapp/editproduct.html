@@ -1,0 +1,392 @@
+{% extends 'wrapper.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+    {% include 'messages.html' %}
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <!-- Item Image -->
+        <div class="mb-3 col-lg-6 mt-3">
+            <div class="pt-2">
+                <label for="formFile" class="form-label">Upload Item Image</label>
+                <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image" id="uploadLink">
+                    <i class="bi bi-upload"></i>
+                </a>
+                <input type="file" id="fileInput" name="itemimage" style="display: none;" accept="image/*" required>
+                <center>
+                    <img src="{{shop.itemimage.url}}" alt="Item Image" id="selectedImage" style="max-width: 100px;">
+                </center>
+                <!-- Script for handling image upload -->
+                <script>
+                    // Get the link, file input, and image elements by their IDs
+                    var uploadLink = document.getElementById("uploadLink");
+                    var fileInput = document.getElementById("fileInput");
+                    var selectedImage = document.getElementById("selectedImage");
+
+                    // Add a click event listener to the link
+                    uploadLink.addEventListener("click", function (e) {
+                        // Prevent the default link behavior
+                        e.preventDefault();
+
+                        // Trigger a click event on the file input element
+                        fileInput.click();
+                    });
+
+                    // Add an event listener to the file input to handle file selection
+                    fileInput.addEventListener("change", function () {
+                        // Display the selected image immediately
+                        if (fileInput.files.length > 0) {
+                            var objectURL = URL.createObjectURL(fileInput.files[0]);
+                            selectedImage.src = objectURL;
+                            selectedImage.style.display = "block";
+                        }
+                    });
+                </script>
+            </div>
+        </div>
+
+
+
+
+
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary btn-sm" name="update_pic">Save
+                Image</button>
+        </div>
+    </form>
+
+    <!-- Item Image2 -->
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="mb-3 col-lg-6 mt-3">
+            <div class="pt-2">
+                <label for="formFile" class="form-label">Item Image 2 (if available)</label>
+                <a href="#" class="btn btn-primary btn-sm" title="itemimage2" id="uploadLink2">
+                    <i class="bi bi-upload"></i>
+                </a>
+                <!-- Delete Image -->
+
+                <a href="#" class="btn btn-danger btn-sm" title="deleteimage2" id="deleteLink2">
+                    <i class="bi bi-trash"></i>
+                </a>
+
+                <script>
+                    var deleteLink2 = document.getElementById("deleteLink2");
+                    var selectedImage2 = document.getElementById("selectedImage2");
+
+                    // Add a click event listener to the delete link
+                    deleteLink2.addEventListener("click", function (e) {
+                        e.preventDefault();
+
+                        // Set the display property of the corresponding image to 'none'
+                        selectedImage2.style.display = "none";
+                    });
+                </script>
+                <!-- end delete image -->
+
+                <!-- end delete image -->
+                <input type="file" id="fileInput2" name="itemimage2" style="display: none;" accept="image/*">
+                <center>
+                    {% if shop.itemimage2 %}
+                    <img src="{{shop.itemimage2.url}}" alt="Item Image" id="selectedImage2" style="max-width: 100px;">
+                    {% else %}
+                    <img src="" alt="Item Image" id="selectedImage2" style="max-width: 100px; display: none;">
+                    {% endif %}
+                </center>
+                <!-- Script for handling image upload -->
+
+
+                <script>
+                    // Get the link, file input, and image elements by their IDs
+                    var uploadLink2 = document.getElementById("uploadLink2");
+                    var fileInput2 = document.getElementById("fileInput2");
+                    var selectedImage2 = document.getElementById("selectedImage2");
+
+                    // Add a click event listener to the link
+                    uploadLink2.addEventListener("click", function (e) {
+                        // Prevent the default link behavior
+                        e.preventDefault();
+
+                        // Trigger a click event on the file input element
+                        fileInput2.click();
+                    });
+
+                    // Add an event listener to the file input to handle file selection
+                    fileInput2.addEventListener("change", function () {
+                        // Display the selected image immediately
+                        if (fileInput2.files.length > 0) {
+                            var objectURL = URL.createObjectURL(fileInput2.files[0]);
+                            selectedImage2.src = objectURL;
+                            selectedImage2.style.display = "block";
+                        }
+                    });
+                </script>
+            </div>
+        </div>
+
+        <!-- End of image -->
+
+
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary btn-sm" name="update_pic2">Save
+                Images 2 </button>
+        </div>
+        <hr>
+    </form>
+
+    <!-- Item Image3 -->
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="mb-3 col-lg-6 mt-3">
+            <div class="pt-2">
+                <label for="formFile" class="form-label">Item Image 3 (if available)</label>
+                <a href="#" class="btn btn-primary btn-sm" title="itemimage3" id="uploadLink3">
+                    <i class="bi bi-upload"></i>
+                </a>
+                <!-- Delete Image -->
+                <a href="#" class="btn btn-danger btn-sm" title="deleteimage3" id="deleteLink3">
+                    <i class="bi bi-trash"></i>
+                </a>
+                <!-- Script for handling delete image functionality -->
+                <script>
+                    var deleteLink3 = document.getElementById("deleteLink3");
+                    var selectedImage3 = document.getElementById("selectedImage3");
+
+                    // Add a click event listener to the delete link
+                    deleteLink3.addEventListener("click", function (e) {
+                        e.preventDefault();
+
+                        // Set the display property of the corresponding image to 'none'
+                        selectedImage3.style.display = "none";
+                    });
+                </script>
+                <!-- end delete image -->
+                <input type="file" id="fileInput3" name="itemimage3" style="display: none;" accept="image/*">
+                <center>
+                    {% if shop.itemimage3 %}
+                    <img src="{{shop.itemimage3.url}}" alt="Item Image" id="selectedImage3" style="max-width: 100px;">
+                    {% else %}
+                    <img src="" alt="Item Image" id="selectedImage3" style="max-width: 100px; display: none;">
+                    {% endif %}
+                </center>
+                <!-- Script for handling image upload -->
+                <script>
+                    // Get the link, file input, and image elements by their IDs
+                    var uploadLink3 = document.getElementById("uploadLink3");
+                    var fileInput3 = document.getElementById("fileInput3");
+                    var selectedImage3 = document.getElementById("selectedImage3");
+
+                    // Add a click event listener to the link
+                    uploadLink3.addEventListener("click", function (e) {
+                        // Prevent the default link behavior
+                        e.preventDefault();
+
+                        // Trigger a click event on the file input element
+                        fileInput3.click();
+                    });
+
+                    // Add an event listener to the file input to handle file selection
+                    fileInput3.addEventListener("change", function () {
+                        // Display the selected image immediately
+                        if (fileInput3.files.length > 0) {
+                            var objectURL = URL.createObjectURL(fileInput3.files[0]);
+                            selectedImage3.src = objectURL;
+                            selectedImage3.style.display = "block";
+                        }
+                    });
+                </script>
+            </div>
+        </div>
+        <!-- End of image -->
+
+
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary btn-sm" name="update_pic3">Save
+                Images 3 </button>
+        </div>
+        <hr>
+    </form>
+
+
+    <!-- Item Video -->
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="mb-3 col-lg-6 mt-3">
+            <div class="pt-2">
+                <label for="formFile" class="form-label">Video Clip (optional)</label>
+                <a href="#" class="btn btn-primary btn-sm" title="itemvideo4" id="uploadLink4">
+                    <i class="bi bi-upload"></i>
+                </a>
+                <!-- Delete Image -->
+                <a href="#" class="btn btn-danger btn-sm" title="deletevideo4" id="deleteLink4">
+                    <i class="bi bi-trash"></i>
+                </a>
+                <!-- Script for handling delete image functionality -->
+                <script>
+                    var deleteLink4 = document.getElementById("deleteLink4");
+                    var selectedVideo4 = document.getElementById("selectedVideo4");
+
+                    // Add a click event listener to the delete link
+                    deleteLink4.addEventListener("click", function (e) {
+                        e.preventDefault();
+
+                        // Set the display property of the corresponding image to 'none'
+                        selectedVideo4.style.display = "none";
+                    });
+                </script>
+                <!-- end delete image -->
+                <input type="file" id="fileInput4" name="itemvideo4" style="display: none;" accept="video/*">
+                <center>
+                    {% if shop.itemvideo %}
+                    <video src="{{shop.itemvideo.url}}" alt="Item video" id="selectedVideo4" style="max-width: 100px;"
+                        controls>
+                        {% else %}
+                        <video src="" alt="Item Video" id="selectedVideo4" style="max-width: 100px; display: none;">
+                            {% endif %}
+                </center>
+                <!-- Script for handling image upload -->
+                <script>
+                    // Get the link, file input, and image elements by their IDs
+                    var uploadLink4 = document.getElementById("uploadLink4");
+                    var fileInput4 = document.getElementById("fileInput4");
+                    var selectedVideo4 = document.getElementById("selectedVideo4");
+
+                    // Add a click event listener to the link
+                    uploadLink4.addEventListener("click", function (e) {
+                        // Prevent the default link behavior
+                        e.preventDefault();
+
+                        // Trigger a click event on the file input element
+                        fileInput4.click();
+                    });
+
+                    // Add an event listener to the file input to handle file selection
+                    fileInput4.addEventListener("change", function () {
+                        // Display the selected image immediately
+                        if (fileInput4.files.length > 0) {
+                            var objectURL = URL.createObjectURL(fileInput4.files[0]);
+                            selectedVideo4.src = objectURL;
+                            selectedVideo4.style.display = "block";
+                        }
+                    });
+                </script>
+            </div>
+        </div>
+        <!-- End of image -->
+
+
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary btn-sm" name="update_vid">Save
+                Video </button>
+        </div>
+        <hr>
+    </form>
+
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- Category -->
+        <div class="col-12 mt-2">
+            <label for="category" class="form-label">Category</label>
+            <div class="input-group">
+                <input type="text" id="category-input" class="form-control" list="category-list" name="category"
+                    value="{{shop.itemcategory}}" placeholder="Select a category" required>
+                <datalist id="category-list">
+                    {% for category in categories %}
+                    <option value="{{category.itemcategory}}">{{category.itemcategory}}</option>
+                    {% endfor %}
+                </datalist>
+            </div>
+        </div>
+
+        <div class="col-sm-12 mt-3">
+            <label for="item name" class="form-label">Item Name (not more than 20 characters)</label>
+            <input type="text" name="itemname" class="form-control" value="{{shop.itemname}}" maxlength="20" required>
+            <div class="invalid-feedback">Please enter Item Name</div>
+        </div>
+
+
+
+        <div class="col-sm-12 mt-3">
+            <label for="item name" class="form-label">Price</label>
+            <div class="input-group">
+                <span class="input-group-text">{{user.currency}}</span>
+                <input type="text" class="form-control" name="itemprice" aria-label="itemprice"
+                    value="{{shop.itemprice|floatformat:2}}" pattern="[0-9]*\.?[0-9]+" title="Enter a valid number"
+                    required>
+            </div>
+            <div class="invalid-feedback">Please enter Item Price</div>
+        </div>
+
+
+        <div class="col-sm-12 mt-3">
+            <label for="discount" class="form-label">Discount Price <small class="card-title"> (if
+                    available)</small></label>
+            <div class="input-group">
+                <span class="input-group-text">{{user.currency}}</span>
+                <input type="text" class="form-control" name="itemdiscount" value="{{shop.itemdiscount|floatformat:2}}"
+                    aria-label="itemDiscount" pattern="[0-9]*\.?[0-9]+" title="Enter a valid number" required>
+            </div>
+            <div class="invalid-feedback">Please enter Discount</div>
+        </div>
+
+        <div class="col-sm-12 mt-3">
+            <label for="item color" class="form-label">Available Colours
+                <small class="text-danger">do not
+                    seperate with (' , ') comma</small>
+            </label>
+            <input type="text" name="itemcolour" class="form-control" placeholder="eg. Black Red Blue ..."
+                value="{{shop.itemcolors}}">
+            <div class="invalid-feedback">Available Colours </div>
+        </div>
+
+        <div class="col-sm-12 mt-3">
+            <label for="item color" class="form-label">Sizes <small>(if available)</small> <small class="text-danger">do
+                    not
+                    seperate with (' , ') comma</small></label>
+            <input type="text" name="itemsize" class="form-control" placeholder="eg. SM XL XXL"
+                value="{{shop.itemsize}}">
+            <div class="invalid-feedback">Available Sizes</div>
+        </div>
+
+
+
+
+        <div class="col-sm-12 form-floating mt-3">
+            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
+                name="itemdescription" style="height: 100px">{{shop.itemdescription}} </textarea>
+            <label for="floatingTextarea2">{{shop.itemdescription}}</label>
+        </div>
+
+
+
+
+
+
+
+        <!-- End of Add Item -->
+
+        <div class="col-sm-12 mt-3">
+            <button class="btn btn-primary w-100 mb-2" name="update_product" type="submit">Update Product</button>
+        </div>
+        <div class="col-sm-12 mt-3">
+            <a href="{{request.META.HTTP_REFERER}}" class="btn btn-warning w-100 mb-2"> <i class="bi bi-arrow-left"></i>
+                Return</a>
+        </div>
+    </form>
+
+
+</div>
+
+
+{% endblock content %}

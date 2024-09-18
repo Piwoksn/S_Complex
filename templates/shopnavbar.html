@@ -1,0 +1,194 @@
+{% load static %}
+
+<!--Header-->
+<header class="custom-shop-header">
+    <div class="container">
+        <div class="row align-items-center justify-content-between">
+            <div class="col-auto">
+                {% if user.slug %}
+                <a href="{% url 'shop' user.slug %}" class="navbar-brand text-black col-4 d-none d-md-block d-lg-block">
+                    <img src="{{ user.logo.url }}" alt="logo" style="width: 50px;" class="pe-1">
+                    {{ user.businessname }}
+                </a>
+                {% endif %}
+            </div>
+
+            <div class="col-7  d-lg-block">
+                <form method="GET" action="{% url 'search' user.slug %}" class="d-flex">
+                    <input class="form-control ms-5" type="search" name="q" placeholder="Search Products  ..."
+                        aria-label="Search">
+                </form>
+            </div>
+
+            <div class="col-auto">
+                {% if cart_count == 0 %}
+                <a href="{% url 'cart' user_slug=user.slug %}" class="text-white">
+                    <i class="bi bi-cart"></i>
+                    <span class="badge bg-primary"></span>
+                </a>
+                {% else %}
+                <a href="{% url 'cart' user_slug=user.slug %}" class="text-white">
+                    <i class="bi bi-cart"></i>
+                    <span class="badge bg-primary">{{ cart_count }}</span>
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</header>
+<!--End Header-->
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light custom-navbar">
+    <div class="container text-center">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link category-link" href="{% url 'shop' user.slug %}" data-category="All">All</a>
+                </li>
+                {% for category in categories %}
+                <li class="nav-item">
+                    <a class="nav-link category-link" href="#category_{{ forloop.counter }}"
+                        data-category="{{ category.itemcategory }}">{{ category.itemcategory }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- JavaScript for Smooth Scrolling -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"
+    integrity="sha384-e3wwd2AAM5JlXNqz1/02ntw9AiBAsSQD8C6wuCfIHzdEJ9nMVJ8HwbliBCY6EnDy"
+    crossorigin="anonymous"></script>
+
+
+<!-- JavaScript for Smooth Scrolling and Auto-Collapse -->
+<script>
+    $(document).on('click', 'a[href^="#"]', function (event) {
+        // Prevent default anchor click behavior
+        event.preventDefault();
+
+        // Collapse the navbar
+        $('.navbar-collapse').collapse('hide');
+
+        // Smooth scrolling to the anchor
+        $('html, body').animate({
+            scrollTop: $($.attr(this, 'href')).offset().top
+        }, 500);
+    });
+</script>
+
+
+
+<style>
+    /* Default styles for navbar */
+    .custom-navbar {
+        overflow-x: auto;
+        /* Enable horizontal scrolling */
+        white-space: nowrap;
+        /* Prevent wrapping of navbar items */
+    }
+
+    .navbar-nav {
+        display: inline-block;
+        /* Ensure navbar items are displayed in a single line */
+    }
+
+    .navbar-nav .nav-item {
+        display: inline-block;
+        /* Display navbar items inline */
+        margin-right: 15px;
+        /* Adjust spacing between navbar items */
+    }
+
+    .navbar-nav .nav-link {
+        color: #343a40;
+        font-weight: bold;
+        white-space: nowrap;
+        /* Prevent wrapping of nav link text */
+    }
+
+    /* Adjust other styles as needed */
+
+    /* Media query for smaller screens */
+    @media screen and (max-width: 768px) {
+        .custom-navbar {
+            overflow-x: hidden;
+            /* Disable horizontal scrolling */
+            overflow-y: auto;
+            /* Enable vertical scrolling */
+            scrollbar-width: thin;
+            /* Specify scrollbar width for Firefox */
+            scrollbar-color: #ced4da transparent;
+            /* Specify scrollbar color for Firefox */
+        }
+
+        .navbar-nav {
+            display: block;
+            /* Display navbar items vertically */
+            scrollbar-width: thin;
+            /* Specify scrollbar width for Firefox */
+            scrollbar-color: #ced4da transparent;
+            /* Specify scrollbar color for Firefox */
+        }
+
+        .navbar-nav .nav-item {
+            display: block;
+            /* Display navbar items as block elements */
+            margin-right: 0;
+            /* Remove margin between navbar items */
+        }
+
+        .navbar-toggler {
+            display: block;
+            /* Display the toggler button on smaller screens */
+        }
+
+        /* Custom styling for scrollbar on WebKit browsers */
+        .custom-navbar::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .custom-navbar::-webkit-scrollbar-thumb {
+            background-color: #ced4da;
+            border-radius: 5px;
+        }
+
+        .custom-navbar::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
+    }
+
+    /* Custom scrollbar for desktop */
+    @media screen and (min-width: 769px) {
+        .custom-navbar {
+            scrollbar-width: thin;
+            /* Specify scrollbar width for Firefox */
+            scrollbar-color: #ced4da transparent;
+            /* Specify scrollbar color for Firefox */
+        }
+
+        /* Custom styling for scrollbar on WebKit browsers */
+        .custom-navbar::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .custom-navbar::-webkit-scrollbar-thumb {
+            background-color: #ced4da;
+            border-radius: 5px;
+        }
+
+        .custom-navbar::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
+    }
+</style>

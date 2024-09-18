@@ -1,0 +1,83 @@
+{% extends 'reg_log.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container my-5">
+
+    <h1 class="display-5 text-center">Welcome {{request.user.last_name}}</h1>
+    <h3 class="display-7 text-center">Read the Terms and Conditions below</h3>
+
+    {% include 'messages.html' %}
+    <form action="{% url 'info' %}" method="POST">
+        {% csrf_token %}
+        <div class="col-sm-12 form-floating mt-3">
+            <textarea class="form-control" id="floatingTextarea2"
+                style="height: 250px; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; text-align: justify;"
+                readonly>Welcome to Shop Complex, a user friendly platform where you have 100% control of your business. With our platform you can easily upload and showcase your goods. Please ensure images you upload are free for commercial use. Shop Complex Should not be used for any fraudulent activity. Hence, Payments from customers should be based on delivery of products. We recommend having a dedicated dispatch rider to deliver goods and products to your customers. Remember, excellent customer service can make you their preferred vendor. 
+
+During your trial period, which spans 2 weeks, you have the opportunity to stock up and set up your business site. Upon the trial period's expiration, you'll need to subscribe to take your business live. We offer the following Subscription Plans:
+                
+        1-Month Monthly Plan for ₦{{nairaPlatinum}}
+        3-Months Quarterly Plan for ₦{{nairaBronze}}
+        6-Months Biannually Plan for ₦{{nairaSilver}}
+        1-Year Annually Plan for ₦{{nairaGold}}
+            </textarea>
+
+
+
+
+        </div>
+
+        <div class="form-check form-check-inline mt-3">
+            <input class="form-check-input" type="checkbox" name="accept" id="inlineRadio1" value="accepted" required>
+            <label class="form-check-label" for="inlineRadio1">I have read and agree to the terms and Conditions</label>
+        </div>
+
+
+
+
+
+        <!-- 
+    {% if user.country != 'Nigeria' and user.country != 'nigeria' or user.currency != '₦' %}
+    <!-- <div class="col-sm-12 form-floating mt-3">
+        <textarea class="form-control" id="floatingTextarea2"
+            style="height: 250px; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; text-align: justify;"
+            readonly>Welcome to Shop Complex, this is a platform where you have 100% control of your business. You have been given a FREE TRIAL of 2 WEEKS to enable you stock and setup your platform. On expiration of your trial period, you will have to subscribe to enable you business is Live. Here is our Subscription Plans: 1-Month/monthly Plan for ${{dollarPlatinum}}, 3-Months/quarterly Plan for ${{dollarBronze}}, 6-Months/biannually Plan for ${{dollarSilver}}, 1-Year/annually Plan for ${{dollarGold}}</textarea>
+    </div> -->
+
+
+        <!-- 
+    <div class="col-sm-12 form-floating mt-3">
+        <textarea class="form-control" id="floatingTextarea2"
+            style="height: 250px; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; text-align: justify;"
+            readonly>Welcome to Shop Complex, this is a platform where you have 100% control of your business. You have been given a FREE TRIAL of 2 WEEKS to enable you stock and setup your platform. On expiration of your trial period, you will have to subscribe to enable you business is Live. Here is our Subscription Plans: 1-Month/monthly Plan for ₦{{foreignnairaPlatinum}}, 3-Months/quarterly Plan for ₦{{foreignnairaBronze}}, 6-Months/biannually Plan for ₦{{foreignnairaSilver}}, 1-Year/annually Plan for ₦{{foreignnairaGold}}</textarea>
+
+    </div>
+
+
+    {% else %}
+
+
+    <div class="col-sm-12 form-floating mt-3">
+        <textarea class="form-control" id="floatingTextarea2"
+            style="height: 250px; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; text-align: justify;"
+            readonly>Welcome to Shop Complex, this is a platform where you have 100% control of your business. You have been given a FREE TRIAL of 2 WEEKS to enable you stock and setup your platform. On expiration of your trial period, you will have to subscribe to enable you business is Live. Here is our Subscription Plans: 1-Month/monthly Plan for ₦{{nairaPlatinum}}, 3-Months/quarterly Plan for ₦{{nairaBronze}}, 6-Months/biannually Plan for ₦{{nairaSilver}}, 1-Year/annually Plan for ₦{{nairaGold}}</textarea>
+
+    </div>
+
+    {% endif %} -->
+
+        <div class="col text-end me-4">
+            <button type="submit" class="btn btn-success py-3 my-3">Proceed to Admin
+                Panel</button>
+
+        </div>
+    </form>
+
+</div>
+
+
+
+
+{% endblock content %}

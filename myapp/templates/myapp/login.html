@@ -1,0 +1,65 @@
+{% extends 'reg_log.html' %}
+{% load static %}
+
+{% block content %}
+<!--Logo-->
+<div class="container my-5">
+    <div class="row">
+        <!--Logo-->
+        <a href="{% url 'home' %}"> <img src="{% static 'assets/logo/logo.png' %}" class="rounded mx-auto d-block mt-2"
+                style="width: 200px;" alt="logo" loading="lazy"></a>
+    </div>
+
+    <!--Login Form-->
+    <div class="row justify-content-center mt-2">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body">
+                    <div class="pt-4 pb-2">
+                        <h5 class="card-title text-center pb-0 fs-4">Login to Shop Complex</h5>
+                        <p class="text-center small">Enter your email & password to login</p>
+                        <br>
+                        {% include 'messages.html' %}
+
+                    </div>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <!--USername-->
+                        <div class="col-12">
+                            <label for="yourEmail" class="form-label">Email</label>
+                            <div class="input-group has-validation">
+                                <span class="input-group-text" id="inputGroupPrepend">@</span>
+                                <input type="text" name="email" class="form-control" id="yourEmail" required>
+                                <div class="invalid-feedback">Please enter your email.</div>
+                            </div>
+                        </div>
+                        <!--End Username-->
+                        <!--Password-->
+                        <div class="col-12 my-2 mb-5">
+                            <label for="yourPassword" class="form-label">Password</label>
+                            <input type="password" name="password" class="form-control" id="yourPassword"
+                                autocomplete="password" required>
+                            <div class="invalid-feedback">Please enter your password!</div>
+                        </div>
+                        <!--End Password-->
+
+                        <div class="col-12">
+                            <button class="btn btn-primary w-100 mb-2" type="submit">Login</button>
+                            <a class="btn btn-warning w-100" href="{% url 'registerform' %}">Register</a>
+                        </div>
+                    </form>
+                    <div class="text-center mt-3">
+                        <a href="{% url 'fgt_pwd' %}">Forgot password?</a>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+{% endblock content %}

@@ -1,0 +1,165 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} Shop Complex {% endblock title %}</title>
+
+    <!-- <link rel="icon" href="{% static 'icon.ico' %}" type="image/x-icon"> -->
+    <link rel="icon" href="{% static 'logo22.png' %}" type="image/x-icon">
+
+    <link rel="stylesheet" href="{% static 'assets/bootstrap-5.3.1-dist/css/bootstrap.min.css' %}">
+
+
+    <!-- Include Font Awesome CSS for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha512-..." crossorigin="anonymous">
+
+    <!--icons-->
+    <link rel="stylesheet" href="{% static 'assets/bootstrap-icons/bootstrap-icons.css' %}">
+
+    <link rel="stylesheet" href="{% static 'assets/style.css' %}">
+
+    <!-- Include portal.js -->
+    <script src="{% static 'js/portal.js' %}"></script>
+
+
+    <!-- Reload Page mostly for chats -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+
+<body class="bg-light">
+    {% include 'navbar.html' %}
+
+    {% block content %}
+
+
+    {% endblock content %}
+    <a href="#top" class="back-to-top btn btn-secondary d-none"><i class="bi bi-arrow-up"></i></a>
+
+    {% include 'footer.html' %}
+
+
+
+
+    <!--Nav BAr-------------------->
+    <script>
+        // Get a reference to your navbar
+        const navbar = document.querySelector('.custom-navbar');
+
+        // Function to toggle the fixed-navbar class based on scroll position
+        function toggleNavbar() {
+            if (window.scrollY > 0) {
+                navbar.classList.add('fixed-navbar');
+            } else {
+                navbar.classList.remove('fixed-navbar');
+            }
+        }
+
+        // Attach an event listener to the window's scroll event
+        window.addEventListener('scroll', toggleNavbar);
+
+        // Initial call to set the navbar's initial state
+        toggleNavbar();
+    </script>
+
+    <!----------End------------->
+
+
+    <!--For Back to Top Link-->
+    <script>
+        window.addEventListener('scroll', function () {
+            var backToTop = document.querySelector('.back-to-top');
+            if (window.scrollY > 100) {
+                backToTop.classList.remove('d-none');
+                backToTop.style.opacity = '1';
+            } else {
+                backToTop.style.opacity = '0';
+                setTimeout(function () {
+                    backToTop.classList.add('d-none');
+                }, 300); // Delay the hiding of the link for smoother transition
+            }
+        });
+
+        document.querySelector('.back-to-top').addEventListener('click', function (e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+
+
+    <!-- Ajax Reload Very good for Chats -->
+
+
+    <script>
+        $(document).ready(function () {
+            setInterval(function () {
+                $.ajax({
+                    url: window.location.href,
+                    type: 'GET',
+                    success: function (data) {
+                        var newHeader = $(data).find('.custom-header').html();
+                        $('.custom-header').html(newHeader);
+                    }
+                });
+            }, 5000); // Reload every 5 second
+        });
+    </script>
+
+    <!-- Reload + Tone -->
+
+    <!-- Ajax Reload Main -->
+    <script>
+        // Function to play notification sound
+        function playSound() {
+            var audio = new Audio("{% static 'tone/notificationtone.wav' %}");
+            audio.play();
+        }
+
+        // Function to check for new notifications
+        function checkNotifications() {
+            $.ajax({
+                url: window.location.href,
+                type: 'GET',
+                success: function (data) {
+                    var currentCartCount = $(data).find('#notificationsDropdown .badge').text();
+                    currentCartCount = parseInt(currentCartCount);
+
+                    // Compare current cart count with previous count
+                    if (currentCartCount > previousCartCount) {
+                        playSound(); // Play sound if there are new notifications
+                    }
+
+                    // Update previous cart count
+                    previousCartCount = currentCartCount;
+                }
+            });
+        }
+
+        // Variable to store previous cart count
+        var previousCartCount = {{ carts.count }};
+
+        // Call checkNotifications function when the document is ready
+        $(document).ready(function () {
+            // Set interval to check for new notifications every 5 seconds
+            setInterval(checkNotifications, 5000);
+        });
+    </script>
+
+
+
+    <!--End Ajax Reload -->
+
+    <!--Bootsrap js-->
+    <script src="{% static 'assets/bootstrap-5.3.1-dist/js/bootstrap.bundle.min.js' %}"></script>
+
+</body>
+
+</html>

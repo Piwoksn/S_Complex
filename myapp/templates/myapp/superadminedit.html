@@ -1,0 +1,193 @@
+{% extends 'superadminwrapper.html' %}
+
+
+
+{% block content %}
+<!--Main-->
+
+
+<div class="container">
+    {% include 'messages.html' %}
+    <div class="row bg-white shadow mb-3  my-3 g-0">
+
+        <form action="{% url 'superadminedit' pk=user.id %}" method="POST">
+            {% csrf_token %}
+            <div class="card">
+                <div class="card-header">
+                    <h2>Edit User Information</h2>
+                </div>
+                <div class="card-body mt-3">
+
+                    <div class="row mb-5">
+                        <center>
+                            <div class="col-sm-4 p-0">
+                                <div class="py-2">
+
+                                    <a href="{{user.profilepic.url}}">
+                                        <img class="rounded" src="{{user.profilepic.url}}" alt="Selected Image1"
+                                            class="mt-2" id="selectedImage2" style="width: 100px;">
+                                    </a>
+                                    <a href="{{user.logo.url}}">
+                                        <img class="rounded" src="{{user.logo.url}}" alt="Selected Image2" class="mt-2"
+                                            id="selectedImage2" style="width: 100px;">
+                                    </a>
+                                    <a href="{{user.idpic.url}}">
+                                        <img class="rounded" src="{{user.idpic.url}}" alt="Selected Image2" class="mt-2"
+                                            id="selectedImage2" style="width: 100px;">
+                                    </a>
+                                </div>
+
+                            </div>
+
+                            <h3 class="text-secondary">Name: {{user.first_name}} {{user.last_name}}</h3>
+                            <h5 class="text-secondary">Email: {{user.email}}</h5>
+                            <h5 class="text-secondary">Site: {{user.slug}}</h5>
+                            <h5 class="text-secondary">Date Joined: {{user.date_joined}}</h5>
+                            <h5 class="text-secondary">Last Seen: {{user.last_login}}</h5>
+                        </center>
+                    </div>
+
+
+                    <div class="row mb-3">
+                        <label for="phone" class="col-md-4 col-lg-2 col-form-label">Phone</label>
+                        <div class="col-md-8 col-lg-9">
+                            <input type="text" class="form-control" id="phone" name="phone" value="{{ user.phone }}"
+                                required>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="coin" class="col-md-4 col-lg-2 col-form-label">Coin</label>
+                        <div class="col-md-8 col-lg-9">
+                            <input type="text" class="form-control" id="coin" name="coin" value="{{ user.coins }}"
+                                required>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="whatsapp" class="col-md-4 col-lg-2 col-form-label">Whatsapp</label>
+                        <div class="col-md-8 col-lg-9">
+                            <input type="text" class="form-control" id="whatsapp" name="whatsapp"
+                                value="{{ user.whatsapp }}" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="facebook" class="col-md-4 col-lg-2 col-form-label">Facebook</label>
+                        <div class="col-md-8 col-lg-9">
+                            <input type="text" class="form-control" id="facebook" name="facebook"
+                                value="{{ user.facebook }}" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="instagram" class="col-md-4 col-lg-2 col-form-label">Instagram</label>
+                        <div class="col-md-8 col-lg-9">
+                            <input type="text" class="form-control" id="instagram" name="instagram"
+                                value="{{ user.instagram }}" required>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="address" class="col-md-4 col-lg-2 col-form-label">Address</label>
+                        <div class="col-md-8 col-lg-9">
+                            <input type="text" class="form-control" id="address" name="address"
+                                value="{{ user.address }}" required>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="state" class="col-md-4 col-lg-2 col-form-label">State</label>
+                        <div class="col-md-8 col-lg-9">
+                            <input type="text" class="form-control" id="state" name="state" value="{{ user.state }}"
+                                required>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="country" class="col-md-4 col-lg-2 col-form-label">Country</label>
+                        <div class="col-md-8 col-lg-9">
+                            <input type="text" class="form-control" id="country" name="country"
+                                value="{{ user.country }}" required>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="securityquestion" class="col-md-4 col-lg-2 col-form-label">Securityquestion</label>
+                        <div class="col-md-8 col-lg-9">
+                            <input type="text" class="form-control" id="securityquestion" name="securityquestion"
+                                value="{{ user.securityquestion }}" required>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="securityanswer" class="col-md-4 col-lg-2 col-form-label">Securityanswer</label>
+                        <div class="col-md-8 col-lg-9">
+                            <input type="text" class="form-control" id="securityanswer" name="securityanswer"
+                                value="{{ user.securityanswer }}" required>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="row mb-3">
+                        <center>
+                            <div class="col-sm-4 p-0">
+                                <div class="py-2">
+
+
+                                    <button class="btn btn-primary w-100" type="submit">Save</button>
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-4 p-0">
+                                <div class="py-2">
+
+
+                                    <a href="{% url 'superadmindelete' pk=user.id %}"
+                                        class="btn btn-outline-danger w-100">Delete User <i class="bi bi-trash"></i></a>
+                                </div>
+
+                            </div>
+
+
+                        </center>
+                    </div>
+
+
+
+
+
+
+
+
+
+                </div>
+
+            </div>
+
+        </form>
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+{% endblock content %}

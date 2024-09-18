@@ -1,0 +1,181 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} Shop Complex {% endblock title %}</title>
+
+    <link rel="icon" href="{% static 'icon.ico' %}" type="image/x-icon">
+
+    <link rel="stylesheet" href="{% static 'assets/bootstrap-5.3.1-dist/css/bootstrap.min.css' %}">
+
+
+    <!-- Include Font Awesome CSS for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha512-..." crossorigin="anonymous">
+
+    <!--icons-->
+    <link rel="stylesheet" href="{% static 'assets/bootstrap-icons/bootstrap-icons.css' %}">
+
+    <link rel="stylesheet" href="{% static 'assets/style.css' %}">
+
+
+</head>
+
+
+<body class="bg-light">
+    {% include 'navbar.html' %}
+
+    <div class="container-fluid">
+        <div class="row mt-2 justify-content-center align-items-center">
+            <h1 class="display-3 text-center card-title">Perform Task to Gain Coin</h1>
+            <h2><span class="text-secondary">Total Coins:</span> <i class="bi bi-coin"></i><span
+                    class="display-4">{{user.coins}}</span></h2>
+            <br>
+            <center>
+                <div class="col col-md-6 col-sm-12">
+                    <div class="card border shadow">
+                        <div class="card-header">
+                            <h2>Reward</h2>
+                        </div>
+                        <div class="card-body text-center">
+                            <p class="mt-2">Click Perform task Below and Get Reward</p>
+                            <h1><i class="bi bi-coin"></i><span class="display-1">20</span></h1>
+
+                            <div>
+
+
+
+
+
+
+
+                            </div>
+
+                        </div>
+                        <div class="card-footer p-2">
+                            <a href="{% url 'coins' %}" class="btn btn-warning m-2 w-100">Get Reward <i
+                                    class="bi bi-coin"></i></a>
+
+
+
+                            <!--  -->
+                            <!-- <a href="#" target="_blank" class="btn btn-warning m-2" onclick="gaincoins('20')">
+                                Perform Task <i class="bi bi-list-task"></i>
+                            </a> -->
+
+                            <!--  -->
+
+                        </div>
+
+                    </div>
+                </div>
+            </center>
+
+
+            <!--  -->
+
+
+            <br>
+            <h5> Perfom Task Below <i class="bi bi-list-task"></i></h5>
+            <hr>
+            <a href="#" target="_blank" class="m-2" onclick="gaincoins('20')"
+                style="width: 100%; border: 1px solid black; height: 400px; text-align: center;">
+                Perform Task <i class="bi bi-list-task"></i>
+            </a>
+
+
+
+
+
+            <!--  -->
+
+        </div>
+    </div>
+
+    <script>
+        function gaincoins(coins) {
+            const data = {
+                'coins': coins,
+            };
+
+            fetch('/coins/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),  // Send data as JSON
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // Handle the response from the server (if needed)
+                    console.log('Server response:', data);
+                });
+        }
+
+    </script>
+
+
+    <a href="#top" class="back-to-top btn btn-secondary d-none"><i class="bi bi-arrow-up"></i></a>
+
+    {% include 'footer.html' %}
+
+
+
+
+    <!--Nav BAr-------------------->
+    <script>
+        // Get a reference to your navbar
+        const navbar = document.querySelector('.custom-navbar');
+
+        // Function to toggle the fixed-navbar class based on scroll position
+        function toggleNavbar() {
+            if (window.scrollY > 0) {
+                navbar.classList.add('fixed-navbar');
+            } else {
+                navbar.classList.remove('fixed-navbar');
+            }
+        }
+
+        // Attach an event listener to the window's scroll event
+        window.addEventListener('scroll', toggleNavbar);
+
+        // Initial call to set the navbar's initial state
+        toggleNavbar();
+    </script>
+
+    <!----------End------------->
+
+
+    <!--For Back to Top Link-->
+    <script>
+        window.addEventListener('scroll', function () {
+            var backToTop = document.querySelector('.back-to-top');
+            if (window.scrollY > 100) {
+                backToTop.classList.remove('d-none');
+                backToTop.style.opacity = '1';
+            } else {
+                backToTop.style.opacity = '0';
+                setTimeout(function () {
+                    backToTop.classList.add('d-none');
+                }, 300); // Delay the hiding of the link for smoother transition
+            }
+        });
+
+        document.querySelector('.back-to-top').addEventListener('click', function (e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+
+    <!--Bootsrap js-->
+    <script src="{% static 'assets/bootstrap-5.3.1-dist/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+
+</html>

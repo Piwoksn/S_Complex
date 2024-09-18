@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Admin</title>
+    <link rel="stylesheet" href="{% static 'assets/bootstrap-5.3.1-dist/css/bootstrap.min.css' %}">
+    <!--icons-->
+    <link rel="stylesheet" href="{% static 'assets/bootstrap-icons/bootstrap-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/style.css' %}">
+    <link rel="stylesheet" href="{% static 'homepage.css' %}">
+</head>
+<style>
+    body {
+        background: whitesmoke;
+        color: black;
+    }
+</style>
+
+<body>
+    {% include 'superadminnavbar.html' %}
+    {% block content %}
+
+
+
+
+    {% endblock content %}
+    <a href="#top" class="back-to-top btn btn-secondary d-none"><i class="bi bi-arrow-up"></i></a>
+    <!--For Back to Top Link-->
+    <script>
+        window.addEventListener('scroll', function () {
+            var backToTop = document.querySelector('.back-to-top');
+            if (window.scrollY > 100) {
+                backToTop.classList.remove('d-none');
+                backToTop.style.opacity = '1';
+            } else {
+                backToTop.style.opacity = '0';
+                setTimeout(function () {
+                    backToTop.classList.add('d-none');
+                }, 300); // Delay the hiding of the link for smoother transition
+            }
+        });
+
+        document.querySelector('.back-to-top').addEventListener('click', function (e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+
+
+    <script src="{% static 'assets/bootstrap-5.3.1-dist/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+
+</html>

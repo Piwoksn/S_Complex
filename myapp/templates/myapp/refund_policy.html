@@ -1,0 +1,173 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" href="{% static 'logo22.png' %}" type="image/x-icon">
+
+    <link rel="stylesheet" href="{% static 'assets/bootstrap-5.3.1-dist/css/bootstrap.min.css' %}">
+
+
+    <!--icons-->
+    <link rel="stylesheet" href="{% static 'assets/bootstrap-icons/bootstrap-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/style.css' %}">
+    <link rel="stylesheet" href="{% static 'homepage.css' %}">
+
+    <title>Refund Policy - Shop Complex</title>
+    <!-- AOS Library CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+
+    <style>
+        body {
+            background-color: white;
+            color: black;
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'home' %}">Shop Complex</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://myshopcomplex.com/#get-started">
+                            Get Started</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://myshopcomplex.com/#setup">
+                            Set Up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://myshopcomplex.com/#contact">
+                            Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'aboutus' %}">
+                            About Us</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Login
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{% url 'loginform' %}">Sign In</a>
+                            <a class="dropdown-item" href="{% url 'registerform' %}">Register</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container my-4">
+        <h1 class="display-4 text-center mb-4">Refund Policy</h1>
+
+        <h2 class="mt-5"">Subscription Bases:</h2>
+        <p>At Shop Complex, we offer various subscription plans tailored to meet your needs:</p>
+        <ul>
+            <li>Monthly Subscription: N2000</li>
+            <li>Quarterly Subscription: N6000</li>
+            <li>Biannual Subscription: N12000</li>
+            <li>Annual Subscription: N24000</li>
+        </ul>
+
+        <h2 class=" mt-5">Subscription Payment Refunds:</h2>
+        <p>In the event that a payment is successfully made for a subscription plan, but your page
+            activation is unsuccessful, we guarantee a refund within 72 hours upon providing proof of payment, including
+            a receipt.</p>
+
+
+        <h2 class="mt-5">Customers:</h2>
+        <p>For our esteemed customers who purchase goods from our online shop, please note the
+            following:</p>
+        <ol>
+            <li>Payments for goods should be made upon delivery of the purchased item.</li>
+            <li>Shop Complex shall not be held responsible for any payments made before the delivery of goods.</li>
+        </ol>
+
+        <h2 class="mt-5">Refund Process:</h2>
+        <p class="mb-5">To initiate a refund request for subscription payments, kindly contact our
+            customer support team via email at <a
+                href="mailto:management@myshopcomplex.com">management@myshopcomplex.com</a> or <a
+                href="mailto:shopcomplex@outlook.com">shopcomplex@outlook.com</a>, or reach out to us via WhatsApp at <a
+                href="https://wa.me/2349036355709">+2349036355709</a>. Please include your proof of payment and any
+            relevant details for expedited processing.</p>
+
+        <p>For any inquiries or assistance regarding refunds or our refund policy, please don't hesitate to reach out to
+            our dedicated customer support team.</p>
+
+        <p>Thank you for choosing Shop Complex.</p>
+
+    </div>
+
+    <a href="#top" class="back-to-top btn btn-secondary d-none"><i class="bi bi-arrow-up"></i></a>
+
+    <!-- Footer -->
+    <footer class="bg-light text-dark text-center py-3">
+        <div class="container">
+            <p>&copy;2023 Shop Complex | <a href="{% url 'privacy_policy' %}" class="text-dark">Privacy
+                    Policy</a> | <a href="{% url 'terms_of_service' %}" class="text-dark">Terms of
+                    Service</a> | <a href="{% url 'refund_policy' %}" class="text-dark">Refund Policy</a></p>
+        </div>
+    </footer>
+
+    <!-- AOS Library Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+    <!--For Back to Top Link-->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // AOS initialization
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true, // Only initialize once
+            });
+
+            // Your other scripts...
+
+            window.addEventListener('scroll', function () {
+                var backToTop = document.querySelector('.back-to-top');
+                if (window.scrollY > 100) {
+                    backToTop.classList.remove('d-none');
+                    backToTop.style.opacity = '1';
+                } else {
+                    backToTop.style.opacity = '0';
+                    setTimeout(function () {
+                        backToTop.classList.add('d-none');
+                    }, 300); // Delay the hiding of the link for smoother transition
+                }
+            });
+
+            document.querySelector('.back-to-top').addEventListener('click', function (e) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+
+    <!-- Smooth Scroll -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'assets/bootstrap-5.3.1-dist/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+
+</html>

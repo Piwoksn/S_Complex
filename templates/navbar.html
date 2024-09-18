@@ -1,0 +1,103 @@
+{% load static %}
+
+<!--Header-->
+<div id="navbar-container"> <!-- Add this line -->
+    <header id="container" class="custom-header" style="font-family: 'Lato', Lato-Regular;">
+        <div class="container">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-auto">
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'portal' %}" class="navbar-brand text-white logo">
+                        <img src="{{user.logo.url}}" alt="logo"> {{ user.businessname|slice:":12" }}
+                    </a>
+                    {% else %}
+                    <a href="{% url 'portal' %}" class="navbar-brand text-white">
+                        <i class="bi bi-diamond"></i> Brand Name
+                    </a>
+                    {% endif %}
+                </div>
+             <!-- Chat -->
+                <div class="col-auto">
+                    <!-- Messages -->
+                    <div class="dropdown d-inline">
+                        <a href="#" class="text-white dropdown-toggle text-decoration-none {% if chats %}{% else %}d-none{% endif %}" id="notificationsDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="bi bi-chat-fill"></i>
+                            <span class="badge bg-warning">{{ chats.count }}</span>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="notificationsDropdown">
+                            <label class="form-label mx-3">Messages from:</label>
+                            <div class="dropdown-divider"></div>
+                            {% for chat in chats %}
+                            <a class="dropdown-item" href="{% url 'userchat' email='admin@admin.com' %}">
+                                Management</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <!-- End Messages -->
+
+                    <!-- Notifications -->
+                    <div class="dropdown d-inline mx-3">
+                        <a href="#" class="text-white dropdown-toggle text-decoration-none" id="notificationsDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="bi bi-bell-fill"></i>
+                            <span class="badge bg-primary">{{ carts.count }}</span>
+                        </a>
+                        <!--  -->
+                        <div class="dropdown-menu dropdown-menu-end dropdown-menu-lg mx-5" aria-labelledby="notificationsDropdown">
+                            {% if user.subscribed %}
+                            {% if carts.count == 0 %}
+                            <label class="form-label mx-3">Empty</label>
+                            {% else %}
+                            <label class="form-label mx-3">Orders from:</label>
+                            {% endif %}
+                            {% for cart in carts %}
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item ms-3" href="{% url 'order' cart.phone %}">
+                                {{ cart.phone }}</a>
+                            {% endfor %}
+                            {% else %}
+                            <label class="form-label mx-3">Subscribe to see Orders</label>
+                            {% endif %}
+                        </div>
+                        
+                        <!--  -->
+                    </div>
+                    <!-- End Notifications -->
+
+                    
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light custom-navbar"
+        style="font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif">
+        <div class="container text-center">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'portal' %}">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'category' %}">Edit-Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>

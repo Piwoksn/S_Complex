@@ -1,0 +1,35 @@
+{% load static %}
+
+<style>
+    @font-face {
+        font-family: Lato;
+        src: url(../static/assets/Lato/Lato-Regular.ttf);
+    }
+</style>
+
+
+
+<!-- Footer -->
+<footer class="bg-light text-dark text-center py-3">
+    <div class="container">
+        <p>&copy;2023-<span id="displayYear"></span> Shop Complex | <a href="{% url 'privacy_policy' %}" class="text-dark">Privacy
+                Policy</a> |
+            <a href="{% url 'terms_of_service' %}" class="text-dark">Terms of Service</a> | <a
+                href="{% url 'refund_policy' %}" class="text-dark">Refund Policy</a>
+        </p>
+    </div>
+</footer>
+
+<!-- Include Bootstrap JS (offline link) -->
+
+<script>
+    // to get current year
+function getYear() {
+    var currentDate = new Date();
+    var currentYear = currentDate.getFullYear();
+    document.querySelector("#displayYear").innerHTML = currentYear;
+}
+
+getYear();
+
+</script>

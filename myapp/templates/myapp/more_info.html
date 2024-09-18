@@ -1,0 +1,327 @@
+{% extends 'reg_log.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container my-5">
+
+    <h1 class="display-5 text-center">Let's get you started!</h1>
+
+
+    <form method="POST" action="process_data" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% include 'messages.html' %}
+
+
+
+        <!--SHop Category-->
+
+        <div class="card my-3 shadow">
+            <div class="card-header">
+                <h1>Shop Information</h1>
+            </div>
+
+            <!--Logo-->
+            <div class="card-body mt-3">
+
+                <div class="row mb-2">
+                    <div class=" col-lg-6">
+                        <label for="FormControlInput1" class="form-label">Business Name</label>
+                        <input type="text" name="businessname" class="form-control" id="inputBusinessname"
+                            placeholder="Enter Your Company Name" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="mb-3 col-lg-6">
+                        <label for="formFile" class="form-label">Upload Business Logo</label>
+                        <input class="form-control" name="logo" type="file" id="image-input2" accept="image/*" required>
+                        <small style="color: orangered;">note: field should not be empty</small>
+                    </div>
+
+                    <div class="col col-lg-6">
+
+                        <img id="preview-image2" src="/static/assets/icons/icon.png" class="rounded mx-auto d-block"
+                            alt="logo" style="max-width: 100px;">
+
+
+                        <script>
+                            document.getElementById('image-input2').addEventListener('change', function () {
+                                const fileInput = this;
+                                const previewImage = document.getElementById('preview-image2');
+                                const file = fileInput.files[0];
+
+                                if (file) {
+                                    const reader = new FileReader();
+                                    reader.onload = function (e) {
+                                        previewImage.src = e.target.result;
+                                        previewImage.style.display = 'block';
+                                    }
+                                    reader.readAsDataURL(file);
+                                } else {
+                                    previewImage.src = '';
+                                    previewImage.style.display = 'none';
+                                }
+                            })
+                        </script>
+
+
+                    </div>
+
+                    <!--Phone-->
+                    <div class="row my-3">
+                        <div class=" col-lg-6">
+                            <label for="FormControlInput1" class="form-label">Business Type</label>
+                            <input type="text" name="businesstype" class="form-control" id="inputBusinesstype"
+                                placeholder="Wholesale, Retail .." required>
+                        </div>
+
+
+
+
+                    </div>
+
+                    <!--Select-->
+                    <!-- <div class="dropdown col-lg-6 mb-3 mt-2">
+                        <select class="form-select" name="currency" id="floatingSelect" aria-label="currency" required>
+                            <option selected>Select Currency</option>
+                            <option value="$">Dollar
+                            </option>
+                            <option value="€">Euro
+                            </option>
+                            <option value="₦">Naira
+                            </option>
+                            <option value="£">Pound
+                            </option>
+                        </select>
+                    </div> -->
+
+                    <div class="col-lg-6 mb-3 mt-2">
+                        <label for="category" class="form-label">Currency</label>
+
+                        <div class="input-group">
+                            <input type="text" id="category-input" class="form-control" list="category-list"
+                                name="currency" placeholder="Select currency" required>
+                            <datalist id="category-list">
+
+                                <option value="$">Dollar</option>
+                                <option value="€">Euro</option>
+                                <option value="₦">Naira</option>
+                                <option value="£">Pound</option>
+
+                            </datalist>
+                        </div>
+                        <small style="color: orangered;">note: Input your currency symbol if not on the list</small>
+                    </div>
+
+                    <div class="dropdown mb-3 mt-2">
+                        <select class="form-select" name="shopcategory" id="floatingSelect" aria-label="Shop Category"
+                            required>
+                            <option selected>Select Shop Category</option>
+
+                            <option value="Art and Craft Stores">Art and Craft Stores
+                            </option>
+                            <option value="Auto Repair Shops
+                ">Auto Repair Shops
+                            </option>
+                            <option value="Automotive Dealerships
+                ">Automotive Dealerships
+                            </option>
+
+
+
+                            <option value="Beauty and Personal Care">Beauty and Personal Care</option>
+                            <option value="Book Stores">Book Stores</option>
+
+
+                            <option value="Clothing Stores">Fashion Stores</option>
+                            <option value="Computer Stores">Computer Stores</option>
+
+
+                            <option value="Dental Stores">Dental Stores</option>
+
+
+                            <option value="E-commerce Businesses">E-commerce Businesses</option>
+
+                            <option value="Fast-Food Chains">Fast-Food Chains</option>
+                            <option value="Fitness and Sports">Fitness and Sports</option>
+
+                            <option value="Grocery Stores">Grocery Stores</option>
+
+                            <option value="Hair Stores">Hair Stores</option>
+                            <option value="Health Care Providers">Health Care Providers</option>
+                            <option value="Home Improvement and Hardware">Home Improvement and Hardware</option>
+
+                            <option value="Pet Stores and Services">Pet Stores and Services</option>
+                            <option value="Pharmacies">Pharmacies</option>
+
+                            <option value="Property Vendor">Property Vendor</option>
+
+                            <option value="Real Estate Agencies">Real Estate Agencies</option>
+
+                            <option value="Technology and Electronics">Technology and Electronics Vendor</option>
+
+                            <option value="Tourism Businesses">Tourism Businesses</option>
+
+                            <option value="Wedding Planners">Wedding Planners</option>
+
+                        </select>
+                    </div>
+
+
+                    <!--TextArea-->
+                    <div class="form-floating mt-3">
+                        <textarea name="moredesc" class="form-control" placeholder="Leave a comment here"
+                            id="floatingTextarea2" style="height: 100px" required></textarea>
+                        <label for="floatingTextarea2" style="margin-left: 10px;">Describe your business to attract
+                            customers</label>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <!--Personal Info-->
+        <div class="card mb-3 shadow">
+            <div class="card-header">
+                <h1>Personal Information</h1>
+            </div>
+            <div class="card-body mt-3">
+
+                <!-- Security Question -->
+                <div class="row mb-3">
+                    <div class=" col-lg-6">
+                        <label for="FormControlInput1" class="form-label">Password Recovery Question</label>
+                        <select class="form-select" name="securityquestion" id="floatingSelect"
+                            aria-label="securityquestion" required>
+                            <option selected>please select a Question</option>
+                            <option value="What year did you get your first pet?">What year did you get your first pet?
+                            </option>
+                            <option value="What year was your favorite birthday?">What year was your favorite birthday?
+                            </option>
+                            <option value="What year did you get your driver's license?">What year did you get your
+                                driver's license?
+                            </option>
+                            <option value="What year did first smartphone?">What year did first smartphone?
+                            </option>
+                            <option value="In what year did you start learning a new language?">In what year did you
+                                start learning a new language?
+                            </option>
+                            <option value="When did you get your first passport?">When did you get your first passport?
+                            </option>
+                            <option value="What year did you buy your first car?">What year did you buy your first car?
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class=" col-lg-6">
+                        <label for="FormControlInput1" class="form-label">Answer</label>
+                        <input type="text" name="securityanswer" class="form-control" id="securityanswer" maxlength="4"
+                            placeholder="Year Only example: 2001" required>
+                    </div>
+                </div>
+
+
+
+
+
+                <!--Phone-->
+                <div class="row mb-3">
+                    <div class=" col-lg-6">
+                        <label for="FormControlInput1" class="form-label">Phone Number</label>
+                        <input type="text" name="phone" class="form-control" id="inputPhone" placeholder="+1 3098477635"
+                            required>
+                        <small style="color: orangered;">note: Insert Country code</small>
+                    </div>
+                </div>
+                <!--Social Media Links-->
+                <div class="row mb-3">
+                    <div class=" col-lg-6">
+                        <label for="FormControlInput1" class="form-label">Whatsapp Number <small
+                                class="text-primary">please inlude country code</small> </label>
+                        <input type="text" name="whatsapp" class="form-control" id="whatsapplink"
+                            autocomplete="whatsapp" placeholder="+1 -phone-number" required>
+                        <small style="color: orangered;">note: Insert Country code</small>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class=" col-lg-6">
+                        <label for="FormControlInput1" class="form-label">Facebook Link</label>
+                        <input type="text" name="facebook" class="form-control" id="facebooklink"
+                            placeholder="your-page-name">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class=" col-lg-6">
+                        <label for="FormControlInput1" class="form-label">Instagram Link</label>
+                        <input type="text" name="instagram" class="form-control" id="instagramlink"
+                            placeholder="your-instagram-username">
+                    </div>
+                </div>
+
+                <!--Image-->
+                <div class="row mt-3">
+                    <div class="mb-3 col-lg-6">
+                        <label for="formFile" class="form-label">Select Profile Image</label>
+                        <input class="form-control" name="profilepic" type="file" id="image-input" accept="image/*"
+                            required>
+                        <small style="color: orangered;">note: field should not be empty</small>
+                    </div>
+
+                    <div class="col col-lg-6">
+
+                        <img id="preview-image" src="/static/assets/icons/avatar.png" class="rounded mx-auto d-block"
+                            alt="Preview" style="max-width: 100px;">
+                        <br>
+
+                    </div>
+
+
+                    <!--IMAGE PREVIEWER-->
+                    <script>
+                        document.getElementById('image-input').addEventListener('change', function () {
+                            const fileInput = this;
+                            const previewImage = document.getElementById('preview-image');
+                            const file = fileInput.files[0];
+
+                            if (file) {
+                                const reader = new FileReader();
+                                reader.onload = function (e) {
+                                    previewImage.src = e.target.result;
+                                    previewImage.style.display = 'block';
+                                }
+                                reader.readAsDataURL(file);
+                            } else {
+                                previewImage.src = '';
+                                previewImage.style.display = 'none';
+                            }
+                        })
+                    </script>
+
+
+
+                </div>
+                <!--Button-->
+                <div class="d-grid text-center mt-3">
+                    <button type="submit" name="more_infobutton" class="btn btn-primary">Register</button>
+                </div>
+            </div>
+        </div>
+
+
+    </form>
+</div>
+
+
+
+
+{% endblock content %}

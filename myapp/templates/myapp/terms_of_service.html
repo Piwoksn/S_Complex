@@ -1,0 +1,233 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'assets/bootstrap-5.3.1-dist/css/bootstrap.min.css' %}">
+
+    <!--icons-->
+    <link rel="stylesheet" href="{% static 'assets/bootstrap-icons/bootstrap-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/style.css' %}">
+    <link rel="stylesheet" href="{% static 'homepage.css' %}">
+
+    <title>Terms of Service</title>
+    <style>
+        body {
+            background-color: white;
+            color: black;
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'home' %}">Shop Complex</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://myshopcomplex.com/#get-started">
+                            Get Started</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://myshopcomplex.com/#setup">
+                            Set Up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://myshopcomplex.com/#contact">
+                            Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'aboutus' %}">
+                            About Us</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Login
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{% url 'loginform' %}">Sign In</a>
+                            <a class="dropdown-item" href="{% url 'registerform' %}">Register</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container my-4">
+        <h1 class="display-4 text-center mb-4">Terms of Service</h1>
+
+        <div class="terms-section">
+            <h3><strong>1. Acceptance of Terms</strong></h3>
+            <p>By accessing or using Shop Complex services, you acknowledge and agree to
+                comply with
+                and be bound by these Terms of Service. It is your responsibility to review these terms periodically for
+                updates or changes.</p>
+        </div>
+
+        <div class="terms-section">
+            <h3><strong>2. User Conduct</strong></h3>
+            <p>As a user, you agree to conduct yourself ethically and responsibly. Prohibited activities include, but
+                are not
+                limited to, internet fraud, scamming, harassment, and any actions that violate the rights of others or
+                our
+                terms. We reserve the right to suspend or terminate your account for engaging in such activities.</p>
+        </div>
+
+        <div class="terms-section">
+            <h3><strong>3. Intellectual Property</strong></h3>
+            <p>All content and materials available on Shop Complex are the intellectual property of Shop Complex.
+                This
+                includes trademarks, logos, and copyrighted materials. Users are prohibited from using, reproducing, or
+                distributing our intellectual property without explicit permission.</p>
+        </div>
+
+        <div class="terms-section">
+            <h3><strong>4. Privacy</strong></h3>
+            <p>Your use of Shop Complex is subject to our <a href="{% url 'privacy_policy' %}"
+                    class="text-primary">Privacy
+                    Policy</a>. We are committed to protecting your privacy and maintaining the confidentiality of your
+                information. By using our services, you consent to the collection, use, and disclosure of your personal
+                information as outlined in our Privacy Policy.</p>
+        </div>
+
+        <div class="terms-section">
+            <h3><strong>5. Termination</strong></h3>
+            <p>Shop Complex reserves the right to terminate or suspend your account without notice if we believe you
+                have
+                violated these Terms of Service or engaged in activities that compromise the security or integrity of
+                our
+                platform. You may also terminate your account at any time by contacting us.</p>
+        </div>
+
+        <div class="terms-section">
+            <h3><strong>6. Prohibited Activities</strong></h3>
+            <p>Users are strictly prohibited from engaging in activities that undermine the trust and safety of our
+                community. This includes, but is not limited to, internet fraud, scamming, hacking, and any other
+                activities
+                that violate our terms. Violators may be subject to legal action.</p>
+        </div>
+
+        <div class="terms-section">
+            <h3><strong>7. Liability Limits</strong></h3>
+            <p>Shop Complex shall not be liable for any indirect, incidental, special, consequential, or punitive
+                damages
+                arising out of or related to its use. We strive to provide a reliable platform, but we
+                do
+                not guarantee the accuracy, completeness, or reliability of any content or information.</p>
+        </div>
+
+        <div class="terms-section">
+            <h3><strong>8. Governing Law</strong></h3>
+            <p>These Terms of Service are governed by and construed in accordance with the laws of Nigeria.
+                Any
+                legal disputes arising from these terms will be resolved in the courts of Nigeria.</p>
+        </div>
+
+        <div class="terms-section">
+            <h3><strong>9. Changes to Terms</strong></h3>
+            <p>Shop Complex reserves the right to modify or replace these Terms of Service at any time. We will notify
+                users of significant changes. Your continued use of the service after such modifications constitutes
+                your
+                acceptance of the updated terms.</p>
+        </div>
+
+        <div class="terms-section">
+            <h3><strong>10. Contact Information</strong></h3>
+            <p>For questions or concerns about these Terms of Service, please contact us at <a
+                    href="mailto:piwoksn@gmail.com" class="text-primary">piwoksn@gmail.com</a>,
+                <a href="mailto:management@myshopcomplex.com" class="text-primary">management@myshopcomplex.com</a>.
+                <a href="mailto:shopcomplex@outlook.com" class="text-primary">shopcomplex@outlook.com</a>.
+            </p>
+        </div>
+    </div>
+
+
+
+    <a href="#top" class="back-to-top btn btn-secondary d-none"><i class="bi bi-arrow-up"></i></a>
+
+
+
+    <!-- Footer -->
+    <footer class="bg-light text-dark text-center py-3">
+        <div class="container">
+            <p>&copy;2023 Shop Complex | <a href="{% url 'privacy_policy' %}" class="text-dark">Privacy Policy</a> | <a
+                    href="{% url 'terms_of_service' %}" class="text-dark">Terms of Service</a> | <a
+                    href="{% url 'refund_policy' %}" class="text-dark">Refund Policy</a></p>
+        </div>
+    </footer>
+    <!--For Back to Top Link-->
+    <script>
+        window.addEventListener('scroll', function () {
+            var backToTop = document.querySelector('.back-to-top');
+            if (window.scrollY > 100) {
+                backToTop.classList.remove('d-none');
+                backToTop.style.opacity = '1';
+            } else {
+                backToTop.style.opacity = '0';
+                setTimeout(function () {
+                    backToTop.classList.add('d-none');
+                }, 300); // Delay the hiding of the link for smoother transition
+            }
+        });
+
+        document.querySelector('.back-to-top').addEventListener('click', function (e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+
+
+
+
+    <!-- Smooth Scroll -->
+
+    <script>
+        // Add your JavaScript functions here
+        $(document).ready(function () {
+            // Smooth scrolling for anchor links
+            $("a").on('click', function (event) {
+                if (this.hash !== "") {
+                    event.preventDefault();
+                    var hash = this.hash;
+                    $('html, body').animate({
+                        scrollTop: $(hash).offset().top
+                    }, 800, function () {
+                        window.location.hash = hash;
+                    });
+                }
+            });
+
+            // Add form validation or other interactive functionality here
+        });
+    </script>
+
+
+
+    <!-- JavaScript Section -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'assets/bootstrap-5.3.1-dist/js/bootstrap.bundle.min.js' %}"></script>
+
+
+
+</body>
+
+
+</html>

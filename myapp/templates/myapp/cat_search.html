@@ -1,0 +1,76 @@
+{% extends 'wrapper.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="col-12 mt-3">
+        <form action="{% url 'cat_search' user.slug %}" class="d-flex">
+            <input class="form-control" type="search" name="q" placeholder="Search ..." aria-label="Search">
+        </form>
+
+    </div>
+    <h3 class="mt-3">Search Result:</h3>
+
+    <div class="home-container my-5 bg-white shadow">
+        {% include 'messages.html' %}
+        {% if categories %}
+        <div class="accordion accordion-flush border shadow" id="accordionFlushExample">
+            {% for category in categories %}
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-heading{{ forloop.counter }}">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapse{{ forloop.counter }}" aria-expanded="false"
+                        aria-controls="flush-collapse{{ forloop.counter }}">
+                        {{ category.itemcategory }}
+                        <!-- Count the number of products in this category -->
+
+                    </button>
+                </h2>
+                <div id="flush-collapse{{ forloop.counter }}" class="accordion-collapse collapse"
+                    aria-labelledby="flush-heading{{ forloop.counter }}" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        <div class="row">
+                            {% for item in product %}
+                            {% if item.itemcategory == category.itemcategory %}
+                            <div class="col-md-6 my-2">
+                                <div class="card mb-3">
+                                    <div class="row g-0">
+                                        <div class="col-md-2 d-flex justify-content-center align-items-center">
+                                            <img src="{{ item.itemimage.url }}" class="img-fluid rounded-start"
+                                                alt="{{ item.itemname }}">
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="card-body">
+                                                <h5 class="card-title">{{ item.itemname }}</h5>
+                                                <p class="card-text">{{ item.itemdescription }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2 my-2">
+                                <p class="me-4">{{ user.currency }}{{ item.itemamount|floatformat:2 }}</p>
+                            </div>
+                            <div class="col-md-2 my-2">
+                                <a href="{% url 'editproduct' item.id %}" class="btn btn-outline-primary">Edit <i
+                                        class="bi bi-list"></i></a>
+                            </div>
+                            <div class="col-md-2 my-2">
+                                <a href="{% url 'delete' item.id %}" class="btn btn-outline-danger">Delete <i
+                                        class="bi bi-trash"></i></a>
+                            </div>
+                            <hr class="mt-3 ">
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="text-center p-3">No results found.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,360 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'assets/bootstrap-5.3.1-dist/css/bootstrap.min.css' %}">
+
+    <!--icons-->
+    <link rel="stylesheet" href="{% static 'assets/bootstrap-icons/bootstrap-icons.css' %}">
+    <title>Subscribe</title>
+
+    <link rel="stylesheet" href="{% static 'assets/style.css' %}">
+
+    <style>
+        .card-body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            /* text-align: center; */
+        }
+
+        /* body {
+            background-color: white;
+        } */
+    </style>
+
+    <script>
+        function showPayPalButton(subscriptionLevel) {
+            document.querySelectorAll(".paypal-button").forEach(function (button) {
+                button.style.display = "none";
+            });
+            document.getElementById(`paypal-button-${subscriptionLevel}`).style.display = "block";
+        }
+    </script>
+
+    <script
+        src="https://www.paypal.com/sdk/js?client-id=AZSXupGa9ihqfYUi4Zxi3S03urWc5aUjzZ-5PhWdmcXvO8WbCtlQQNw8V9qLLkdWkBSRiq2QJzzwa_C9&vault=true&intent=subscription"
+        data-sdk-integration-source="button-factory"></script>
+
+
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="row my-5">
+            <center>
+                <h2>Subscription Levels</h2>
+            </center>
+            <hr>
+        </div>
+
+        <!-- PAY STACK SUBSCRIPTION -->
+        <!-- <div class="row">
+            <div class="col-lg-3 col-md-4 col-sm-12">
+                <div class="card shadow border text-center">
+                    <div class="card-header">
+                        <h2>Basic</h2>
+                    </div>
+                    <div class="card-body p-4">
+                        <h2>1 Days</h2>
+                        <h3>₦{{nairaBasic.price}}</h3>
+
+
+                        <a href="https://paystack.com/pay/sz173vcnm-" class="btn bg-dark text-light w-100 mt-3"
+                            onclick="handlePaystackSuccess('Basic', '{{ confirmation_code }}', '{{ user.email }}', '{{ datetime }}', '{{ due_date }}', 'Basic')">
+                            Subscribe
+                        </a>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-4 col-sm-12">
+                <div class="card shadow border text-center">
+                    <div class="card-header">
+                        <h2>Platinum</h2>
+                    </div>
+                    <div class="card-body p-4">
+                        <h2>1 Month</h2>
+                        <h3>₦{{nairaPlatinum.price}}</h3>
+
+
+                        <a href="https://paystack.com/pay/nswrs4p6b1" class="btn bg-dark text-light w-100 mt-3"
+                            onclick="handlePaystackSuccess('platinum', '{{ confirmation_code }}', '{{ user.email }}', '{{ datetime }}', '{{ due_date }}', 'platinum')">
+                            Subscribe
+                        </a>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-4 col-sm-12">
+                <div class="card shadow border text-center">
+                    <div class="card-header">
+                        <h2>Bronze</h2>
+                    </div>
+                    <div class="card-body p-4">
+                        <h2>3 Month</h2>
+                        <h3>₦{{nairaBronze.price}}</h3>
+
+                        <a href="https://paystack.com/pay/16c89q8tqt" class="btn bg-dark text-light w-100 mt-3"
+                            onclick="handlePaystackSuccess('bronze', '{{ confirmation_code }}', '{{ user.email }}', '{{ datetime }}', '{{ due_date }}', 'Bronze')">
+                            Subscribe
+                        </a>
+
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-4 col-sm-12">
+                <div class="card shadow border text-center">
+                    <div class="card-header">
+                        <h2>Silver</h2>
+                    </div>
+                    <div class="card-body p-4">
+                        <h2>6 Month</h2>
+                        <h3>₦{{nairaSilver.price}}</h3>
+
+
+                        <a href="https://paystack.com/pay/nsms4ew-t-" class="btn bg-dark text-light w-100 mt-3"
+                            onclick="handlePaystackSuccess('silver', '{{ confirmation_code }}', '{{ user.email }}', '{{ datetime }}', '{{ due_date }}', 'Silver')">
+                            Subscribe
+                        </a>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-4 col-sm-12">
+                <div class="card shadow border text-center">
+                    <div class="card-header">
+                        <h2>Gold</h2>
+                    </div>
+                    <div class="card-body p-4">
+                        <h2>1 Year</h2>
+                        <h3> ₦{{nairaGold.price}}</h3>
+
+
+
+                        <a href="https://paystack.com/pay/hn3kmibv-6" class="btn bg-dark text-light w-100 mt-3"
+                            onclick="handlePaystackSuccess('gold', '{{ confirmation_code }}', '{{ user.email }}', '{{ datetime }}', '{{ due_date }}', 'Gold')">
+                            Subscribe
+                        </a>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+            <script>
+                function handlePaystackSuccess(subscriptionType, confirmationCode, email, datetime, dueDate) {
+                    const data = {
+                        'confirmation_id': confirmationCode,
+                        'email': email,
+                        'datetime': datetime,
+                        'due_date': dueDate,
+                        'subscription_type': subscriptionType,
+                    };
+
+                    fetch('/paystack-callback/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data),  // Send data as JSON
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            // Handle the response from the server (if needed)
+                            console.log('Server response:', data);
+                        });
+                }
+
+            </script>
+
+
+        </div> -->
+        <!-- END OF PAY STACK SUBSCRIPTION -->
+
+        <!--  -->
+        <!--  -->
+        <!--  -->
+        <!-- FLUTTERWAVE SUBSCRIPTION -->
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-sm-12">
+                <div class="card shadow border text-center">
+                    <div class="card-header">
+                        <h2>Basic</h2>
+                    </div>
+                    <div class="card-body p-4">
+                        <h2>1 Days</h2>
+                        <h3>₦{{nairaBasic.price}}</h3>
+
+
+                        <a href="https://flutterwave.com/pay/vhodffwwe8s3" class="btn bg-dark text-light w-100 mt-3"
+                            onclick="handlePaystackSuccess('Basic', '{{ confirmation_code }}', '{{ user.email }}', '{{ datetime }}', '{{ due_date }}', 'Basic')">
+                            Subscribe
+                        </a>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-3 col-md-4 col-sm-12">
+                <div class="card shadow border text-center">
+                    <div class="card-header">
+                        <h2>Platinum</h2>
+                    </div>
+                    <div class="card-body p-4">
+                        <h2>1 Month</h2>
+                        <h3>₦{{nairaPlatinum.price}}</h3>
+
+
+                        <a href="https://flutterwave.com/pay/4mndqtjex3vt" class="btn bg-dark text-light w-100 mt-3"
+                            onclick="handlePaystackSuccess('platinum', '{{ confirmation_code }}', '{{ user.email }}', '{{ datetime }}', '{{ due_date }}', 'platinum')">
+                            Subscribe
+                        </a>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-4 col-sm-12">
+                <div class="card shadow border text-center">
+                    <div class="card-header">
+                        <h2>Bronze</h2>
+                    </div>
+                    <div class="card-body p-4">
+                        <h2>3 Month</h2>
+                        <h3>₦{{nairaBronze.price}}</h3>
+
+                        <a href="https://flutterwave.com/pay/1aolcw5zrh5v" class="btn bg-dark text-light w-100 mt-3"
+                            onclick="handlePaystackSuccess('bronze', '{{ confirmation_code }}', '{{ user.email }}', '{{ datetime }}', '{{ due_date }}', 'Bronze')">
+                            Subscribe
+                        </a>
+
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-4 col-sm-12">
+                <div class="card shadow border text-center">
+                    <div class="card-header">
+                        <h2>Silver</h2>
+                    </div>
+                    <div class="card-body p-4">
+                        <h2>6 Month</h2>
+                        <h3>₦{{nairaSilver.price}}</h3>
+
+
+                        <a href="https://flutterwave.com/pay/wvoatsipovdn" class="btn bg-dark text-light w-100 mt-3"
+                            onclick="handlePaystackSuccess('silver', '{{ confirmation_code }}', '{{ user.email }}', '{{ datetime }}', '{{ due_date }}', 'Silver')">
+                            Subscribe
+                        </a>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-4 col-sm-12">
+                <div class="card shadow border text-center">
+                    <div class="card-header">
+                        <h2>Gold</h2>
+                    </div>
+                    <div class="card-body p-4">
+                        <h2>1 Year</h2>
+                        <h3> ₦{{nairaGold.price}}</h3>
+
+
+
+                        <a href="https://flutterwave.com/pay/uwjd9a6tfbd6" class="btn bg-dark text-light w-100 mt-3"
+                            onclick="handlePaystackSuccess('gold', '{{ confirmation_code }}', '{{ user.email }}', '{{ datetime }}', '{{ due_date }}', 'Gold')">
+                            Subscribe
+                        </a>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+            <script>
+                function handlePaystackSuccess(subscriptionType, confirmationCode, email, datetime, dueDate) {
+                    const data = {
+                        'confirmation_id': confirmationCode,
+                        'email': email,
+                        'datetime': datetime,
+                        'due_date': dueDate,
+                        'subscription_type': subscriptionType,
+                    };
+
+                    // fetch('/paystack-callback/', {
+                    //     method: 'POST',
+                    //     headers: {
+                    //         'Content-Type': 'application/json',
+                    //     },
+                    //     body: JSON.stringify(data),  // Send data as JSON
+                    // })
+                    fetch('/flutterwave-callback/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data),  // Send data as JSON
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            // Handle the response from the server (if needed)
+                            console.log('Server response:', data);
+                        });
+                }
+
+            </script>
+
+
+        </div>
+        <!-- END OF FLUTTERWAVE SUBSCRIPTION -->
+
+
+
+
+
+        <div class="row">
+            <div class="col-11 text-center">
+                <a href="{% url 'portal' %}" class="btn btn-secondary w-100 mb-5 mt-3 ms-4">
+                    <i class="bi bi-arrow-left"></i> Return to Portal
+                </a>
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+    <script src="{% static 'assets/bootstrap-5.3.1-dist/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+
+</html>

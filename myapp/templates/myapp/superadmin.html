@@ -1,0 +1,164 @@
+{% extends 'superadminwrapper.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="row my-3 g-0">
+        <div class="card shadow">
+            <div class="card-body">
+                <label for="card-label" class="card-label mt-3">Number of Nigerians:
+                    <span class="badge bg-secondary">{{ nigeria }}</span>
+                </label>
+                <br>
+                <label for="card-label" class="card-label mt-3">Other Countries:
+                    <span class="badge bg-secondary">{{ othercountry }}</span>
+                </label>
+                <br>
+                <hr>
+                {% for country_data in usercountry %}
+                {{ country_data.country }}
+                <span class="badge bg-secondary">{{ country_data.count }}</span>
+                <br>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% include 'messages.html' %}
+    <div class="row">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="card shadow border-secondary">
+                <div class="card-header text-center">
+                    <h2> Naira Plan ₦</h2>
+                </div>
+                <div class="card-body">
+
+                    <div class="col-sm-12 mt-3">
+                        <label for="plan" class="form-label">Basic Plan</label>
+                        <div class="input-group">
+                            <span class="input-group-text">₦</span>
+                            <input type="number" class="form-control" name="basicprice" aria-label="itemprice"
+                                value="{{nairaBasic.price}}" min="0">
+                        </div>
+                        <div class="invalid-feedback">Please enter Item Price</div>
+                    </div>
+
+                    <div class="col-sm-12 mt-3">
+                        <label for="plan" class="form-label">Platinum Plan</label>
+                        <div class="input-group">
+                            <span class="input-group-text">₦</span>
+                            <input type="number" class="form-control" name="platinumprice" aria-label="itemprice"
+                                value="{{nairaPlatinum.price}}" min="0">
+                        </div>
+                        <div class="invalid-feedback">Please enter Item Price</div>
+                    </div>
+
+                    <div class="col-sm-12 mt-3">
+                        <label for="plan" class="form-label">Bronze Plan</label>
+                        <div class="input-group">
+                            <span class="input-group-text">₦</span>
+                            <input type="number" class="form-control" name="bronzeprice" aria-label="itemprice"
+                                value="{{nairaBronze.price}}" min="0">
+                        </div>
+                        <div class="invalid-feedback">Please enter Item Price</div>
+                    </div>
+
+                    <div class="col-sm-12 mt-3">
+                        <label for="plan" class="form-label">Silver Plan</label>
+                        <div class="input-group">
+                            <span class="input-group-text">₦</span>
+                            <input type="number" class="form-control" name="silverprice" aria-label="itemprice"
+                                value="{{nairaSilver.price}}" min="0">
+                        </div>
+                        <div class="invalid-feedback">Please enter Item Price</div>
+                    </div>
+
+                    <div class="col-sm-12 mt-3">
+                        <label for="plan" class="form-label">Gold Plan</label>
+                        <div class="input-group">
+                            <span class="input-group-text">₦</span>
+                            <input type="number" class="form-control" name="goldprice" aria-label="itemprice"
+                                value="{{nairaGold.price}}" min="0">
+                        </div>
+                        <div class="invalid-feedback">Please enter Item Price</div>
+                    </div>
+
+                    <div class="col-sm-12 mt-3">
+                        <button class="btn btn-info w-100 mb-2" name="nairabutton" type="submit">Update ₦</button>
+                    </div>
+
+
+                </div>
+            </div>
+        </form>
+
+
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="card shadow border-secondary">
+                <div class="card-header text-center">
+                    <h2> Dollar Plan $</h2>
+                </div>
+                <div class="card-body">
+
+                    <div class="col-sm-12 mt-3">
+                        <label for="plan" class="form-label">Basic Plan</label>
+                        <div class="input-group">
+                            <span class="input-group-text">$</span>
+                            <input type="number" class="form-control" name="basicprice" aria-label="itemprice"
+                                value="{{dollarBasic.price}}" min="0">
+                        </div>
+                        <div class="invalid-feedback">Please enter Item Price</div>
+                    </div>
+
+                    <div class="col-sm-12 mt-3">
+                        <label for="plan" class="form-label">Platinum Plan</label>
+                        <div class="input-group">
+                            <span class="input-group-text">$</span>
+                            <input type="number" class="form-control" name="platinumprice" aria-label="itemprice"
+                                value="{{dollarPlatinum.price}}" min="0">
+                        </div>
+                        <div class="invalid-feedback">Please enter Item Price</div>
+                    </div>
+
+                    <div class="col-sm-12 mt-3">
+                        <label for="plan" class="form-label">Bronze Plan</label>
+                        <div class="input-group">
+                            <span class="input-group-text">$</span>
+                            <input type="number" class="form-control" name="bronzeprice" aria-label="itemprice"
+                                value="{{dollarBronze.price}}" min="0">
+                        </div>
+                        <div class="invalid-feedback">Please enter Item Price</div>
+                    </div>
+
+                    <div class="col-sm-12 mt-3">
+                        <label for="plan" class="form-label">Silver Plan</label>
+                        <div class="input-group">
+                            <span class="input-group-text">$</span>
+                            <input type="number" class="form-control" name="silverprice" aria-label="itemprice"
+                                value="{{dollarSilver.price}}" min="0">
+                        </div>
+                        <div class="invalid-feedback">Please enter Item Price</div>
+                    </div>
+
+                    <div class="col-sm-12 mt-3">
+                        <label for="plan" class="form-label">Gold Plan</label>
+                        <div class="input-group">
+                            <span class="input-group-text">$</span>
+                            <input type="number" class="form-control" name="goldprice" aria-label="itemprice"
+                                value="{{dollarGold.price}}" min="0">
+                        </div>
+                        <div class="invalid-feedback">Please enter Item Price</div>
+                    </div>
+
+                    <div class="col-sm-12 mt-3">
+                        <button class="btn btn-warning w-100 mb-2" name="dollarbutton" type="submit">Update $</button>
+                    </div>
+
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,429 @@
+:root {
+    scroll-behavior: smooth;
+}
+
+@font-face {
+    font-family: Merriweather;
+    src: url(../assets/Merriweather/Merriweather-Regular.ttf);
+
+}
+
+@font-face {
+    font-family: adine-kirnberg;
+    src: url(../assets/adine-kirnberg/Adine\ Kirnberg.ttf);
+}
+
+@font-face {
+    font-family: beyond-wonderland;
+    src: url(../assets/beyond-wonderland/Beyond\ Wonderland.ttf);
+}
+
+
+body {
+    font-family: "Merriweather";
+    background: #F5F5F5;
+    color: #333333;
+}
+
+a {
+    color: #4154f1;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #717ff5;
+    text-decoration: none;
+}
+
+/* Style the "Back to Top" link */
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.back-to-top i {
+    font-size: 1rem;
+}
+
+/* More Header n Nav */
+/* Add this CSS class to style the fixed navbar */
+.fixed-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    /* Adjust the z-index as needed */
+    background-color: #fff;
+    /* Set the background color for the fixed navbar */
+    /* Add any other styling you want for the fixed navbar */
+}
+
+/* Custom styles for the header and navbar */
+
+.custom-header {
+    background-color: #3f4156;
+    color: #ffffff;
+    padding: 15px 0;
+}
+
+/* Shop */
+.custom-shop-header {
+    background-color: rgb(255, 255, 255);
+    color: #000000;
+    padding: 15px 0;
+}
+
+.custom-shop-header .bi {
+    color: #000000;
+    font-weight: bolder;
+}
+
+.custom-shop-header .bi-cart {
+    font-size: 22px;
+}
+
+.custom-shop-header a {
+    color: #000000;
+}
+
+/*
+body.shop {
+    /*background-color: rgb(252, 252, 252);*/
+/*background-color: #f7f7f7;*/
+/*background-color: #f0fff0;*/
+/*background-color: #edfff8;*/
+/*background-color: #eaeaea;*/
+/*background-color: #fff7e0;
+
+}*/
+
+body.shop a:hover .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+body.shop .productcard {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+body.shop form div {
+    display: inline-block;
+    margin-left: 20px;
+    text-align: left;
+
+}
+
+body.shop form span {
+    padding-right: 10px;
+}
+
+/* End Shop */
+
+.custom-navbar {
+    background-color: #ffffff;
+}
+
+.navbar-toggler-icon {
+    background-color: #ffffff;
+}
+
+.navbar-toggler {
+    border: none;
+}
+
+.navbar-nav .nav-link {
+    color: #343a40;
+    font-weight: bold;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #007bff;
+}
+
+
+.card-header h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.form-label {
+    font-weight: bold;
+    color: #616060;
+}
+
+/*Profile*/
+.profile .profile-card img {
+    max-width: 120px;
+}
+
+.profile .profile-card h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #2c384e;
+    margin: 10px 0 0 0;
+}
+
+.profile .profile-card h3 {
+    font-size: 18px;
+}
+
+
+.profile .profile-overview .row {
+    margin-bottom: 20px;
+    font-size: 15px;
+}
+
+.profile .profile-overview .card-title {
+    color: #012970;
+}
+
+.profile .profile-overview .label {
+    font-weight: 600;
+    color: rgba(1, 41, 112, 0.6);
+}
+
+.profile .profile-edit label {
+    font-weight: 600;
+    color: rgba(1, 41, 112, 0.6);
+}
+
+.profile .profile-edit img {
+    max-width: 120px;
+}
+
+
+
+
+.profile-pic {
+    width: 28px;
+    margin-left: 15px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.icons {
+    width: 40px;
+    margin: 15px;
+    margin-left: 0px;
+}
+
+.breadcrumb {
+    font-size: 14px;
+    font-family: "Nunito", sans-serif;
+    color: #899bbd;
+    font-weight: 600;
+}
+
+.breadcrumb a {
+    color: #899bbd;
+    transition: 0.3s;
+}
+
+.breadcrumb a:hover {
+    color: #51678f;
+}
+
+.breadcrumb .breadcrumb-item::before {
+    color: #899bbd;
+}
+
+.breadcrumb .active {
+    color: #51678f;
+    font-weight: 600;
+}
+
+div .contact i {
+    color: #4189e6;
+    margin: 0.25rem;
+    font-size: 2.5rem;
+}
+
+
+
+
+/* SOCIAL MEDIA */
+.profile .profile-card .social-links a {
+    font-size: 20px;
+    display: inline-block;
+    color: rgba(1, 41, 112, 0.5);
+    line-height: 0;
+    margin: 5px;
+    margin-top: 0;
+    transition: 0.3s;
+}
+
+
+.profile .profile-card .social-links a.facebook:hover {
+    color: #012970;
+}
+
+.profile .profile-card .social-links a.instagram:hover {
+    color: #df0e5e;
+}
+
+.profile .profile-card .social-links a.whatsapp:hover {
+    color: #10922c;
+}
+
+
+.card {
+    margin-bottom: 30px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 0 30px rgba(166, 184, 12, 0.1);
+}
+
+.card-header {
+    border-color: #ebeef4;
+    background-color: #fff;
+    color: #798eb3;
+    padding: 15px;
+}
+
+.card-body {
+    padding: 0 20px 20px 20px;
+}
+
+.nav-item .nav-link {
+    color: #333333;
+}
+
+.nav-item .nav-link:focus {
+    color: #1e66b8;
+}
+
+.card-title {
+    padding: 20px 0 15px 0;
+    font-size: 18px;
+    font-weight: 500;
+    color: #012970;
+}
+
+.logo img {
+    max-height: 26px;
+    margin-right: 6px;
+}
+
+.circular-cropper-container-logo {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+}
+
+
+.circular-cropper-container {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+}
+
+footer {
+    text-align: center;
+    color: #7a7a7a;
+}
+
+/* Bordered Tabs */
+.nav-tabs-bordered {
+    border-bottom: 2px solid #ebeef4;
+}
+
+.nav-tabs-bordered .nav-link {
+    margin-bottom: -2px;
+    border: none;
+    color: #2c384e;
+}
+
+.nav-tabs-bordered .nav-link:hover,
+.nav-tabs-bordered .nav-link:focus {
+    color: #4154f1;
+}
+
+.nav-tabs-bordered .nav-link.active {
+    background-color: #fff;
+    color: #4154f1;
+    border-bottom: 2px solid #4154f1;
+}
+
+
+/* # Profie Page ------*/
+.profile .profile-card img {
+    max-width: 120px;
+}
+
+.profile .profile-card h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #2c384e;
+    margin: 10px 0 0 0;
+}
+
+.profile .profile-card h3 {
+    font-size: 18px;
+}
+
+
+.profile .profile-card .social-links a:hover {
+    color: #012970;
+}
+
+.profile .profile-overview .row {
+    margin-bottom: 20px;
+    font-size: 15px;
+}
+
+.profile .profile-overview .card-title {
+    color: #012970;
+}
+
+.profile .profile-overview .label {
+    font-weight: 600;
+    color: rgba(1, 41, 112, 0.6);
+}
+
+.profile .profile-edit label {
+    font-weight: 600;
+    color: rgba(1, 41, 112, 0.6);
+}
+
+.profile .profile-edit img {
+    max-width: 120px;
+}
+
+
+.contact a.facebook:hover .bi-facebook {
+    color: #012970;
+    transition: 0.3s;
+}
+
+.contact a.instagram:hover .bi-instagram {
+    color: #df0e5e;
+    transition: 0.3s;
+}
+
+.contact a.whatsapp:hover .bi-whatsapp {
+    color: #10922c;
+    transition: 0.3s;
+}
+
+.contact a.phone:hover .bi-telephone {
+    color: black;
+    transition: 0.3s;
+}
+
+.contact a.email:hover .bi-envelope {
+    color: black;
+    transition: 0.3s;
+}

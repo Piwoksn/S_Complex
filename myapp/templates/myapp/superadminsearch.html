@@ -1,0 +1,96 @@
+{% extends 'superadminwrapper.html' %}
+
+
+
+{% block content %}
+<!--Main-->
+
+
+<div class="container">
+    {% include 'messages.html' %}
+    <div class="row bg-white shadow mb-3  my-3 g-0">
+
+        {% for user, subscription in user_subscriptions.items reversed%}
+        <!-- Users --------------------->
+
+        <div class="col-md-8 my-2">
+            <a href="{% url 'superadminedit' pk=user.id %}">
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4 d-flex justify-content-center align-items-center">
+                            <img src="{{ user.profilepic.url }}" class="img-fluid rounded-start"
+                                alt="{{ item.itemname }}" width="100px">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{user.first_name}} {{user.last_name}}, User ID: {{user.id}}</h5>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p class="card-text">Email: <b> {{ user.email }} </b></p>
+                                        <p class="card-text">Phone: <b> {{ user.phone }} </b></p>
+                                        <p class="card-text">Whatsapp: <b> {{ user.whatsapp }} </b></p>
+                                        <p class="card-text">Country: <b> {{ user.country }} </b></p>
+                                        <p class="card-text">Business: <b> {{ user.businessname }} </b></p>
+                                        <p class="me-4">Site: <b> {{ user.slug }} </b></p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <u><small>Subscription</small></u>
+                                        <p class="me-6 p-0 m-0">Subscribed: <b> {{ user.subscribed }} </b></p>
+                                        <hr>
+                                        {% if subscription %}
+                                        <p class="me-6 p-0 m-0">Sub Ends : <b> {{ subscription.end_date }} </b></p>
+                                        <hr>
+                                        <p class="me-6 p-0 m-0">Sub Plan : <b> {{ subscription.naira_plan }} </b></p>
+                                        <hr>
+                                        <!-- {% if user.country == 'Nigeria' or user.country == 'nigeria' %}
+                                    <p class="me-6 p-0 m-0">Sub Plan : <b> {{ subscription.naira_plan }} </b></p>
+                                    <hr> {% else %}
+                                    <p class="me-6 p-0 m-0">Sub Plan : <b> {{ subscription.dollar_plan }} </b></p>
+                                    <hr>
+                                    {% endif %} -->
+
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+
+
+        <!-- ------------------------------------- -->
+
+        {% if user.email != "admin@admin.com" %}
+        <div class="col-md-4 my-2">
+            <a href="{% url 'superadmindelete' pk=user.id %}" class="btn btn-outline-danger ms-3">Delete User <i
+                    class="bi bi-trash"></i></a>
+        </div>
+        {% endif %}
+
+
+
+
+
+        <hr class="mt-3 ">
+        {% endfor %}
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+{% endblock content %}

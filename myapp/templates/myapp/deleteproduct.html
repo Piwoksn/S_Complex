@@ -1,0 +1,73 @@
+{% extends 'wrapper.html' %}
+{% load static }
+{% block content %}
+<div class="container">
+
+
+    <div class="row my-5 g-0">
+        <div class="col d-flex justify-content-center align-items-center" style="width: auto;">
+            <div class="card" style="width: 18rem;">
+                <img src="{{product.itemimage.url}}" class="card-img-top" alt="{{itemname}}">
+                <div class="card-body">
+
+
+
+                    <p class="m-3">
+                        Are you sure you want to delete <b> {{product.itemname}} </b>?
+                    </p>
+
+                </div>
+
+                <div class="card-body">
+                    <form action="" method="POST">
+                        {% csrf_token %}
+
+                        <a href="{{request.META.HTTP_REFERER}}" class="btn btn-outline-primary"> <i
+                                class="bi bi-arrow-left m-1"></i>
+                            Return</a>
+                        <button type="submit" class="btn btn-danger m-1">Confirm <i class="bi bi-trash"></i></button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+        <!--  <form action="" method="POST">
+        {% csrf_token %}
+
+        <div class="row align-items-center">
+            <p class="m-3">
+                Are you sure you want to delete <b> {{product.itemname}} </b>?
+            </p>
+        </div>
+
+
+
+
+
+
+        <a href="{{request.META.HTTP_REFERER}}" class="btn btn-outline-primary"> <i class="bi bi-arrow-left m-1"></i>
+            Return</a>
+        <button type="submit" class="btn btn-danger m-1">Confirm <i class="bi bi-trash"></i></button>
+
+
+    </form>-->
+
+
+
+
+
+
+    </div>
+</div>
+
+
+
+{% endblock content %}

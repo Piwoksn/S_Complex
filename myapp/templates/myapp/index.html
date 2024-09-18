@@ -1,0 +1,356 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'assets/bootstrap-5.3.1-dist/css/bootstrap.min.css' %}">
+
+    <!--icons-->
+    <link rel="stylesheet" href="{% static 'assets/bootstrap-icons/bootstrap-icons.css' %}">
+    <title>Shop Complex</title>
+
+    <!--<link rel="icon" href="{% static 'icon.ico' %}" type="image/x-icon">-->
+    <link rel="icon" href="{% static 'logo22.png' %}" type="image/x-icon">
+
+    <link rel="stylesheet" href="{% static 'assets/style.css' %}">
+    <link rel="stylesheet" href="{% static 'homepage.css' %}">
+
+    <!-- AOS Library CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+
+    <style>
+        .header {
+            background-image: url({% static 'clip/heart-hands-gesture-diversity-concept.png' %});
+            background-position: top;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-attachment: scroll;
+        }
+
+        a .bi-facebook:hover {
+            color: rgb(0, 0, 201);
+        }
+
+        a .bi {
+            color: white;
+            transition: color, 1s;
+        }
+
+        a .bi-whatsapp:hover {
+            color: rgb(8, 252, 0);
+        }
+
+        a .bi-tiktok:hover {
+            color: rgb(66, 66, 66);
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <!-- <a class="navbar-brand" href="{% url 'home' %}">Shop Complex</a> -->
+            <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'logo22.png' %}" alt="Shop Complex"
+                    width="50px"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#get-started">
+                            Get Started</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#setup">
+                            Set Up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">
+                            Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'aboutus' %}">
+                            About Us</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Login
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{% url 'loginform' %}">Sign In</a>
+                            <a class="dropdown-item" href="{% url 'registerform' %}">Register</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="header">
+        <div class="video-container d-none d-md-block d-lg-block">
+            <video autoplay loop muted playsinline>
+                <source src="{% static 'clip/clip1.mp4' %}" type="video/mp4">
+            </video>
+        </div>
+        <div class="text-center">
+            <h1>Welcome to Shop Complex</h1>
+            <p>Your One-Stop Shopping Destination</p>
+        </div>
+        <div class="cta-buttons">
+            <a class="btn btn-primary btn-lg" href="{% url 'loginform' %}">Sign In</a>
+            <a class="btn btn-warning btn-lg" href="{% url 'registerform' %}">Register</a>
+        </div>
+    </div>
+
+
+    <div class="conitainer">
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h2 class="section-title">
+                        <i class="bi bi-shop"></i><br> Shop Complex: A Seamless Shopping Space for Your
+                        Business
+                    </h2>
+                    <p class="text-center">
+                        Are you a vendor looking to expand your horizons and reach a wider audience? Look no further
+                        than
+                        Shop Complex, a platform designed to revolutionize the shopping experience and put your business
+                        in
+                        the spotlight. Discover Shop Complex, with its easy-to-use interface and interactive features,
+                        can be
+                        a game-changer for your business.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="container mt-5 mb-5" id="get-started">
+            <h2 class="section-title">Get Started with Shop Complex</h2>
+            <div class="row">
+                <div class="col-md-6 mb-4" data-aos="fade-up">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <h5 class="card-title step-title">
+                                <i class="bi bi-check-circle-fill"></i> Step 1: Embrace Shop Complex
+                            </h5>
+                            <p class="card-text step-description">Partner with us for a user-friendly platform. Showcase
+                                your
+                                goods easily and join Shop Complex with a simple process.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4" data-aos="fade-up">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="bi bi-check-circle-fill"></i> Step 2:
+                                Easy-to-Use
+                                Interface</h5>
+                            <p class="card-text step-description">Our platform is designed for business owners and
+                                customers.
+                                Update product listings effortlessly, and no technical expertise is needed.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4" data-aos="fade-up">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <h5 class="card-title step-title"><i class="bi bi-check-circle-fill"></i> Step 3:
+                                Interactive
+                                Features</h5>
+                            <p class="card-text step-description">Create an engaging shopping experience and utilize
+                                interactive tools for visualization. Highlight featured products and engage with
+                                customers.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4" data-aos="fade-up">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <h5 class="card-title step-title"><i class="bi bi-check-circle-fill"></i> Step 4: Showcase
+                                Your
+                                Goods
+                            </h5>
+                            <p class="card-text step-description">Display your brand and products attractively. Utilize
+                                advanced product management tools for easy organization.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4" data-aos="fade-up">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <h5 class="card-title step-title"><i class="bi bi-check-circle-fill"></i> Step 5: Expand
+                                Your
+                                Reach
+                            </h5>
+                            <p class="card-text step-description">Attract both local and global customers. Joining
+                                Shop Complex
+                                increases your potential for sales and growth.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4" data-aos="fade-up">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <h5 class="card-title step-title"><i class="bi bi-check-circle-fill"></i> Step 6: Secure
+                                Your
+                                Space
+                            </h5>
+                            <p class="card-text step-description">Manage your online store and inventory. Respond to
+                                customer
+                                inquiries 24/7. Your digital showroom is always open.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12" data-aos="fade-up">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <h5 class="card-title step-title"><i class="bi bi-check-circle-fill"></i> Step 7: Enjoy the
+                                Benefits
+                            </h5>
+                            <p class="card-text step-description">With Shop Complex, you receive marketing support,
+                                access to
+                                insights, and a platform that continuously evolves to meet your business needs. It's a
+                                win-win
+                                partnership dedicated to helping your business thrive.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="container">
+            <div class="row mb-5">
+                <center>
+                    <div class="">
+                        <div class="">
+                            <h3>Setting up Shop Complex</h3>
+                        </div>
+                        <div class="">
+                            <iframe id="setup" class="rounded" height="350px" width="100%"
+                                src="https://www.youtube.com/embed/BNYj-zIUjNw"></iframe>
+                        </div>
+                    </div>
+                </center>
+            </div>
+        </div>
+
+        <div class="container mt-5">
+            <div class="row">
+                <div class="">
+                    <div class="text-center">
+                        <h2 class="fw-bold mb-4" id="contact">Contact Us</h2>
+                        <hr class="my-4">
+                    </div>
+
+                    <div class="mb-4">
+                        <p class="lead"><strong>Shop Complex</strong></p>
+                        <p class="mb-2"><i class="bi bi-envelope-fill"></i> <a
+                                href="mailto:management@myshopcomplex.com"
+                                class="text-decoration-none">management@myshopcomplex.com</a></p>
+                        <p class="mb-2"><i class="bi bi-envelope-fill"></i> <a href="mailto:shopcomplex@outlook.com"
+                                class="text-decoration-none">shopcomplex@outlook.com</a></p>
+                        <p class="mb-2"><i class="bi bi-envelope-fill"></i> <a href="mailto:piwoksn@gmail.com"
+                                class="text-decoration-none">piwoksn@gmail.com</a></p>
+
+                    </div>
+
+                    <p class="mb-4 text-center">Connect with Us on: <br><a href="https://www.facebook.com/myshopcomplex"
+                            target="_blank" class="text-decoration-none mx-1" style="font-size: 1.5rem;">
+                            <i class="bi bi-facebook" style="font-size: 1.5rem;"></i></a>
+                        <a href="https://whatsapp.com/channel/0029VaAAsCn7T8bbxggg0Z2n" target="_blank"
+                            class="text-decoration-none mx-1">
+                            <i class="bi bi-whatsapp" style="font-size: 1.5rem; "></i></a>
+                        <a href="https://tiktok.com/@myshopcomplex" target="_blank" class="text-decoration-none mx-1">
+                            <i class="bi bi-tiktok" style="font-size: 1.5rem;"></i></a>
+
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <a href="#top" class="back-to-top btn btn-secondary d-none"><i class="bi bi-arrow-up"></i></a>
+
+
+
+        <!-- Footer -->
+        <footer class="bg-dark text-light text-center py-3">
+            <div class="container">
+                <p>&copy;2023-<span id="displayYear"></span> Shop Complex | <a href="{% url 'privacy_policy' %}" class="text-light">Privacy
+                        Policy</a> | <a href="{% url 'terms_of_service' %}" class="text-light">Terms of Service</a> | <a
+                        href="{% url 'refund_policy' %}" class="text-light">Refund Policy</a> </p>
+            </div>
+        </footer>
+
+        <!-- Smooth Scroll and Back to Top JavaScript Section -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // AOS initialization with a delay for smoother scrolling
+                AOS.init({
+                    duration: 800,
+                    easing: 'ease-in-out',
+                    once: true, // Only initialize once
+                });
+
+                // Smooth scrolling for anchor links
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function (e) {
+                        e.preventDefault();
+
+                        document.querySelector(this.getAttribute('href')).scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    });
+                });
+
+                // Back to top button
+                var backToTop = document.querySelector('.back-to-top');
+                window.addEventListener('scroll', function () {
+                    if (window.scrollY > 100) {
+                        backToTop.classList.remove('d-none');
+                        backToTop.style.opacity = '1';
+                    } else {
+                        backToTop.style.opacity = '0';
+                        setTimeout(function () {
+                            backToTop.classList.add('d-none');
+                        }, 300); // Delay the hiding of the link for smoother transition
+                    }
+                });
+
+                document.querySelector('.back-to-top').addEventListener('click', function (e) {
+                    e.preventDefault();
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        </script>
+
+        <!-- AOS Library Script -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+        <!-- Bootstrap and jQuery JavaScript Section -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="{% static 'assets/bootstrap-5.3.1-dist/js/bootstrap.bundle.min.js' %}"></script>
+
+        <script>
+            // to get current year
+        function getYear() {
+            var currentDate = new Date();
+            var currentYear = currentDate.getFullYear();
+            document.querySelector("#displayYear").innerHTML = currentYear;
+        }
+        
+        getYear();
+        
+        </script>
+</body>
+
+</html>

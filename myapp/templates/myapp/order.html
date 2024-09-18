@@ -1,0 +1,187 @@
+{% extends 'wrapper.html' %}
+{% load static }
+{% block content %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.0/jszip.min.js"></script>
+
+
+
+<div class="container">
+
+
+    {% include 'messages.html' %}
+    <!-- Cart Items -->
+    <div class="row mt-5">
+
+        {% for persons in persons %}
+        <form action="{% url 'clear' persons.phone %}" method="POST">
+            {% csrf_token %}
+
+            <h3>Order from: <span class="text-primary"> {{person.purchaser}} - <a href="tel:{{persons.phone}}">
+                        {{persons.phone}}</a></span></h3>
+            <hr>
+
+
+            {% for cart_item in cart_items %}
+
+
+
+            {% if cart_item.purchaser == cart_item.purchaser %}
+
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    const receiveOrderButton = document.getElementById("receiveOrderButton");
+
+                    receiveOrderButton.addEventListener("click", function () {
+                        // Function to download images as a ZIP file
+                        function downloadImagesAsZip() {
+                            // Create a new ZIP file
+                            const zip = new JSZip();
+                            const receiverPhone = "{{ cart_item.phone }}";  // Get the receiver's phone number
+                            const receiverName = "{{ cart_item.purchaser }}";  // Get the receiver's name
+
+                            // Loop through your cart_items and add each image to the ZIP file
+                            {% for cart_item in cart_items %}
+                            zip.file("{{ cart_item.name }}.jpg", fetch("{{ cart_item.cart_image.url }}").then(res => res.blob()));
+                            {% endfor %}
+
+                            // Generate the ZIP file
+                            zip.generateAsync({ type: "blob" }).then(function (content) {
+                                const zipBlob = new Blob([content], { type: "application/zip" });
+                                const zipUrl = URL.createObjectURL(zipBlob);
+
+                                // Create an anchor element to trigger the download
+                                const a = document.createElement("a");
+                                a.style.display = "none";
+
+                                // Set the download filename based on the receiver's phone number
+                                a.download = `order-from-${receiverName}-${receiverPhone}.zip`;
+
+                                a.href = zipUrl;
+                                document.body.appendChild(a);
+
+                                // Trigger the click event to start the download
+                                a.click();
+
+                                // Remove the anchor element
+                                document.body.removeChild(a);
+                            });
+
+                            // alert('{{cart_item.purchaser}}-{{cart_item.phone}} order has been downloaded, check your downloads')
+                        }
+
+                        // Function to send a WhatsApp message
+                        function sendWhatsAppMessage() {
+                            const message = `Hello {{ cart_item.purchaser }}, thank you for visiting *{{ user.businessname }}*. Your order has been received. Please Confirm your order from the link https://www.myshopcomplex.com//{{ cart_item.phone }}/{{ user.slug }}/`;
+                            const whatsappLink = `https://api.whatsapp.com/send?phone={{ cart_item.phone }}&text=${encodeURIComponent(message)}`;
+
+                            // Open WhatsApp in a new tab
+                            window.open(whatsappLink, "_blank");
+                        }
+
+                        // Execute the download and WhatsApp message functions
+                        // downloadImagesAsZip();
+                        sendWhatsAppMessage();
+                    });
+                });
+            </script>
+
+
+            <div class="col-md-6 my-2">
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4 d-flex justify-content-center align-items-center">
+                            <img src="{{ cart_item.cart_image.url }}" class="img-fluid rounded-start"
+                                alt="{{ cart_item.name }}">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ cart_item.name }}</h5>
+
+                                {% if cart_item.size %}
+                                <p class="card-text">Size: {{ cart_item.size }}</p>
+                                {% endif %}
+
+                                {% if cart_item.color %}
+                                <p class="card-text">Colour: {{ cart_item.color }}</p>
+                                {% endif %}
+                                <!-- You can add more details as needed -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Move these elements inside the for loop -->
+            <div class="col-md-2 my-2">Qty:
+                <input type="number" class="text-center " value="{{cart_item.quantity}}" readonly style="width: 60px;">
+            </div>
+            <div class="col-md-2 my-2">
+                <p class="me-4"><small class="me-3"> x </small>{{ user.currency }}{{cart_item.price|floatformat:2}}</p>
+            </div>
+
+            <hr>
+            {% endif %}
+            {% endfor %}
+            {% endfor %}
+
+
+
+    </div>
+    <!-- End Cart Items -->
+
+
+    <!-- Total -->
+    <div class="row my-2">
+        <div class="col-md-6 offset-md-6">
+            <div class="d-flex justify-content-between">
+                <div class="display-6 fw-bold mx-2">Total: {{ user.currency }}{{cart_total|floatformat:2}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Total -->
+
+    <!-- Buttons -->
+    <!-- <center> -->
+    <div class="row mt-3 mb-5">
+        <div class="col-md-8 offset-md-4">
+            <div class="d-flex justify-content-between">
+                <div style="width: auto; margin: auto;">
+
+                    <a href="{% url 'portal' %}" class="btn btn-secondary ms-2 my-2">
+                        <i class="bi bi-arrow-90deg-left"></i> Return
+                    </a>
+
+                    <!-- Add this button within the form -->
+                    <button type="button" class="btn btn-success ms-2 my-2" id="receiveOrderButton">
+                        <i class="bi bi-whatsapp"></i> Take Order
+                    </button>
+
+
+
+
+
+                    <button type="submit" href="{% url 'portal' %}" class="btn btn-danger ms-2 my-2">
+                        Clear Order <i class="bi bi-trash"></i></i>
+                    </button>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- </center> -->
+    </form>
+    <!-- End Buttons -->
+
+
+
+
+
+
+
+
+</div>
+
+
+{% endblock content %}

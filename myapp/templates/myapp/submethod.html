@@ -1,0 +1,33 @@
+{% extends 'wrapper.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="row mt-4 justify-content-center align-items-center">
+
+        <h1 class="card-title mb-5 mx-3">Select Payment Method</h1>
+        {% include 'messages.html' %}
+
+        <div class="col-md-6 mb-4">
+            <a href="{% url 'coinsub' %}">
+                <div class="card bg-warning shadow border h-100">
+                    <div class="card-body p-5">
+                        <h3>Pay with Coin <i class="bi bi-coin"></i></h3>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <a href="{% url 'subscription' %}">
+                <div class="card bg-info shadow border h-100">
+                    <div class="card-body p-5">
+                        <h3>Pay with Card <i class="bi bi-credit-card"></i></h3>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+    </div>
+</div>
+{% endblock content %}

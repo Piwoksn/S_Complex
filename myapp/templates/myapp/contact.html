@@ -1,0 +1,94 @@
+{% extends 'wrapper.html' %}
+
+{% load static %}
+{% block content %}
+
+<!--Body-->
+<div class="container my-3">
+
+    <div class="pagetitle">
+        <h2>Contact</h2>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'portal' %}">Home</a></li>
+                <li class="breadcrumb-item">Pages</li>
+                <li class="breadcrumb-item active">Contact</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+
+    <div class="row gy-4">
+
+        <div class="col-xl-12">
+
+            <div class="row contact">
+                <div class="col-lg-4">
+                    <div class="card shadow p-4 my-2">
+                        <i class="bi bi-geo-alt"></i>
+                        <h3>Address</h3>
+                        <p>{{user.address}}</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <a class="phone" href="tel:{{user.phone}}">
+                        <div class="card shadow p-4 my-2">
+                            <i class="bi bi-telephone"></i>
+                            <h3>Call Us</h3>
+                            <p>{{user.phone}}</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4">
+                    <a class="email" href="mailto:{{user.email}}">
+                        <div class="card shadow p-4 my-2">
+                            <i class="bi bi-envelope"></i>
+                            <h3>Email Us</h3>
+                            <p>{{user.email}}</p>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <!--  Contact Edit Form  -->
+        <div class="col-xl-12">
+
+            <div class="row contact">
+                <h2>Social Links</h2>
+                <div class="col-lg-4">
+                    <a class="whatsapp" href="{{user.whatsapp}}">
+                        <div class="card shadow p-4 my-2">
+                            <i class="bi bi-whatsapp"></i>
+                            <h3>Whatsapp</h3>
+                            <p>{{whatsapp}}</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4">
+                    <a class="facebook" href="{{user.facebook}}">
+                        <div class="card shadow p-4 my-2">
+                            <i class="bi bi-facebook"></i>
+                            <h3>Facebook</h3>
+                            <p>{{facebook}}</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4">
+                    <a class="instagram" href="{{user.instagram}}">
+                        <div class="card shadow p-4 my-2">
+                            <i class="bi bi-instagram"></i>
+                            <h3>Instagram</h3>
+                            <p>{{instagram}}</p>
+
+                        </div>
+                    </a>
+                </div>
+
+
+
+            </div>
+
+
+            {% endblock content %}

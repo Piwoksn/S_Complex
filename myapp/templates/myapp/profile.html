@@ -1,0 +1,472 @@
+{% extends 'wrapper.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container my-3">
+    <!-- Page Title Section -->
+    <div class="pagetitle">
+        <div class="container">
+            <h2>Profile</h2>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'portal' %}">Home</a></li>
+                    <li class="breadcrumb-item">Users</li>
+                    <li class="breadcrumb-item active">Profile</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!-- End Page Title Section -->
+
+
+
+
+
+
+    <section class="section profile">
+        <div class="row">
+            <div class="col-xl-4">
+
+                <div class="card shadow">
+                    <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+
+                        <img src="{{user.logo.url}}" alt="Profile" class="rounded-circle" style="width: 100px;">
+                        <h2>{{user.first_name}} {{user.last_name}}</h2>
+                        <!--<h3>{{businessname}}</h3>-->
+                        <!--Icons-->
+                        <div class="social-links mt-2">
+                            <a href="{{user.facebook}}" class="facebook">
+                                <i class="bi bi-facebook"></i>
+                            </a>
+
+                            <a href="{{user.whatsapp}}" class="whatsapp">
+                                <i class="bi bi-whatsapp"></i>
+                            </a>
+
+                            <a href="{{user.instagram}}" class="instagram">
+                                <i class="bi bi-instagram"></i>
+                            </a>
+
+                        </div>
+                        <!--end Icons-->
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-xl-8">
+
+                <div class="card shadow">
+                    <div class="card-body pt-3">
+                        <!-- Bordered Tabs -->
+                        <ul class="nav nav-tabs nav-tabs-bordered">
+
+                            <li class="nav-item">
+                                <button class="nav-link active" data-bs-toggle="tab"
+                                    data-bs-target="#profile-overview">Overview</button>
+                            </li>
+
+
+
+
+                            <li class="nav-item">
+
+                                <button class="nav-link" id="edit-profile-button" data-bs-toggle="tab"
+                                    data-bs-target="#profile-edit">
+                                    Edit Profile
+                                </button>
+
+
+                            </li>
+
+
+                            <li class="nav-item">
+                                <button class="nav-link" data-bs-toggle="tab"
+                                    data-bs-target="#profile-change-password">Change
+                                    Password</button>
+                            </li>
+
+                        </ul>
+                        <div class="tab-content pt-2">
+
+                            <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                                <h5 class="card-title">About</h5>
+                                <p class="small fst-italic">{{user.moredesc}}</p>
+
+                                <h5 class="card-title">Profile Details</h5>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label ">Full Name</div>
+                                    <div class="col-lg-9 col-md-8">{{user.first_name}} {{user.last_name}}</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">Company</div>
+                                    <div class="col-lg-9 col-md-8">{{user.businessname}}</div>
+                                </div>
+
+                                <!-- <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">Business</div>
+                                    <div class="col-lg-9 col-md-8">{{user.businesstype}}</div>
+                                </div> -->
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">Country</div>
+                                    <div class="col-lg-9 col-md-8">{{user.country}}</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">Address</div>
+                                    <div class="col-lg-9 col-md-8">{{user.address}}</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">Phone</div>
+                                    <div class="col-lg-9 col-md-8">{{user.phone}}</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">Email</div>
+                                    <div class="col-lg-9 col-md-8">{{user.email}}</div>
+                                </div>
+
+                            </div>
+
+                            <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+
+
+                                <!-- Photo -->
+                                <!-- <form method="POST" enctype="multipart/form-data">
+                                    {% csrf_token %}
+
+                                    {% include 'messages.html' %}
+
+                                    <div class="row mb-3">
+
+
+
+                                        <div class="col-md-8 col-lg-9">
+                                            <div class="pt-2">
+                                                <label for="profileImage3" class="form-label">Change Profile
+                                                    Image</label>
+                                                <a href="#" class="btn btn-primary btn-sm"
+                                                    title="Upload new profile image" id="uploadLink3">
+                                                    <i class="bi bi-upload"></i>
+                                                </a>
+                                                <input type="file" id="fileInput3" name="profilepic"
+                                                    style="display: none;" accept="image/*" required>
+                                                <center>
+                                                    <center><img src="{{user.profilepic.url}}" alt="Selected Image"
+                                                            class="mt-2" id="selectedImage3"></center>
+                                                </center>
+
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <script>
+                                        // Get the link, file input, and image elements by their IDs
+                                        var uploadLink3 = document.getElementById("uploadLink3");
+                                        var fileInput3 = document.getElementById("fileInput3");
+                                        var selectedImage3 = document.getElementById("selectedImage3");
+
+                                        // Add a click event listener to the link
+                                        uploadLink3.addEventListener("click", function (e) {
+                                            // Prevent the default link behavior
+                                            e.preventDefault();
+
+                                            // Trigger a click event on the file input element
+                                            fileInput3.click();
+                                        });
+
+                                        // Add an event listener to the file input to handle file selection
+                                        fileInput3.addEventListener("change", function () {
+                                            // Display the selected image immediately
+                                            if (fileInput3.files.length > 0) {
+                                                var objectURL = URL.createObjectURL(fileInput3.files[0]);
+                                                selectedImage3.src = objectURL;
+                                                selectedImage3.style.display = "block";
+                                            }
+                                        });
+                                    </script>
+
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-primary btn-sm" name="update_pic">Save
+                                            Image</button>
+                                    </div>
+
+                                </form>
+
+                                <hr> -->
+
+                                <!-- Logo -->
+                                <form method="POST" enctype="multipart/form-data">
+                                    {% csrf_token %}
+
+                                    <div class="row mb-3">
+
+
+
+                                        <div class="col-md-8 col-lg-9">
+                                            <div class="pt-2">
+                                                <label for="logoImage" class="form-label">Change logo</label>
+                                                <a href="#" class="btn btn-primary btn-sm" title="Upload new logo image"
+                                                    id="uploadLink2">
+                                                    <i class="bi bi-upload"></i>
+                                                </a>
+                                                <input type="file" id="fileInput2" name="logo" style="display: none;"
+                                                    accept="image/*" required>
+
+                                                <center><img src="{{user.logo.url}}" alt="Selected Image2" class="mt-2"
+                                                        id="selectedImage2"></center>
+
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <script>
+                                        // Get the link, file input, and image elements by their IDs
+                                        var uploadLink = document.getElementById("uploadLink2");
+                                        var fileInput = document.getElementById("fileInput2");
+                                        var selectedImage = document.getElementById("selectedImage2");
+
+                                        // Add a click event listener to the link
+                                        uploadLink.addEventListener("click", function (e) {
+                                            // Prevent the default link behavior
+                                            e.preventDefault();
+
+                                            // Trigger a click event on the file input element
+                                            fileInput.click();
+                                        });
+
+                                        // Add an event listener to the file input to handle file selection
+                                        fileInput.addEventListener("change", function () {
+                                            // Display the selected image immediately
+                                            if (fileInput.files.length > 0) {
+                                                var objectURL = URL.createObjectURL(fileInput.files[0]);
+                                                selectedImage.src = objectURL;
+                                                selectedImage.style.display = "block";
+                                            }
+                                        });
+                                    </script>
+
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-primary btn-sm" name="update_logo">Save
+                                            Logo</button>
+                                    </div>
+
+                                </form>
+
+                                <hr>
+
+                                <!-- Profile Edit Form -->
+                                <form method="POST" enctype="multipart/form-data">
+                                    {% csrf_token %}
+
+
+
+                                    <div class="row mb-3">
+                                        <label for="fullName" class="col-md-4 col-lg-3 col-form-label">First
+                                            Name</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input type="text" class="form-control" id="first_name" name="first_name"
+                                                value="{{ user.first_name }}" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Last Name</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input type="text" class="form-control" id="last_name" name="last_name"
+                                                value="{{ user.last_name }}" required>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row mb-3">
+                                        <label for="about" class="col-md-4 col-lg-3 col-form-label">About</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <textarea class="form-control" name="moredesc" cols="30" rows="10"
+                                                style="height: 100px;" ">{{ user.moredesc }}</textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class=" row mb-3">
+                                        <label for="company" class="col-md-4 col-lg-3 col-form-label">Company</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input type="text" class="form-control" id="businessname" name="businessname"
+                                                value="{{ user.businessname }}" required>
+                                        </div>
+                                    </div>
+                                    
+
+                                    <!-- <div class="row mb-3">
+                                        <label for="Business" class="col-md-4 col-lg-3 col-form-label">Business</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input type="text" class="form-control" id="businesstype" name="businesstype"
+                                                value="{{ user.businesstype }}" required>
+                                        </div>
+                                    </div> -->
+
+                                    <div class="row mb-3">
+                                        <label for="Country" class="col-md-4 col-lg-3 col-form-label">Country</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input type="text" class="form-control" id="country" name="country"
+                                                value="{{ user.country }}" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="Country" class="col-md-4 col-lg-3 col-form-label">Currency</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            
+
+                                                <div class="input-group">
+                                                    <input type="text" id="category-input" class="form-control" list="category-list"
+                                                        name="currency" value="{{ user.currency }}" required>
+                                                    <datalist id="category-list">
+                        
+                                                        <option value="$">Dollar</option>
+                                                        <option value="€">Euro</option>
+                                                        <option value="₦">Naira</option>
+                                                        <option value="£">Pound</option>
+                        
+                                                    </datalist>
+                                                </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="Address" class="col-md-4 col-lg-3 col-form-label">Address</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input type="text" class="form-control" id="address" name="address"
+                                                value="{{ user.address }}" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input type="text" class="form-control" id="phone" name="phone"
+                                                value="{{ user.phone }}" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input type="text" class="form-control" id="email" name="email"
+                                                value="{{ user.email }}" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="Facebook" class="col-md-4 col-lg-3 col-form-label">Facebook
+                                            Profile</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input type="text" class="form-control" id="facebook" name="facebook"
+                                                value="{{ facebook }}">
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="Twitter" class="col-md-4 col-lg-3 col-form-label">Whatsapp
+                                            Profile</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input type="text" class="form-control" id="whatsapp" name="whatsapp"
+                                                value="{{ whatsapp }}" required>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row mb-3">
+                                        <label for="Instagram" class="col-md-4 col-lg-3 col-form-label">Instagram
+                                            Profile</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input type="text" class="form-control" id="instagram" name="instagram"
+                                                value="{{ instagram }}">
+                                        </div>
+                                    </div>
+
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-primary" name="update_profile">Save
+                                            Changes</button>
+                                    </div>
+
+                                </form><!-- End Profile Edit Form -->
+
+
+                            </div>
+
+                            <div class="tab-pane fade pt-3" id="profile-settings">
+
+
+                            </div>
+
+                            <div class="tab-pane fade pt-3" id="profile-change-password">
+
+
+
+                                <!-- Change Password Form -->
+
+                                {% include 'messages.html' %}
+
+                                <form action="" method="POST">
+                                    {% csrf_token %}
+
+                                    {{ password_form.as_p }}
+
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-primary" name="change_password">Change
+                                            Password</button>
+                                    </div>
+
+                                </form><!-- End Change Password Form -->
+
+                            </div>
+
+                        </div><!-- End Bordered Tabs -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Profile Section -->
+
+</div>
+<!-- End Profile Section -->
+
+
+{% endblock content %}

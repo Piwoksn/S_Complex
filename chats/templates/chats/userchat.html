@@ -1,0 +1,161 @@
+<!-- {% load static %} -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'assets/bootstrap-5.3.1-dist/css/bootstrap.min.css' %}">
+
+    <link rel="icon" href="{% static 'logo22.png' %}" type="image/x-icon">
+
+    <!--icons-->
+    <link rel="stylesheet" href="{% static 'assets/bootstrap-icons/bootstrap-icons.css' %}">
+
+    <title>Chat Room</title>
+
+    <link rel="stylesheet" href="{% static 'assets/style.css' %}">
+    <link rel="stylesheet" href="{% static 'homepage.css' %}">
+
+    <style>
+        .chat-container2 {
+            height: 400px;
+            overflow-y: auto;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+        }
+
+        .sender {
+            text-align: right;
+        }
+
+        .receiver {
+            text-align: left;
+        }
+
+        .sender div {
+            background-color: lightgreen;
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 5px;
+            display: inline-block;
+        }
+
+        .receiver div {
+            background-color: lightcyan;
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 5px;
+            display: inline-block;
+        }
+
+        .sender small,
+        .receiver small {
+            display: block;
+            text-align: right;
+            color: gray;
+        }
+
+        .receiver small {
+            text-align: left;
+        }
+
+        .btn-right {
+            float: right;
+            margin: 5px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row my-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="display-5 text-secondary"> Management </span>
+                        <a href="{% url 'portal' %}" type="button" class="btn-close bg-light btn-right"></a>
+                    </div>
+                    <div class="card-body">
+                        <!-- Chat Container -->
+                        <div class="chat-container2">
+                            {% for chat in all_chats %}
+                            <div class="{% if chat.user != user %}receiver{% else %}sender{% endif %}">
+                                <div>
+                                    {{ chat.sentmessages }}
+                                </div>
+                                <small class="text-secondary">{% if chat.user != user %}received{% else %}sent{% endif %}: {{ chat.timesent | timesince }}</small>
+                            </div>
+                            {% endfor %}
+                            <!-- here -->
+                        </div>
+                            <form class="chat" action="" method="POST">
+                        <!-- End Chat Container -->
+                        
+                        <div class="col-md-12 mt-4">
+                                {% csrf_token %}
+                                <div class="input-group">
+                                    <textarea class="form-control" name="message" id="" cols="30" rows="3"
+                                        placeholder="Type your message..."
+                                        style="resize: none; outline: none;"></textarea>
+                                    <button class="btn btn-primary send" type="submit"><i
+                                            class="bi bi-send"></i></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Section -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'assets/bootstrap-5.3.1-dist/js/bootstrap.bundle.min.js' %}"></script>
+
+
+
+    <!-- Reload Chat-container -->
+    <script>
+        $(document).ready(function () {
+            setInterval(function () {
+                $.ajax({
+                    url: window.location.href,
+                    type: 'GET',
+                    success: function (data) {
+                        var newHeader = $(data).find('.chat-container2').html();
+                        $('.chat-container2').html(newHeader);
+                    }
+                });
+            }, 1000); // Reload every 1 second
+        });
+    </script>
+
+
+<!-- Always Show recent chats -->
+<script>
+    $(document).ready(function () {
+        setInterval(function () {
+            $.ajax({
+                url: window.location.href,
+                type: 'GET',
+                success: function (data) {
+                    var newHeader = $(data).find('.chat-container2').html();
+                    $('.chat-container2').html(newHeader);
+
+                    // Scroll to the bottom of the chat container
+                    var chatContainer = $('.chat-container2');
+                    chatContainer.scrollTop(chatContainer.prop("scrollHeight"));
+                }
+            });
+        }, 1000); // Reload every 5 second
+    });
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,490 @@
+{% extends 'wrapper.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container my-3 ">
+    {% if user.is_authenticated %}
+    <h2>Hello, {{user.last_name}}</h2>
+    <div class="row mt-2">
+
+        {% if not user.slug %}
+        <div class="col-lg-8 col-md-12 col-sm-12">
+            <small>Share Your Shop Link Below:</small>
+            <input class="form-control mb-2 text-center bg-danger text-white" type="text" value="Site is not active"
+                readonly>
+        </div>
+
+        {% else %}
+
+        <div class="col-lg-8 col-md-12 col-sm-12">
+            <small>Share Your Shop Link Below: (Click to Copy)</small>
+
+            <input id="copyInput" class="form-control mb-2 text-center bg-success text-white" type="text"
+                value="https://www.myshopcomplex.com/shop/{{user.slug}}" readonly>
+        </div>
+
+
+
+        {% endif %}
+
+        <!-- Subscribe Button -->
+
+        <div class="col-lg-4 col-md-12 col-sm-12">
+            <small>Total Coins: <i class="bi bi-coin"></i>
+                <span class="">{{user.coins}}</span>
+            </small><br>
+            <b>{{notify}}</b> <br>
+            <small>{{due}} </small>
+
+
+            {% if not user.slug %} <a href="{% url 'submethod' %}" class="btn btn-warning">Subscribe</a>
+
+            {% endif %}
+        </div>
+
+        <!-- END FREE TRIAL -->
+
+
+
+
+
+
+    </div>
+    {% else %}
+    {% endif %}
+</div>
+<div class="container">
+    <!-- Item Row -->
+    <div class="row">
+        <div class="col-12 col-lg-8">
+            <!-- Add to Shop -->
+            <div class="card mb-3 shadow">
+                <div class="card-header text-white bg-dark">
+                    <h1><i class="bi bi-shop me-2"></i> Add To Shop </h1>
+                </div>
+                <div class="card-body">
+                    <form action="{% url 'addProduct' %}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% include 'messages.html' %}
+                        <!-- Category -->
+                        <div class="col-12 mt-2">
+                            <label for="category" class="form-label">Category</label>
+                            <div class="input-group">
+                                <input type="text" id="category-input" class="form-control" list="category-list"
+                                    name="category" placeholder="Select a category" required>
+                                <datalist id="category-list">
+                                    {% for category in categories %}
+                                    <option value="{{category.itemcategory}}">{{category.itemcategory}}</option>
+                                    {% endfor %}
+                                </datalist>
+                            </div>
+                        </div>
+                        <!-- Item Image -->
+                        <div class="mb-3 col-lg-6 mt-3">
+                            <div class="pt-2">
+                                <label for="formFile" class="form-label">Upload Item Image</label>
+                                <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"
+                                    id="uploadLink">
+                                    <i class="bi bi-upload"></i>
+                                </a>
+                                <input type="file" id="fileInput" name="itemimage" style="display: none;"
+                                    accept="image/*" required>
+                                <center>
+                                    <img src="" alt="Item Image" id="selectedImage"
+                                        style="max-width: 100px; display: none;">
+                                </center>
+                                <!-- Script for handling image upload -->
+                                <script>
+                                    // Get the link, file input, and image elements by their IDs
+                                    var uploadLink = document.getElementById("uploadLink");
+                                    var fileInput = document.getElementById("fileInput");
+                                    var selectedImage = document.getElementById("selectedImage");
+
+                                    // Add a click event listener to the link
+                                    uploadLink.addEventListener("click", function (e) {
+                                        // Prevent the default link behavior
+                                        e.preventDefault();
+
+                                        // Trigger a click event on the file input element
+                                        fileInput.click();
+                                    });
+
+                                    // Add an event listener to the file input to handle file selection
+                                    fileInput.addEventListener("change", function () {
+                                        // Display the selected image immediately
+                                        if (fileInput.files.length > 0) {
+                                            var objectURL = URL.createObjectURL(fileInput.files[0]);
+                                            selectedImage.src = objectURL;
+                                            selectedImage.style.display = "block";
+                                        }
+                                    });
+                                </script>
+                            </div>
+                        </div>
+                        <!---->
+
+                        <!-- Item Image2 -->
+                        <div class="mb-3 col-lg-6 mt-3" id="image2Container">
+                            <div class="pt-2">
+                                <label for="formFile" class="form-label">Image 2 </label>
+                                <a href="#" class="btn btn-primary btn-sm" title="itemimage2" id="uploadLink2">
+                                    <i class="bi bi-upload"></i>
+                                </a>
+
+                                <input type="file" id="fileInput2" name="itemimage2" style="display: none;"
+                                    accept="image/*">
+                                <center>
+                                    <img src="" alt="Item Image" id="selectedImage2"
+                                        style="max-width: 100px; display: none;">
+                                </center>
+                                <!-- Script for handling image upload -->
+                                <script>
+                                    // Get the link, file input, and image elements by their IDs
+                                    var uploadLink2 = document.getElementById("uploadLink2");
+                                    var fileInput2 = document.getElementById("fileInput2");
+                                    var selectedImage2 = document.getElementById("selectedImage2");
+
+                                    // Add a click event listener to the link
+                                    uploadLink2.addEventListener("click", function (e) {
+                                        // Prevent the default link behavior
+                                        e.preventDefault();
+
+                                        // Trigger a click event on the file input element
+                                        fileInput2.click();
+                                    });
+
+                                    // Add an event listener to the file input to handle file selection
+                                    fileInput2.addEventListener("change", function () {
+                                        // Display the selected image immediately
+                                        if (fileInput2.files.length > 0) {
+                                            var objectURL = URL.createObjectURL(fileInput2.files[0]);
+                                            selectedImage2.src = objectURL;
+                                            selectedImage2.style.display = "block";
+                                        }
+                                    });
+                                </script>
+                            </div>
+                        </div>
+
+
+                        <!-- Item Image3 -->
+                        <div class="mb-3 col-lg-6 mt-3" id="image3Container">
+                            <div class="pt-2">
+                                <label for="formFile" class="form-label">Image 3 </label>
+                                <a href="#" class="btn btn-primary btn-sm" title="itemimage3" id="uploadLink3">
+                                    <i class="bi bi-upload"></i>
+                                </a>
+
+                                <input type="file" id="fileInput3" name="itemimage3" style="display: none;"
+                                    accept="image/*">
+                                <center>
+                                    <img src="" alt="Item Image" id="selectedImage3"
+                                        style="max-width: 100px; display: none;">
+                                </center>
+                                <!-- Script for handling image upload -->
+                                <script>
+                                    // Get the link, file input, and image elements by their IDs
+                                    var uploadLink3 = document.getElementById("uploadLink3");
+                                    var fileInput3 = document.getElementById("fileInput3");
+                                    var selectedImage3 = document.getElementById("selectedImage3");
+
+                                    // Add a click event listener to the link
+                                    uploadLink3.addEventListener("click", function (e) {
+                                        // Prevent the default link behavior
+                                        e.preventDefault();
+
+                                        // Trigger a click event on the file input element
+                                        fileInput3.click();
+                                    });
+
+                                    // Add an event listener to the file input to handle file selection
+                                    fileInput3.addEventListener("change", function () {
+                                        // Display the selected image immediately
+                                        if (fileInput3.files.length > 0) {
+                                            var objectURL = URL.createObjectURL(fileInput3.files[0]);
+                                            selectedImage3.src = objectURL;
+                                            selectedImage3.style.display = "block";
+                                        }
+                                    });
+                                </script>
+                            </div>
+                        </div>
+
+                        <a href="#" id="moreImagesLink">
+                            <small>Add more images (optional)</small>
+                            <i class="bi bi-plus text-primary"></i>
+                        </a>
+
+                        <hr>
+
+
+                        <script>
+                            var image2Container = document.getElementById("image2Container");
+                            var image3Container = document.getElementById("image3Container");
+                            var moreImagesLink = document.getElementById("moreImagesLink");
+
+                            // Initially hide the second and third images
+                            image2Container.style.display = "none";
+                            image3Container.style.display = "none";
+
+                            moreImagesLink.addEventListener("click", function (e) {
+                                e.preventDefault();
+
+                                // Toggle visibility of the second image
+                                if (image2Container.style.display === "none") {
+                                    image2Container.style.display = "block";
+                                } else {
+                                    // If the second image is visible, toggle the visibility of the third image
+                                    image3Container.style.display = "block";
+                                    // Hide the "more image" link when the third image is displayed
+                                    moreImagesLink.style.display = "none";
+                                }
+                            });
+                        </script>
+
+
+                        <!-- End of image -->
+
+                        <!-- Video Clip -->
+
+                        <div class="mb-3 col-lg-6 mt-3" id="image4Container">
+                            <div class="pt-2">
+                                <label for="formFile" class="form-label" data-bs-toggle="tooltip"
+                                    data-bs-placement="top"
+                                    title="Upload Short Clips. Upload might take long depending on the size of your clip, ensure to compress before uploading.">Video
+                                    Clip <i class="bi bi-info-circle-fill text-secondary"></i> <small
+                                        class="text-primary">(optional)</small></label>
+                                <a href="#" class="btn btn-primary btn-sm" title="itemvideo3" id="uploadLink4">
+                                    <i class="bi bi-upload"></i>
+                                </a>
+
+                                <input type="file" id="fileInput4" name="itemvideo4" style="display: none;"
+                                    accept="video/*">
+                                <center>
+                                    <video src="" alt="Item video" id="selectedVideo4"
+                                        style="max-width: 100px; display: none;" controls>
+                                </center>
+                                <!-- Script for handling video upload -->
+                                <script>
+                                    // Get the link, file input, and image elements by their IDs
+                                    var uploadLink4 = document.getElementById("uploadLink4");
+                                    var fileInput4 = document.getElementById("fileInput4");
+                                    var selectedVideo4 = document.getElementById("selectedVideo4");
+
+                                    // Add a click event listener to the link
+                                    uploadLink4.addEventListener("click", function (e) {
+                                        // Prevent the default link behavior
+                                        e.preventDefault();
+
+                                        // Trigger a click event on the file input element
+                                        fileInput4.click();
+                                    });
+
+                                    // Add an event listener to the file input to handle file selection
+                                    fileInput4.addEventListener("change", function () {
+                                        // Check if a file is selected
+                                        if (fileInput4.files.length > 0) {
+                                            // Get the selected file
+                                            var selectedFile = fileInput4.files[0];
+
+                                            // Check the file size (in bytes)
+                                            var fileSizeInBytes = selectedFile.size;
+
+                                            // Convert the file size to megabytes
+                                            var fileSizeInMB = fileSizeInBytes / (1024 * 1024);
+
+                                            // Check if the file size is greater than 15MB
+                                            if (fileSizeInMB > 15) {
+                                                // Show an error message
+                                                alert("Error: File size must be 15MB or below.");
+
+                                                // Clear the file input
+                                                fileInput4.value = "";
+
+                                                // Hide the selected video
+                                                selectedVideo4.style.display = "none";
+                                            } else {
+                                                // Display the selected video immediately
+                                                var objectURL = URL.createObjectURL(selectedFile);
+                                                selectedVideo4.src = objectURL;
+                                                selectedVideo4.style.display = "block";
+                                            }
+                                        }
+                                    });
+                                </script>
+
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <!--End Video Clip -->
+
+
+
+                        <!---->
+
+                        <div class="col-sm-12 mt-3">
+                            <label for="item name" class="form-label" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="20 Characters Only">Item Name <i class="bi bi-info-circle-fill"></i> <small
+                                    class="text-primary"></small></label>
+                            <input type="text" name="itemname" class="form-control" maxlength="20" required>
+                            <div class="invalid-feedback">Please enter Item Name</div>
+                        </div>
+
+
+
+                        <div class="col-sm-12 mt-3">
+                            <label for="item name" class="form-label">Price</label>
+                            <div class="input-group">
+                                <span class="input-group-text">{{user.currency}}</span>
+                                <input type="text" class="form-control" name="itemprice" aria-label="itemprice"
+                                    pattern="[0-9]*\.?[0-9]+" title="Enter a valid number" required>
+                            </div>
+                            <div class="invalid-feedback">Please enter Item Price</div>
+                        </div>
+
+
+                        <div class="col-sm-12 mt-3">
+                            <label for="discount" class="form-label">Discount Price <small class="text-primary">
+                                    (optional)</small></label>
+                            <div class="input-group">
+                                <span class="input-group-text">{{user.currency}}</span>
+                                <input type="text" class="form-control" name="itemdiscount" value="0.00"
+                                    pattern="[0-9]*\.?[0-9]+" title="Enter a valid number" aria-label="itemDiscount"
+                                    required>
+                            </div>
+                            <div class="invalid-feedback">Please enter Discount</div>
+                        </div>
+
+                        <div class="col-sm-12 mt-3">
+                            <label for="item color" class="form-label" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="do not seperate with a (' , ') comma">Available Colours <i
+                                    class="bi bi-info-circle-fill"></i>
+
+                            </label>
+                            <input type="text" name="itemcolour" class="form-control"
+                                placeholder="eg. Black Red Blue ...">
+                            <div class="invalid-feedback">Available Colours </div>
+                        </div>
+
+                        <div class="col-sm-12 mt-3">
+                            <label for="item color" class="form-label" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="do not seperate with a (' , ') comma">Sizes <small class="text-primary">(if
+                                    available)</small> <i class="bi bi-info-circle-fill"></i></label>
+                            <input type="text" name="itemsize" class="form-control" placeholder="eg. SM XL XXL">
+                            <div class="invalid-feedback">Available Sizes</div>
+                        </div>
+
+
+
+
+                        <div class="col-sm-12 form-floating mt-3">
+                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
+                                name="itemdescription" style="height: 100px"></textarea>
+                            <label for="floatingTextarea2">Item description (optional)</label>
+                        </div>
+
+
+                        <!-- End of Add Item -->
+                        <div class="col-sm-12 mt-3">
+                            <button class="btn btn-primary w-100 mb-2" name="add" type="submit">Add</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- List of Items Accordion -->
+        <div class="col-sm-12 col-lg-4">
+            <div class="card mb-3 shadow">
+                <div class="card-header text-white bg-dark">
+                    <h1><i class="bi bi-pen me-2"></i> Shop Items </h1>
+                </div>
+                <div class="card-body">
+                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                        <!-- Accordion content goes here -->
+
+                        {% if categories %}
+
+                        {% for category in categories %}
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-heading{{forloop.counter}}">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapse{{forloop.counter}}" aria-expanded="false"
+                                    aria-controls="flush-collapse{{forloop.counter}}">
+
+                                    {{category.itemcategory}} {{product__count}}
+
+                                </button>
+                            </h2>
+                            <div id="flush-collapse{{forloop.counter}}" class="accordion-collapse collapse"
+                                aria-labelledby="flush-heading{{forloop.counter}}"
+                                data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+
+
+                                    {% for item in product reversed %}
+                                    {% if item.itemcategory == category.itemcategory %}
+
+                                    <div class="card-body m-0 p-0">
+                                        <small class="text-secondary">updated@{{item.updated |timesince}}</small>
+                                        <p class="text-secondary"><b>{{item.itemname}}</b></p>
+                                        <img src="{{item.itemimage.url}}" alt="image" style="width: 50px;">
+                                        <small
+                                            class="text-secondary">{{user.currency}}{{item.itemamount|floatformat:2}}</small>
+                                        <br>
+                                        <small class="text-secondary">created@{{item.created}}</small>
+
+                                    </div>
+
+                                    <hr class="my-1 p-0 text-primary">
+
+
+
+
+
+
+                                    {% endif %}
+                                    {% endfor %}
+
+                                </div>
+                            </div>
+                        </div>
+
+                        {% endfor %}
+
+                        {% else %}
+                        <p class="text-center p-3">Shop is Empty! Add Items</p>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Live View -->
+
+
+    <div class="row">
+        <div class="card mb-3 shadow">
+            <div class="card-header text-center">
+                <a class="btn btn-outline-danger btn-lg" href="shop/{{ user.slug }}" target="_blank">Preview Shop</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="card mb-3 shadow">
+            <div class="card-header text-center">
+                <h3>Learn How to Add to Shop</h3>
+            </div>
+            <div class="card-body text-center">
+                <video src="{% static 'clip/complete1.mp4' %}" width="100%" controls></video>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+{% endblock content %}
