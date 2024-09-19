@@ -2134,4 +2134,31 @@ class UserRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
 
 
 def refund_policy(request):
-    return render(request, "myapp/refund_policy.html")
+    nairaGold = NairaSubscriptionPlan.objects.get(plan_type='Gold')
+    nairaSilver = NairaSubscriptionPlan.objects.get(plan_type='Silver')
+    nairaBronze = NairaSubscriptionPlan.objects.get(plan_type='Bronze')
+    nairaPlatinum = NairaSubscriptionPlan.objects.get(plan_type='Platinum')
+    # Foreign
+    # foreignnairaGold = NairaSubscriptionPlan.objects.get(
+    #     plan_type='ForeignGold')
+    # foreignnairaSilver = NairaSubscriptionPlan.objects.get(
+    #     plan_type='ForeignSilver')
+    # foreignnairaBronze = NairaSubscriptionPlan.objects.get(
+    #     plan_type='ForeignBronze')
+    # foreignnairaPlatinum = NairaSubscriptionPlan.objects.get(
+    #     plan_type='ForeignPlatinum')
+    # foreignnairaBasic = NairaSubscriptionPlan.objects.get(
+    #     plan_type='ForeignBasic')
+
+    dollarGold = DollarSubscriptionPlan.objects.get(plan_type='Gold')
+    dollarSilver = DollarSubscriptionPlan.objects.get(plan_type='Silver')
+    dollarBronze = DollarSubscriptionPlan.objects.get(plan_type='Bronze')
+    dollarPlatinum = DollarSubscriptionPlan.objects.get(
+        plan_type='Platinum')
+
+    context = {'nairaGold': int(nairaGold.price), 'nairaSilver': int(nairaSilver.price),
+               'nairaBronze': int(nairaBronze.price), 'nairaPlatinum': int(nairaPlatinum.price), 'dollarGold': int(dollarGold.price), 'dollarSilver': int(dollarSilver.price), 'dollarBronze': int(dollarBronze.price), 'dollarPlatinum': int(dollarPlatinum.price),
+               # 'foreignnairaGold': int(foreignnairaGold.price), 'foreignnairaSilver': int(foreignnairaSilver.price), 'foreignnairaPlatinum': int(foreignnairaPlatinum.price), 'foreignnairaBronze': int(foreignnairaBronze.price), 'foreignnairaBasic': int(foreignnairaBasic.price),
+
+               }
+    return render(request, "myapp/refund_policy.html", context)
