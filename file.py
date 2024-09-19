@@ -1,0 +1,1 @@
+reg_record(businessname, moredesc, firstname, lastname, email, gender, phone, country, state, address, meansofid, idnumber, whatsapp, facebook, instagram)

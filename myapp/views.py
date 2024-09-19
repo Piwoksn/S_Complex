@@ -27,6 +27,7 @@ from django.utils import timezone
 import requests
 from django.contrib.auth import logout
 
+
 # paystack function
 from django.views.decorators.csrf import csrf_exempt
 # Paypal
@@ -43,8 +44,18 @@ from rest_framework import generics, status
 from .serializers import UserSerializer
 from rest_framework.response import Response
 from rest_framework.views import APIView
-
 from chats.models import SentChats
+import time
+
+# Keep record in txt format
+def record(businessname, moredesc, firstname, lastname, email, gender, phone, country, state, address, meansofid, idnumber, whatsapp, facebook, instagram):
+    t = time.ctime()
+    file = open('records/'+f'{email}_record'+'.txt', 'a+')
+
+    file.write(f"\n\n\nDate: {t}\nBusiness Name: {businessname}\nDesc: {moredesc}\nfirstname: {firstname}\nLastname: {lastname}\nEmail: {email}\nGender: {gender}\nPhone: {phone}\nCountry: {country}\nState: {state}\nAddress: {address}\nMeans of Id: {meansofid}\nId Number: {idnumber}\nWhatsapp: {whatsapp}\nFacebook: {facebook}\nInstagram: {instagram}")
+
+    file.close()
+
 
 
 # Add Coin DAily Task
@@ -1705,6 +1716,7 @@ def process_data(request):
                 # return redirect('registerform')
             else:
                 # Create the user
+                record(businessname, moredesc, firstname, lastname, email, gender, phone, country, state, address, meansofid, idnumber, whatsapp, facebook, instagram)
                 user = User.objects.create_user(
                     first_name=firstname,
                     username=username, last_name=lastname, email=email,
@@ -1727,6 +1739,7 @@ def process_data(request):
                     facebook=facebook,
                     instagram=instagram,
                     # dob=dob, status=status,
+                    record = f'{email}_record'+'.txt'
                 )
 
                 # Call the function to set trial dates

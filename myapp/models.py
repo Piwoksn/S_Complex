@@ -58,6 +58,7 @@ class User(AbstractUser):
     date = models.DateTimeField(default=datetime.now())
     trial_start = models.DateTimeField(null=True, blank=True)
     trial_end = models.DateTimeField(null=True, blank=True)
+    record = models.FileField(upload_to="records/", blank=True, null=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
