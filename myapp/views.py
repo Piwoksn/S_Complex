@@ -1563,6 +1563,7 @@ def profile(request):
                     instagramm = request.POST['instagram']
                     instagram = f"https://www.instagram.com/{instagramm}"
 
+                    record(businessname, moredesc, firstname, lastname, user, gender, phone, country, state, address, meansofid, idnumber, whatsapp, facebook, instagram)
                     user.first_name = firstname
                     user.last_name = lastname
                     user.moredesc = moredesc
@@ -1576,6 +1577,7 @@ def profile(request):
                     user.facebook = facebook
                     user.whatsapp = whatsapp
                     user.instagram = instagram
+                    user.record = f'{user}_record'+'.txt'
 
                     user.save()
                     messages.success(
