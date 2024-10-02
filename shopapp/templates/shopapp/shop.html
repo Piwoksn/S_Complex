@@ -43,13 +43,13 @@
                     </div>
                     <div
                         class="card-body border-top{% if not request.resolver_match.url_name == 'product' %} card-body-md-lg{% endif %} mb-2">
-                        <h5 class="card-title pt-1 mt-1 pb-0 mb-0">{{ item.itemname }}</h5>
+                        <h6 class="card-title pt-1 mt-1 pb-0 mb-0" style="font-size:15px">{{ item.itemname }}</h6>
                         {% if item.itemdiscount %}
                         <p class="card-text text-danger text-decoration-line-through p-0 m-0"
-                            style="font-weight: bolder;">
+                            style="font-size: 14px">
                             {{ user.currency }}{{ item.itemprice|floatformat:2 }}
                         </p>
-                        <h5 class="card-text" style="font-weight: bolder;">
+                        <h5 class="card-text" style="font-weight: bolder; font-size: 14px">
                             {{ user.currency }}{{ item.itemamount|floatformat:2 }}
                         </h5>
 
