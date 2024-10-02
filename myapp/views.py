@@ -63,10 +63,9 @@ def add_coins_daily(request, user):
     # Check if the user has logged in within the last 3 minutes (for testing)
     last_login = user.last_login.date()
     current_time = timezone.now().date()
-    print(last_login, "\n", current_time)
     # if last_login and (current_time - last_login) >= timedelta(hours=24):
     if last_login != current_time:
-        # User logged in after 24 hours, add 50 coins (for testing)
+        # User logged in every new day, add 50 coins (for testing)
         user.coins += 50
         user.save()
         messages.success(request, "You Received Bonus of 50 coins.")
