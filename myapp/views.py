@@ -9,7 +9,7 @@ from django.http import JsonResponse
 from django.db.models import Count  # Import Count from django.db.models
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import auth
-from django.contrib import auth  # Import authentication library if not already done
+from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from .models import User
 from .forms import UserForm
@@ -46,6 +46,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from chats.models import SentChats
 import time
+from django.utils import timezone
+
 
 # Keep record in txt format
 def record(businessname, moredesc, firstname, lastname, email, gender, phone, country, state, address, meansofid, idnumber, whatsapp, facebook, instagram):
@@ -58,21 +60,20 @@ def record(businessname, moredesc, firstname, lastname, email, gender, phone, co
 
 
 
-# Add Coin DAily Task
+# Add Coin Daily Task
 def add_coins_daily(request, user):
     # Check if the user has logged in within the last 3 minutes (for testing)
-    last_login = user.last_login.date()
-    current_time = timezone.now().date()
-    # if last_login and (current_time - last_login) >= timedelta(hours=24):
-    if last_login != current_time:
+    last_login = user.last_login.date()  # Extract only the date
+    current_date = timezone.now().date()  # Extract only the date
+    
+    if last_login != current_date:
         # User logged in every new day, add 50 coins (for testing)
         user.coins += 50
+        user.last_login = timezone.now()  # Update last_login to the current full datetime
         user.save()
-        messages.success(request, "You Received Bonus of 50 coins.")
-        # Update the last_login and daily_bonus_received attributes
-        user.last_login = current_time
-        user.save()
-#
+        messages.success(request, "You Received 50 coins Daily Bonus.")
+    else:
+        print("False")
 
 
 def aboutus(request):
@@ -1115,14 +1116,23 @@ def superadminedit(request, pk):
 def home(request):
     if request.user.is_authenticated:
         user = request.user
+        user.last_login = timezone.now()
+        user.save()
         if not user.businessname:
-            # auth.login(request, user)
             messages.success(
                 request, f"Welcome back {user.first_name} {user.last_name}, please complete your registration process")
             return redirect('more_info')
         else:
-            # auth.login(request, user)
+
+            # add_coins_daily(request, user)
+            # user.last_login = timezone.now().date()
+            # user.save()
             return redirect('portal')
+        
+        # add_coins_daily(request, user)
+        # user.last_login = timezone.now().date()
+        # print(user)
+        # user.save()
 
         return redirect('portal')
     return render(request, 'myapp/index.html')
