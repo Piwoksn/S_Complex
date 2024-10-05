@@ -60,20 +60,24 @@ def record(businessname, moredesc, firstname, lastname, email, gender, phone, co
 
 
 
-# Add Coin Daily Task
+# Add Coin DAily Task
 def add_coins_daily(request, user):
     # Check if the user has logged in within the last 3 minutes (for testing)
-    last_login = user.last_login.date()  # Extract only the date
-    current_date = timezone.now().date()  # Extract only the date
-    
-    if last_login != current_date:
+    last_login = user.last_login.date()
+    current_time = timezone.now().date()
+    if last_login != current_time:
+        print(current_time)
+        print(last_login)
         # User logged in every new day, add 50 coins (for testing)
         user.coins += 50
-        user.last_login = timezone.now()  # Update last_login to the current full datetime
+        user.last_login = timezone.now()
         user.save()
         messages.success(request, "You Received 50 coins Daily Bonus.")
-    else:
-        print("False")
+        # Update the last_login and daily_bonus_received attributes
+    
+        
+
+
 
 
 def aboutus(request):
@@ -1116,24 +1120,15 @@ def superadminedit(request, pk):
 def home(request):
     if request.user.is_authenticated:
         user = request.user
-        user.last_login = timezone.now()
-        user.save()
+                
         if not user.businessname:
             messages.success(
                 request, f"Welcome back {user.first_name} {user.last_name}, please complete your registration process")
             return redirect('more_info')
         else:
-
-            # add_coins_daily(request, user)
-            # user.last_login = timezone.now().date()
-            # user.save()
+            add_coins_daily(request, user)
             return redirect('portal')
-        
-        # add_coins_daily(request, user)
-        # user.last_login = timezone.now().date()
-        # print(user)
-        # user.save()
-
+        add_coins_daily(request, user)
         return redirect('portal')
     return render(request, 'myapp/index.html')
 
@@ -1447,7 +1442,7 @@ def portal(request):
 
         # ----------------------------------
         # Daily Coin 50coins
-        add_coins_daily(request, user)  # Call add_coins_daily function
+        add_coins_daily(request, user)
 
         # ----------------------------------
         # ----------------------------------
