@@ -1250,38 +1250,6 @@ def changepassword(request, pk):
 # ----------------------------------------
 
 
-# def loginform(request):
-
-#     if request.user.is_authenticated:
-#         return redirect('portal')
-
-#     if request.method == 'POST':
-#         try:
-#             email = request.POST['email']
-#             password = request.POST['password']
-
-#             user = auth.authenticate(email=email, password=password)
-#             if user is not None:
-#                 if not user.businessname:
-#                     auth.login(request, user)
-#                     messages.success(
-#                         request, f"Welcome back {user.first_name} {user.last_name}, please complete your registration process")
-#                     return redirect('more_info')
-#                 else:
-#                     auth.login(request, user)
-#                     return redirect('portal')
-
-#             else:
-#                 messages.warning(request, 'Invalid Credentials')
-#                 # Redirects to current activity
-#                 return HttpResponseRedirect(request.path_info)
-#         except:
-#             messages.warning(request, 'An error occured. Please try again')
-#             return redirect('loginform')
-#     else:
-#         return render(request, 'myapp/login.html')
-
-# Modify the loginform view function to call add_coins_daily and reset daily_bonus_received
 def loginform(request):
     if request.user.is_authenticated:
         return redirect('portal')
@@ -1293,16 +1261,16 @@ def loginform(request):
 
             user = auth.authenticate(email=email, password=password)
             if user is not None:
+                auth.login(request, user)
                 if not user.businessname:
-                    auth.login(request, user)
                     messages.success(
-                        request, f"Welcome back {user.first_name} {user.last_name}, please complete your registration process")
+                        request, f"Welcome back {request.user.username}, please complete your registration process")
                     return redirect('more_info')
                 else:
                     # Call add_coins_daily function after successful login
                     add_coins_daily(request, user)
                     # ----End of coin
-                    auth.login(request, user)
+                    # auth.login(request, user)
 
                     return redirect('portal')
             else:
@@ -1322,12 +1290,11 @@ def more_info(request):
         if request.method == "POST":
 
             # Extract user input from the request
-            firstname = request.POST['firstname']
-            lastname = request.POST['lastname']
+            # firstname = request.POST['firstname']
+            # lastname = request.POST['lastname']
             # gender = request.POST['gender']
             # dob = request.POST['dob']
             # status = request.POST['status']
-            country = request.POST['country']
             # state = request.POST['state']
             # address = request.POST['address']
 
@@ -1337,29 +1304,31 @@ def more_info(request):
             phone1 = request.POST['phone']
             phone = ''.join(phone1.split())
             meansofid = request.POST['identification']
-            idnumber = request.POST['cardnumber']
-            idpic = request.FILES.get('uploadedFile')
+            # idnumber = request.POST['cardnumber']
+            # idpic = request.FILES.get('uploadedFile')
             profilepic = request.FILES.get('profilepic')
             businessname = request.POST['businessname']
             logo = request.FILES.get('logo')
             # businesstype = request.POST['businesstype']
             currency = request.POST['currency']
+            country = request.POST['country']
             shopcategory = request.POST['shopcategory']
             moredesc = request.POST['moredesc']
-            # whatsap1 = request.POST['whatsapp']
-            # whatsap = ''.join(whatsap1.split())
+            whatsap1 = request.POST['whatsapp']
+            whatsap = ''.join(whatsap1.split())
 
             whatsapp = f"https://wa.me/{whatsap}"
-            # facebookk = request.POST['facebook']
-            # facebook = f"https://www.facebook.com/{facebookk}"
-            # instagramm = request.POST['instagram']
-            # instagram = f"https://www.instagram.com/{instagramm}"
+            facebookk = request.POST['facebook']
+            facebook = f"https://www.facebook.com/{facebookk}"
+            instagramm = request.POST['instagram']
+            instagram = f"https://www.instagram.com/{instagramm}"
             # ---------End of More_info-----------
 
             # Check if business name is already taken
             if User.objects.filter(businessname=businessname).exists():
                 messages.warning(request, 'Business Name is already taken')
-                return redirect('more_info')
+                # return redirect('more_info')
+                return redirect(request.path_info)
 
             else:
                 # user = User.objects.latest('id')
@@ -1371,9 +1340,14 @@ def more_info(request):
                 user.profilepic = profilepic
                 user.businessname = businessname
                 user.logo = logo
-                user.businesstype = businesstype
+                # user.businesstype = businesstype
+                user.meansofid = meansofid
+                # user.firstname = firstname
+                # user.lastname = lastname
                 user.currency = currency
+                user.country = country
                 user.shopcategory = shopcategory
+                user.identification = meansofid
                 user.moredesc = moredesc
                 user.whatsapp = whatsapp
                 user.facebook = facebook
@@ -1393,8 +1367,7 @@ def more_info(request):
                 user.save()
 
                 return redirect('info')
-
-                # return HttpResponseRedirect(request.path_info)
+            
         else:
             return render(request, 'myapp/more_info.html')
     else:
@@ -1745,8 +1718,8 @@ def process_data(request):
                 # Create the user
                 # record(businessname, moredesc, firstname, lastname, email, gender, phone, country, state, address, meansofid, idnumber, whatsapp, facebook, instagram)
                 user = User.objects.create_user(
-                    first_name=None,
-                    username=username, last_name=None, email=email,
+                    first_name= "",
+                    username=username, last_name= "", email=email,
                     gender=None, country=None, state=None, address=None, password=password,
                     # Added More Info
                     securityquestion=None,

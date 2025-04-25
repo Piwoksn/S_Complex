@@ -61,7 +61,7 @@ class User(AbstractUser):
     record = models.FileField(upload_to="records/", blank=True, null=True)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['username']
 
     def compress_image(self, image, max_size=(800, 800), img_format='JPEG', quality=80):
         try:

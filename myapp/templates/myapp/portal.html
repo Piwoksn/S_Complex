@@ -4,7 +4,7 @@
 {% block content %}
 <div class="container my-3 ">
     {% if user.is_authenticated %}
-    <h2>Hello, {{user.last_name}}</h2>
+    <h2>Hello {{user.username}}</h2>
     <div class="row mt-2">
 
         {% if not user.slug %}
@@ -212,7 +212,7 @@
                         </div>
 
                         <a href="#" id="moreImagesLink">
-                            <small>Add more images (optional)</small>
+                            <small>more images</small>
                             <i class="bi bi-plus text-primary"></i>
                         </a>
 
@@ -360,7 +360,7 @@
 
                         <div class="col-sm-12 mt-3">
                             <label for="item color" class="form-label" data-bs-toggle="tooltip" data-bs-placement="top"
-                                title="do not seperate with a (' , ') comma">Available Colours <i
+                                title="do not seperate with a (' , ') comma">Colours <i
                                     class="bi bi-info-circle-fill"></i>
 
                             </label>
