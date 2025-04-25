@@ -1315,29 +1315,46 @@ def loginform(request):
     else:
         return render(request, 'myapp/login.html')
 
-
+@login_required(login_url='loginform')
 def more_info(request):
     if request.user.is_authenticated:
 
         if request.method == "POST":
 
-            # Extract additional user input
+            # Extract user input from the request
+            firstname = request.POST['firstname']
+            lastname = request.POST['lastname']
+            # gender = request.POST['gender']
+            # dob = request.POST['dob']
+            # status = request.POST['status']
+            country = request.POST['country']
+            # state = request.POST['state']
+            # address = request.POST['address']
+
+            # More Info
             securityquestion = request.POST['securityquestion']
             securityanswer = request.POST['securityanswer']
-            phone = request.POST['phone']
+            phone1 = request.POST['phone']
+            phone = ''.join(phone1.split())
+            meansofid = request.POST['identification']
+            idnumber = request.POST['cardnumber']
+            idpic = request.FILES.get('uploadedFile')
             profilepic = request.FILES.get('profilepic')
             businessname = request.POST['businessname']
             logo = request.FILES.get('logo')
-            businesstype = request.POST['businesstype']
+            # businesstype = request.POST['businesstype']
             currency = request.POST['currency']
             shopcategory = request.POST['shopcategory']
             moredesc = request.POST['moredesc']
-            whatsap = request.POST['whatsapp']
+            # whatsap1 = request.POST['whatsapp']
+            # whatsap = ''.join(whatsap1.split())
+
             whatsapp = f"https://wa.me/{whatsap}"
-            facebookk = request.POST['facebook']
-            facebook = f"https://www.facebook.com/{facebookk}"
-            instagramm = request.POST['instagram']
-            instagram = f"https://www.instagram.com/{instagramm}"
+            # facebookk = request.POST['facebook']
+            # facebook = f"https://www.facebook.com/{facebookk}"
+            # instagramm = request.POST['instagram']
+            # instagram = f"https://www.instagram.com/{instagramm}"
+            # ---------End of More_info-----------
 
             # Check if business name is already taken
             if User.objects.filter(businessname=businessname).exists():
@@ -1664,50 +1681,49 @@ def process_data(request):
     if request.method == 'POST':
 
         # Extract user input from the request
-        firstname = request.POST['firstname']
-        lastname = request.POST['lastname']
-        username = firstname+lastname
+        # firstname = request.POST['firstname']
+        # lastname = request.POST['lastname']
+        username = request.POST.get("username")
         email = request.POST['email']
-        gender = request.POST['gender']
+        # gender = request.POST['gender']
         # dob = request.POST['dob']
         # status = request.POST['status']
-        country = request.POST['country']
-        state = request.POST['state']
-        address = request.POST['address']
+        # country = request.POST['country']
+        # state = request.POST['state']
+        # address = request.POST['address']
         password = request.POST['password']
         confirmpassword = request.POST['confirmpassword']
 
         # More Info
         # Extract additional user input
-        securityquestion = request.POST['securityquestion']
-        securityanswer = request.POST['securityanswer']
-        phone1 = request.POST['phone']
-        phone = ''.join(phone1.split())
-        meansofid = request.POST['identification']
-        idnumber = request.POST['cardnumber']
-        idpic = request.FILES.get('uploadedFile')
-        profilepic = request.FILES.get('profilepic')
-        businessname = request.POST['businessname']
-        logo = request.FILES.get('logo')
+        # securityquestion = request.POST['securityquestion']
+        # securityanswer = request.POST['securityanswer']
+        # phone1 = request.POST['phone']
+        # phone = ''.join(phone1.split())
+        # meansofid = request.POST['identification']
+        # idnumber = request.POST['cardnumber']
+        # idpic = request.FILES.get('uploadedFile')
+        # profilepic = request.FILES.get('profilepic')
+        # businessname = request.POST['businessname']
+        # logo = request.FILES.get('logo')
         # businesstype = request.POST['businesstype']
-        currency = request.POST['currency']
+        # currency = request.POST['currency']
         # shopcategory = request.POST['shopcategory']
-        moredesc = request.POST['moredesc']
-        whatsap1 = request.POST['whatsapp']
-        whatsap = ''.join(whatsap1.split())
+        # moredesc = request.POST['moredesc']
+        # whatsap1 = request.POST['whatsapp']
+        # whatsap = ''.join(whatsap1.split())
 
-        whatsapp = f"https://wa.me/{whatsap}"
-        facebookk = request.POST['facebook']
-        facebook = f"https://www.facebook.com/{facebookk}"
-        instagramm = request.POST['instagram']
-        instagram = f"https://www.instagram.com/{instagramm}"
+        # whatsapp = f"https://wa.me/{whatsap}"
+        # facebookk = request.POST['facebook']
+        # facebook = f"https://www.facebook.com/{facebookk}"
+        # instagramm = request.POST['instagram']
+        # instagram = f"https://www.instagram.com/{instagramm}"
         # ---------End of More_info-----------
 
         # Check if passwords match
         if password == confirmpassword:
             # Check if email and username are already in use
             if User.objects.filter(email=email).exists():
-                # user = User.objects.get(email=email)
                 user = auth.authenticate(
                     email=email, password=password)
                 if user is not None:
@@ -1718,38 +1734,37 @@ def process_data(request):
                     messages.warning(
                         request, 'Email is already used')
                     return HttpResponseRedirect(request.path_info)
-                    # return redirect(request.META.get('HTTP_REFERER', 'registerform'))
 
                 # New line for More Info-------------------------------------
-            elif User.objects.filter(businessname=businessname).exists():
-                messages.warning(request, 'Business Name already taken')
-                return HttpResponseRedirect(request.path_info)
+            # elif User.objects.filter(businessname=businessname).exists():
+            #     messages.warning(request, 'Business Name already taken')
+            #     return HttpResponseRedirect(request.path_info)
                 # return redirect(request.META.get('HTTP_REFERER', 'registerform'))
                 # return redirect('registerform')
             else:
                 # Create the user
-                record(businessname, moredesc, firstname, lastname, email, gender, phone, country, state, address, meansofid, idnumber, whatsapp, facebook, instagram)
+                # record(businessname, moredesc, firstname, lastname, email, gender, phone, country, state, address, meansofid, idnumber, whatsapp, facebook, instagram)
                 user = User.objects.create_user(
-                    first_name=firstname,
-                    username=username, last_name=lastname, email=email,
-                    gender=gender, country=country, state=state, address=address, password=password,
+                    first_name=None,
+                    username=username, last_name=None, email=email,
+                    gender=None, country=None, state=None, address=None, password=password,
                     # Added More Info
-                    securityquestion=securityquestion,
-                    securityanswer=securityanswer,
-                    phone=phone,
-                    meansofid=meansofid,
-                    idnumber=idnumber,
-                    idpic=idpic,
-                    profilepic=profilepic,
-                    businessname=businessname,
-                    logo=logo,
+                    securityquestion=None,
+                    securityanswer=None,
+                    phone=None,
+                    meansofid=None,
+                    idnumber=None,
+                    idpic=None,
+                    profilepic=None,
+                    businessname=None,
+                    logo=None,
                     # businesstype=businesstype,
-                    currency=currency,
+                    currency=None,
                     # shopcategory=shopcategory,
-                    moredesc=moredesc,
-                    whatsapp=whatsapp,
-                    facebook=facebook,
-                    instagram=instagram,
+                    moredesc=None,
+                    whatsapp=None,
+                    facebook=None,
+                    instagram=None,
                     # dob=dob, status=status,
                     record = f'{email}_record'+'.txt'
                 )
@@ -1763,19 +1778,18 @@ def process_data(request):
                 auth.login(request, user)
 
                 # Password Recovery------------------
-                passwordreset = f"{user.securityanswer}{user.slug}"
-                passwordresetphone = f"{user.phone}{user.slug}"
-                user.passwordresetcode = passwordreset
-                user.passwordresetphone = passwordresetphone
+                # passwordreset = f"{user.securityanswer}{user.slug}"
+                # passwordresetphone = f"{user.phone}{user.slug}"
+                # user.passwordresetcode = passwordreset
+                # user.passwordresetphone = passwordresetphone
                 # ------------------------------------------
                 user.save()
 
-                # return redirect('more_info')
-                return redirect('info')
+                return redirect('more_info')
+                # return redirect('info')
 
         else:
             messages.warning(request, 'Password does not match')
-            # return HttpResponseRedirect(request.path_info)
             return redirect(request.META.get('HTTP_REFERER', 'registerform'))
 
     else:
