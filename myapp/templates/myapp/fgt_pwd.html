@@ -1,218 +1,268 @@
-{% extends 'reg_log.html' %}
-{% load static %}
-
-
-{% block content %}
-
+{% extends 'reg_log.html' %} 
+{% load static %} 
+{% block content %} 
 {% if page == 'forgetpassword' %}
-
-<!--Logo-->
-<div class="container mt-2">
+  
+  <!--Logo-->
+  {% comment %} <div class="container mt-2">
     <div class="row">
-        <img src="{% static 'assets/logo/logo.png' %}" class="rounded mx-auto d-block mt-2" style="width: 200px;"
-            alt="logo">
+      <img
+        src="{% static 'logo22.png' %}"
+        class="rounded mx-auto d-block mt-2"
+        style="width: 100px"
+        alt="logo"
+      />
     </div>
-
+     {% endcomment %}
     <!-- Request Password Form-->
     <div class="row justify-content-center mt-2">
-        <div class="col-md-6">
-            <div class="card shadow">
-
-                <div class="card-body">
-                    <div class="pt-4 pb-2">
-                        <h5 class="card-title text-center pb-0 fs-4">Request Password Form</h5>
-                        {% include 'messages.html' %}
-                    </div>
-                    <form method="POST">
-                        {% csrf_token %}
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="text" class="form-control form-control" name="email" id="email" required>
-                        </div>
-
-
-                        <div class="d-grid">
-                            <button type="submit" class="btn btn-primary">Request Password Reset</button>
-                        </div>
-                    </form>
-                    <div class="text-center mt-3">
-                        <a href="{% url 'loginform' %}">Back to Login</a>
-                    </div>
-                </div>
+      <div class="col-md-6">
+        <div class="card shadow">
+          <div class="card-body">
+            <div class="pt-4 pb-2">
+            <img
+                src="{% static 'logo22.png' %}"
+                class="rounded mx-auto d-block"
+                style="width: 100px"
+                alt="logo"
+              /> 
+              <h5 class="card-title text-center pb-0 fs-4">
+                Request Password Form
+              </h5>
+              {% include 'messages.html' %}
             </div>
+            <form method="POST">
+              {% csrf_token %}
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input
+                  type="text"
+                  class="form-control form-control"
+                  name="email"
+                  id="email"
+                  required
+                />
+              </div>
+  
+              <div class="d-grid">
+                <button type="submit" class="btn btn-primary">
+                  Request Password Reset
+                </button>
+              </div>
+            </form>
+            <div class="text-center mt-3">
+              <a href="{% url 'loginform' %}">Back to Login</a>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-
-
-</div>
-
-{% elif page == 'securityquestion' %}
-
-
-
-<!-- Security Question ------------------------------>
-<!--Logo-->
-<div class="container mt-2">
-    <div class="row">
-        <img src="{% static 'assets/logo/logo.png' %}" class="rounded mx-auto d-block mt-2" style="width: 200px;"
-            alt="logo">
-    </div>
-
-    <!-- Request Password Form-->
+  </div>
+  {% endif %}
+  {% if page == 'securityquestion' %}
+  
+  <!-- Security Question ------------------------------>
+  <!--Logo-->
+  
+  
+    {% comment %} Request Password Form {% endcomment %}
     <div class="row justify-content-center mt-2">
-        <div class="col-md-6">
-            <div class="card shadow">
-
-                <div class="card-body">
-                    <div class="pt-4 pb-2">
-                        <h5 class="card-title text-center pb-0 fs-4">Request Password Form</h5>
-                        {% include 'messages.html' %}
-                    </div>
-                    <form method="POST">
-                        {% csrf_token %}
-
-                        <div class="mb-3">
-                            <label for="securityanswer" class="form-label text-dark">{{question}}</label>
-
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="securityanswer" class="form-label">Answer</label>
-                            <input type="text" class="form-control form-control" name="securityanswer" maxlength="4"
-                                id="securityanswer" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="securityanswer" class="form-label">What is your business name</label>
-                            <input type="text" class="form-control form-control" name="businessname" id="securityanswer"
-                                required>
-                        </div>
-
-
-                        <div class="d-grid">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
-                    </form>
-                    <div class="text-center mt-3">
-                        <a href="{% url 'loginform' %}">Back to Login</a>
-                    </div>
-                </div>
+      <div class="col-md-6">
+        <div class="card shadow">
+          <div class="card-body">
+            <div class="pt-4 pb-2">
+              <img
+                src="{% static 'logo22.png' %}"
+                class="rounded mx-auto d-block mt-2"
+                style="width: 100px"
+                alt="logo"
+              />
+              <h5 class="card-title text-center pb-0 fs-4">
+                Request Password Form
+              </h5>
+              {% include 'messages.html' %}
             </div>
+            <form method="POST">
+              {% csrf_token %}
+  
+              <div class="mb-3">
+                <label for="securityanswer" class="form-label text-dark"
+                  >{{question}}</label
+                >
+              </div>
+  
+              <div class="mb-3">
+                <label for="securityanswer" class="form-label">Answer</label>
+                <input
+                  type="text"
+                  class="form-control form-control"
+                  name="securityanswer"
+                  maxlength="4"
+                  id="securityanswer"
+                  required
+                />
+              </div>
+  
+              <div class="mb-3">
+                <label for="securityanswer" class="form-label"
+                  >What is your business name</label
+                >
+                <input
+                  type="text"
+                  class="form-control form-control"
+                  name="businessname"
+                  id="securityanswer"
+                  required
+                />
+              </div>
+  
+              <div class="d-grid">
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </form>
+            <div class="text-center mt-3">
+              <a href="{% url 'loginform' %}">Back to Login</a>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-
-
-</div>
-
-{% elif page == 'confirmnumber' %}
-<!-- COnfirm Number ------------------------------>
-<!--Logo-->
-<div class="container mt-2">
-    <div class="row">
-        <img src="{% static 'assets/logo/logo.png' %}" class="rounded mx-auto d-block mt-2" style="width: 200px;"
-            alt="logo">
-    </div>
-
-    <!-- Request Password Form-->
+  </div>
+  {% endif %}
+  {% if page == 'confirmnumber' %} 
+  {% comment %} COnfirm Number {% endcomment %}
+  
+  {% comment %} Request Password Form {% endcomment %}
     <div class="row justify-content-center mt-2">
-        <div class="col-md-6">
-            <div class="card shadow">
-
-                <div class="card-body">
-                    <div class="pt-4 pb-2">
-                        <h5 class="card-title text-center pb-0 fs-4">Request Password Form</h5>
-                        {% include 'messages.html' %}
-                    </div>
-                    <form method="POST">
-                        {% csrf_token %}
-
-                        <div class="mb-3">
-                            <label for="phone" class="form-label text-dark">Complete the Phone Number:
-                                {{firstpart}}<small style="font-size: 8px;">****</small>{{lastpart}}</label>
-
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="securityanswer" class="form-label">Phone</label>
-                            <input type="text" class="form-control form-control" name="phone" id="phone" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="securityanswer" class="form-label">Re-enter business name</label>
-                            <input type="text" class="form-control form-control" name="businessname" id="securityanswer"
-                                required>
-                        </div>
-
-                        <div class="d-grid">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
-
-
-
-                    </form>
-                    <div class="text-center mt-3">
-                        <a href="{% url 'loginform' %}">Back to Login</a>
-                    </div>
-                </div>
+      <div class="col-md-6">
+        <div class="card shadow">
+          <div class="card-body">
+            <div class="pt-4 pb-2">
+              <img
+                src="{% static 'logo22.png' %}"
+                class="rounded mx-auto d-block mt-2"
+                style="width: 100px"
+                alt="logo"
+              /> 
+              <h5 class="card-title text-center pb-0 fs-4">
+                Request Password Form
+              </h5>
+              {% include 'messages.html' %}
             </div>
+            <form method="POST">
+              {% csrf_token %}
+  
+              <div class="mb-3">
+                <label for="phone" class="form-label text-dark"
+                  >Complete the Phone Number: {{firstpart}}<small
+                    style="font-size: 8px"
+                    >****</small
+                  >{{lastpart}}</label
+                >
+              </div>
+  
+              <div class="mb-3">
+                <label for="securityanswer" class="form-label">Phone</label>
+                <input
+                  type="text"
+                  class="form-control form-control"
+                  name="phone"
+                  id="phone"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="securityanswer" class="form-label"
+                  >Re-enter business name</label
+                >
+                <input
+                  type="text"
+                  class="form-control form-control"
+                  name="businessname"
+                  id="securityanswer"
+                  required
+                />
+              </div>
+  
+              <div class="d-grid">
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </form>
+            <div class="text-center mt-3">
+              <a href="{% url 'loginform' %}">Back to Login</a>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-
-
-</div>
-
-
-{% else %}
-
-<!-- change Password-------------------------------------- -->
-<!--Logo-->
-<div class="container my-5">
-    <div class="row">
-        <img src="{% static 'assets/logo/logo.png' %}" class="rounded mx-auto d-block mt-2" style="width: 200px;"
-            alt="logo">
-    </div>
-
-
-    <!-- Request Password Form-->
+  </div>
+  
+  {% endif %}
+  {% if page == 'changepassword' %}
+  
+  {% comment %} change Password {% endcomment %}
+  {% comment %} Logo {% endcomment %}
+  
+  
+    {% comment %} Request Password Form {% endcomment %}
     <div class="row justify-content-center mt-2">
-        <div class="col-md-6">
-            <div class="card shadow">
-
-                <div class="card-body">
-                    <div class="pt-4 pb-2">
-                        <h5 class="card-title text-center pb-0 fs-4">Request Password Form</h5>
-                        {% include 'messages.html' %}
-                    </div>
-                    <form method="POST">
-                        {% csrf_token %}
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Enter New Password</label>
-                            <!-- {{password_form.new_password1}} -->
-                            <input type="password" class="form-control form-control" name="firstpassword"
-                                id="firstpassword" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Re-type New Password</label>
-                            <!-- {{password_form.new_password2}} -->
-                            <input type="password" class="form-control form-control" name="secondpassword"
-                                id="secondpassword" required>
-                        </div>
-
-
-                        <div class="d-grid">
-                            <button type="submit" name="changepassword" class="btn btn-primary">Save New
-                                Password</button>
-                        </div>
-                    </form>
-
-                </div>
+      <div class="col-md-6">
+        <div class="card shadow">
+          <div class="card-body">
+            <div class="pt-4 pb-2">
+              <img
+                src="{% static 'logo22.png' %}"
+                class="rounded mx-auto d-block mt-2"
+                style="width: 100px"
+                alt="logo"
+              />
+              <h5 class="card-title text-center pb-0 fs-4">
+                Request Password Form
+              </h5>
+              {% include 'messages.html' %}
             </div>
+            <form method="POST">
+              {% csrf_token %}
+              <div class="mb-3">
+                <label for="email" class="form-label">Enter New Password</label>
+                <!-- {{password_form.new_password1}} -->
+                <input
+                  type="password"
+                  class="form-control form-control"
+                  name="firstpassword"
+                  id="firstpassword"
+                  required
+                />
+              </div>
+  
+              <div class="mb-3">
+                <label for="email" class="form-label">Re-type New Password</label>
+                <!-- {{password_form.new_password2}} -->
+                <input
+                  type="password"
+                  class="form-control form-control"
+                  name="secondpassword"
+                  id="secondpassword"
+                  required
+                />
+              </div>
+  
+              <div class="d-grid">
+                <button
+                  type="submit"
+                  name="changepassword"
+                  class="btn btn-primary"
+                >
+                  Save New Password
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
+      </div>
     </div>
-
-
-</div>
-
-{% endif %}
-
-{% endblock content %}
+  </div>
+  
+  {% endif %} 
+  {% endblock content %}
+  

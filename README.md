@@ -10,3 +10,5 @@ www.myshopcomplex.com:2222/evo/
 # Tools
 
 Html, Css, JavaScript, Bootstrap, Python, Django
+
+# Making it Free 2025

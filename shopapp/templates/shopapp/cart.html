@@ -1,147 +1,220 @@
-{% extends 'shopwrapper.html' %}
+{% extends 'shopwrapper.html' %} {% block content %}
+<style>
+  /* Modal Background */
+  .modal-content {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
 
-{% block content %}
+  /* Modal Header */
+  .modal-header {
+    background-color: #2c3e50;
+    color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+
+  /* Title Styling */
+  .modal-title {
+    color: #f39c12;
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+
+  /* Body Text */
+  .modal-body {
+    color: #444444;
+    font-size: 1rem;
+  }
+
+  /* Small Text (Info) */
+  .modal-body small {
+    color: #17a2b8;
+  }
+
+  .btn-secondary:hover {
+    background-color: #c0392b;
+  }
+
+  .btn-info {
+    background-color: #28a745;
+    color: white;
+    border: none;
+  }
+
+  .btn-info:hover {
+    background-color: #218838;
+  }
+</style>
 <div class="container mt-5">
-    <h3>Cart <i class="bi bi-cart-fill"></i></h3>
-    {% include 'messages.html' %}
-    <hr>
+  <h3>Cart <i class="bi bi-cart-fill"></i></h3>
+  {% include 'messages.html' %}
+  <hr />
 
-    <!-- Cart Items -->
-    <div class="row">
-        {% if cart_items %}
-        {% for cart_item in cart_items %}
-        <div class="col-md-6 my-2">
-            <div class="card mb-3">
-                <div class="row g-0">
-                    <div class="col-md-4 d-flex justify-content-center align-items-center">
-                        <img src="{{ cart_item.image_url }}" class="img-fluid rounded-start" alt="{{ cart_item.name }}">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ cart_item.name }}</h5>
+  <!-- Cart Items -->
+  <div class="row">
+    {% if cart_items %} {% for cart_item in cart_items %}
+    <div class="col-md-6 my-2">
+      <div class="card mb-3">
+        <div class="row g-0">
+          <div
+            class="col-md-4 d-flex justify-content-center align-items-center"
+          >
+            <img
+              src="{{ cart_item.image_url }}"
+              class="img-fluid rounded-start"
+              alt="{{ cart_item.name }}"
+            />
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{ cart_item.name }}</h5>
 
-                            {% if cart_item.size %}
-                            <p class="card-text">Size: {{ cart_item.size }}</p>
-                            {% endif %}
-
-                            {% if cart_item.color %}
-                            <p class="card-text">Colour: {{ cart_item.color }}</p>
-                            {% endif %}
-                            <!-- You can add more details as needed -->
-                        </div>
-                    </div>
-                </div>
+              {% if cart_item.size %}
+              <p class="card-text">Size: {{ cart_item.size }}</p>
+              {% endif %} {% if cart_item.color %}
+              <p class="card-text">Colour: {{ cart_item.color }}</p>
+              {% endif %}
             </div>
+          </div>
         </div>
-        <!-- Move these elements inside the for loop -->
-        <div class="col-md-2 my-2">
-            Qty:
-            <input type="number" class="text-center " value="{{cart_item.quantity}}" readonly style="width: 60px;">
-        </div>
-        <div class="col-md-2 my-2">
-            <p class="me-4"><small class="me-3"> x </small>{{ user.currency }}{{ cart_item.price|floatformat:2 }}</p>
-        </div>
-        <div class="col-md-2 my-2">
-            <a href="{% url 'remove_from_cart' cart_item.product_id %}" class="btn btn-outline-danger">Remove <i
-                    class="bi bi-trash"></i></a>
-        </div>
-        <hr>
-        {% endfor %}
-        {% else %}
-
-        <p class="text-center">Cart is Empty!</p>
-
-        {% endif %}
+      </div>
     </div>
-    <!-- End Cart Items -->
 
-
-    <!-- Total -->
-    <div class="row my-2">
-        <div class="col-md-6 offset-md-6">
-            <div class="d-flex justify-content-between">
-                <div class="fw-bold mx-2">Total: {{ user.currency }}{{ cart_total|floatformat:2 }}
-                </div>
-            </div>
-        </div>
-
+    <div class="col-md-2 my-2">
+      Qty:
+      <input
+        type="number"
+        class="text-center"
+        value="{{cart_item.quantity}}"
+        readonly
+        style="width: 60px"
+      />
     </div>
-    <!-- End Total -->
-
-    <!-- Buttons -->
-    <div class="row mt-3 mb-5">
-        <div class="col-md-8 offset-md-4">
-            <div class="d-flex justify-content-between">
-                <div>
-                    <center>
-                        <a href="{% url 'shop' user.slug %}" class="btn btn-secondary mx-2 my-2">
-                            <i class="bi bi-arrow-90deg-left"></i> Continue Shopping
-                        </a>
-
-                        {% if cart_items %}
-                        <!-- Button to trigger the modal -->
-                        <button type="button" class="btn btn-primary ms-2 my-2" data-bs-toggle="modal"
-                            data-bs-target="#orderModal">
-                            Place Order <i class="bi bi-arrow-90deg-right"></i>
-                        </button>
-                        {% endif %}
-
-                    </center>
-                </div>
-            </div>
-        </div>
+    <div class="col-md-2 my-2">
+      <p class="me-4">
+        <small class="me-3"> x </small>{{ user.currency }}{{
+        cart_item.price|floatformat:2 }}
+      </p>
     </div>
-    <!-- End Buttons -->
+    <div class="col-md-2 my-2">
+      <a
+        href="{% url 'remove_from_cart' cart_item.product_id %}"
+        class="btn btn-outline-danger"
+        >Remove <i class="bi bi-trash"></i
+      ></a>
+    </div>
+    <hr />
+    {% endfor %} {% else %}
 
+    <p class="text-center">Cart is Empty!</p>
+
+    {% endif %}
+  </div>
+  <!-- End Cart Items -->
+
+  <!-- Total -->
+  <div class="row my-2">
+    <div class="col-md-6 offset-md-6">
+      <div class="d-flex justify-content-between">
+        <div class="fw-bold mx-2">
+          Total: {{ user.currency }}{{ cart_total|floatformat:2 }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Total -->
+
+  <!-- Buttons -->
+  <div class="row mt-3 mb-5">
+    <div class="col-md-8 offset-md-4">
+      <div class="d-flex justify-content-between">
+        <div>
+          <center>
+            <a
+              href="{% url 'shop' user.slug %}"
+              class="btn btn-secondary mx-2 my-2"
+            >
+              <i class="bi bi-arrow-90deg-left"></i> Continue Shopping
+            </a>
+
+            {% if cart_items %}
+            <!-- Button to trigger the modal -->
+            <button
+              type="button"
+              class="btn btn-primary ms-2 my-2"
+              data-bs-toggle="modal"
+              data-bs-target="#orderModal"
+            >
+              Place Order <i class="bi bi-arrow-90deg-right"></i>
+            </button>
+            {% endif %}
+          </center>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Buttons -->
 </div>
 
-
 <!-- Modal -->
-<div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header bg-secondary text-white">
-                <h5 class="modal-title" id="orderModalLabel">Enter Your Details <br>
-                    <small class="text-info"> <b>Pay only on Delivery</b></small>
-                </h5>
+<div
+  class="modal fade"
+  id="orderModal"
+  tabindex="-1"
+  aria-labelledby="orderModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-secondary text-white">
+        <h5 class="modal-title" id="orderModalLabel">
+          Enter Your Details <br />
+          <small class="text-info"> <b>Pay only on Delivery</b></small>
+        </h5>
 
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form method="POST" action="{%url 'place_order' user_slug=user.slug %}">
-                {% csrf_token %}
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" name="purchaser" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="phone" class="form-label">Whatsapp Number</label>
-                        <input type="text" class="form-control" id="phone" name="phone"
-                            placeholder="e.g. {% if user.country == 'Nigeria' %}+234 phonenumber {% else %}+1 phonenumber {% endif %}"
-                            required>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-info">Submit
-                        Order
-                    </button>
-                </div>
-            </form>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <form method="POST" action="{%url 'place_order' user_slug=user.slug %}">
+        {% csrf_token %}
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              name="purchaser"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="phone" class="form-label">Whatsapp Number</label>
+            <input
+              type="text"
+              class="form-control"
+              id="phone"
+              name="phone"
+              placeholder="e.g. {% if user.country == 'Nigeria' %}+234 phonenumber {% else %}+1 phonenumber {% endif %}"
+              required
+            />
+          </div>
         </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+            Close
+          </button>
+          <button type="submit" class="btn btn-info">Submit Order</button>
+        </div>
+      </form>
     </div>
+  </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    {% endblock content %}
+  {% endblock content %}
+</div>
