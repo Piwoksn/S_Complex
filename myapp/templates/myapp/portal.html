@@ -4,12 +4,21 @@
 {% block content %}
 <div class="container my-3 ">
     {% if user.is_authenticated %}
-    <h2>Hello {{user.username}}</h2>
+    <div class="d-flex">
+    <h2 class="">Hello {{user.username}}</h2>
+    
+    {% if user.qrcode %}
+        
+    <a class="mx-3" href="{{ user.qrcode.url }}" download>
+    <img src="{{ user.qrcode.url }}" alt="" width="80px", height="80px">
+    </a>
+    {% endif %}
+    </div>
     <div class="row mt-2">
 
         {% if not user.slug %}
         <div class="col-lg-8 col-md-12 col-sm-12">
-            <small>Share Your Shop Link Below:</small>
+            <small>click to download QRcode or Click link to Copy:</small>
             <input class="form-control mb-2 text-center bg-danger text-white" type="text" value="Site is not active"
                 readonly>
         </div>
@@ -17,7 +26,7 @@
         {% else %}
 
         <div class="col-lg-8 col-md-12 col-sm-12">
-            <small>Share Your Shop Link Below: (Click to Copy)</small>
+            <small>click to download QRcode or Click link to Copy:</small>
 
             <input id="copyInput" class="form-control mb-2 text-center bg-success text-white" type="text"
                 value="https://www.myshopcomplex.com/shop/{{user.slug}}" readonly>

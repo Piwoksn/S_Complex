@@ -26,6 +26,7 @@ from subscription.models import Subscription, NairaSubscriptionPlan, DollarSubsc
 from django.utils import timezone
 import requests
 from django.contrib.auth import logout
+import qrcode
 
 
 # paystack function
@@ -1305,8 +1306,8 @@ def more_info(request):
             phone = ''.join(phone1.split())
             meansofid = request.POST['identification']
             # idnumber = request.POST['cardnumber']
-            # idpic = request.FILES.get('uploadedFile')
-            profilepic = request.FILES.get('profilepic')
+            idpic = request.FILES.get('uploadedFile')
+            # profilepic = request.FILES.get('profilepic')
             businessname = request.POST['businessname']
             logo = request.FILES.get('logo')
             # businesstype = request.POST['businesstype']
@@ -1337,7 +1338,8 @@ def more_info(request):
                 user.securityquestion = securityquestion
                 user.securityanswer = securityanswer
                 user.phone = phone
-                user.profilepic = profilepic
+                # user.profilepic = profilepic
+                user.idpic = idpic
                 user.businessname = businessname
                 user.logo = logo
                 # user.businesstype = businesstype
@@ -1352,8 +1354,22 @@ def more_info(request):
                 user.whatsapp = whatsapp
                 user.facebook = facebook
                 user.instagram = instagram
+                
+                user.save()
+                
+                # make qrcode
+                save_as = request.user.username+user.slug
+                directory = "static\\images\\qrcodes\\"
+                # edit below with domain name
+                code = qrcode.make(f"https://myshopcomplex.com/shop/{user.slug}")
+                code.save(directory+save_as+".png")
+
+                user.qrcode = "qrcodes\\"+save_as+".png"
 
                 user.save()
+                # end of qrcode
+
+                
 
                 # Call the function to set trial dates
                 set_trial_dates(user)
@@ -1618,13 +1634,19 @@ def profile(request):
 
         # -----------------------------------------------------------------
         facebookk = user.facebook
-        facebook = facebookk[25:]
+        if facebookk:
+            facebook = facebookk[25:]
+        else:
+            facebook = None
 
         whatsap = user.whatsapp
         whatsapp = whatsap[14:]
 
         instagramm = user.instagram
-        instagram = instagramm[26:]
+        if instagramm:
+            instagram = instagramm[26:]
+        else:
+            instagram = None
 
         context = {'facebook': facebook, 'whatsapp': whatsapp,
                    'instagram': instagram, 'password_form': password_form, 'carts': carts}

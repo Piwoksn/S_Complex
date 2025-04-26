@@ -36,18 +36,21 @@
                         <!--<h3>{{businessname}}</h3>-->
                         <!--Icons-->
                         <div class="social-links mt-2">
+                            {% if user.facebook %}
                             <a href="{{user.facebook}}" class="facebook">
                                 <i class="bi bi-facebook"></i>
                             </a>
-
+                            {% endif %}
+                            {% if user.whatsapp %}
                             <a href="{{user.whatsapp}}" class="whatsapp">
                                 <i class="bi bi-whatsapp"></i>
                             </a>
-
+                            {% endif %}
+                            {% if user.instagram %}
                             <a href="{{user.instagram}}" class="instagram">
                                 <i class="bi bi-instagram"></i>
                             </a>
-
+                            {% endif %}
                         </div>
                         <!--end Icons-->
                     </div>
@@ -116,10 +119,10 @@
                                     <div class="col-lg-9 col-md-8">{{user.country}}</div>
                                 </div>
 
-                                <div class="row">
+                                {% comment %} <div class="row">
                                     <div class="col-lg-3 col-md-4 label">Address</div>
                                     <div class="col-lg-9 col-md-8">{{user.address}}</div>
-                                </div>
+                                </div> {% endcomment %}
 
                                 <div class="row">
                                     <div class="col-lg-3 col-md-4 label">Phone</div>
@@ -134,73 +137,6 @@
                             </div>
 
                             <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
-
-
-                                <!-- Photo -->
-                                <!-- <form method="POST" enctype="multipart/form-data">
-                                    {% csrf_token %}
-
-                                    {% include 'messages.html' %}
-
-                                    <div class="row mb-3">
-
-
-
-                                        <div class="col-md-8 col-lg-9">
-                                            <div class="pt-2">
-                                                <label for="profileImage3" class="form-label">Change Profile
-                                                    Image</label>
-                                                <a href="#" class="btn btn-primary btn-sm"
-                                                    title="Upload new profile image" id="uploadLink3">
-                                                    <i class="bi bi-upload"></i>
-                                                </a>
-                                                <input type="file" id="fileInput3" name="profilepic"
-                                                    style="display: none;" accept="image/*" required>
-                                                <center>
-                                                    <center><img src="{{user.profilepic.url}}" alt="Selected Image"
-                                                            class="mt-2" id="selectedImage3"></center>
-                                                </center>
-
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                    <script>
-                                        // Get the link, file input, and image elements by their IDs
-                                        var uploadLink3 = document.getElementById("uploadLink3");
-                                        var fileInput3 = document.getElementById("fileInput3");
-                                        var selectedImage3 = document.getElementById("selectedImage3");
-
-                                        // Add a click event listener to the link
-                                        uploadLink3.addEventListener("click", function (e) {
-                                            // Prevent the default link behavior
-                                            e.preventDefault();
-
-                                            // Trigger a click event on the file input element
-                                            fileInput3.click();
-                                        });
-
-                                        // Add an event listener to the file input to handle file selection
-                                        fileInput3.addEventListener("change", function () {
-                                            // Display the selected image immediately
-                                            if (fileInput3.files.length > 0) {
-                                                var objectURL = URL.createObjectURL(fileInput3.files[0]);
-                                                selectedImage3.src = objectURL;
-                                                selectedImage3.style.display = "block";
-                                            }
-                                        });
-                                    </script>
-
-                                    <div class="text-center">
-                                        <button type="submit" class="btn btn-primary btn-sm" name="update_pic">Save
-                                            Image</button>
-                                    </div>
-
-                                </form>
-
-                                <hr> -->
 
                                 <!-- Logo -->
                                 <form method="POST" enctype="multipart/form-data">
@@ -341,13 +277,13 @@
                                         </div>
                                     </div>
 
-                                    <div class="row mb-3">
+                                    {% comment %} <div class="row mb-3">
                                         <label for="Address" class="col-md-4 col-lg-3 col-form-label">Address</label>
                                         <div class="col-md-8 col-lg-9">
                                             <input type="text" class="form-control" id="address" name="address"
                                                 value="{{ user.address }}" required>
                                         </div>
-                                    </div>
+                                    </div> {% endcomment %}
 
                                     <div class="row mb-3">
                                         <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>

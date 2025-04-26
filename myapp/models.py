@@ -21,7 +21,7 @@ import os
 
 class User(AbstractUser):
 
-    profilepic = models.ImageField(null=True, blank=True, default="avatar.png")
+    profilepic = models.ImageField(upload_to= 'profilepic', null=True, blank=True, default="avatar.png")
     moredesc = models.TextField(null=True, blank=True)
     businessname = models.CharField(
         max_length=100, unique=True, null=True, blank=True)
@@ -34,7 +34,8 @@ class User(AbstractUser):
     email = models.EmailField(unique=True)
     meansofid = models.CharField(max_length=100, null=True, blank=True)
     idnumber = models.CharField(max_length=100, null=True, blank=True)
-    idpic = models.ImageField(null=True, blank=True)
+    idpic = models.ImageField(upload_to= 'id', null=True, blank=True)
+    qrcode = models.ImageField(null=True, blank=True)
     # shopcategory = models.CharField(max_length=100, null=True, blank=True)
     logo = models.ImageField(null=True, blank=True, default="icon.png")
     currency = models.CharField(max_length=10, null=True, blank=True)
