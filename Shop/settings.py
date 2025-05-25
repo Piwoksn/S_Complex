@@ -18,6 +18,8 @@ DEBUG = True
 # ALLOWED_HOSTS = ['myshopcomplex.com',
 #                  'a961-197-210-78-239.ngrok.io', 'localhost']
 
+# My Abstract User
+AUTH_USER_MODEL = 'myapp.User'
 
 ALLOWED_HOSTS = []
 
@@ -47,8 +49,7 @@ ALLOWED_CRISPY_TEMPLATE_PACKS = ['bootstrap5',]
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 
-# My Abstract User
-AUTH_USER_MODEL = 'myapp.User'
+
 
 MIDDLEWARE = [
     'allauth.account.middleware.AccountMiddleware',
@@ -173,40 +174,32 @@ SESSION_COOKIE_NAME = 'shopping_cart_session'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # ----------------------------------------------------------------------
 # SMTP Configuration
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_PORT = 587
-# EMAIL_USE_TLS = True
-# EMAIL_HOST_USER = 'piwoksn@gmail.com'
-# EMAIL_HOST_PASSWORD = 'kdwpazklznnhemxl'
-# EMAIL_USE_SSL = False
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'piwoksn@gmail.com'
+EMAIL_HOST_PASSWORD = 'dzrb qnun nley xbqf'
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'piwoksn@gmail.com'
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"  # or "optional" if you want users to skip it
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True       # Optional: activates on link click, no button
 
 AUTHENTICATION_BACKENDS =[
     "django.contrib.auth.backends.ModelBackend",
-    "allauth.account.auth_backends.AccountBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
 ]
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 ACCOUNT_LOGOUT_REDIRECT = 'home'
 LOGIN_REDIRECT_URL = 'portal'
-ACCOUNT_LOGIN_METHOD = {'email'}
-ACCOUNT_SIGNUP_FIELDS = ['email*', 'password1']
-
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# # EMAIL_HOST = 'smtp.office365.com'
-# EMAIL_HOST = 'smtp-mail.outlook.com'
-# EMAIL_PORT = 587
-# # EMAIL_PORT = 25
-# EMAIL_USE_TLS = True
-# EMAIL_HOST_USER = 'shopcomplex@outlook.com'
-# # EMAIL_HOST_PASSWORD = 'juojbqjfnokhomyd'
-# EMAIL_HOST_PASSWORD = 'classicalnob95'
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
+# ACCOUNT_LOGIN_METHODS = {'email'}
+ACCOUNT_SIGNUP_FIELDS = ['email*', 'password1*']
 
 
-# EMAIL_USE_SSL = False
-# EMAIL_DEBUG = True
-# DEFAULT_FROM_EMAIL = 'shopcomplex@outlook.com'
-# SERVER_EMAIL = 'shopcomplex@outlook.com'
 
 # ----------------------------------------------------------------------
 LOGGING = {

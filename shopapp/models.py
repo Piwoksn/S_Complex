@@ -104,7 +104,7 @@ def delete_image(sender, instance, **kwargs):
 
 # ____________________________________
 class CartItem(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     product = models.ForeignKey(
         Product, on_delete=models.CASCADE, null=True, blank=True)
 

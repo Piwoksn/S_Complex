@@ -36,29 +36,29 @@
                         <!--<h3>{{businessname}}</h3>-->
                         <!--Icons-->
                         <div class="social-links mt-2">
-                            {% if user.facebook %}
+                            {% comment %} {% if user.facebook %}
                             <a href="{{user.facebook}}" class="facebook">
                                 <i class="bi bi-facebook"></i>
                             </a>
-                            {% endif %}
-                            {% if user.whatsapp %}
+                            {% endif %} {% endcomment %}
+                            {% comment %} {% if user.whatsapp %}
                             <a href="{{user.whatsapp}}" class="whatsapp">
                                 <i class="bi bi-whatsapp"></i>
                             </a>
-                            {% endif %}
-                            {% if user.instagram %}
+                            {% endif %} {% endcomment %}
+                            {% comment %} {% if user.instagram %}
                             <a href="{{user.instagram}}" class="instagram">
                                 <i class="bi bi-instagram"></i>
                             </a>
-                            {% endif %}
+                            {% endif %} {% endcomment %}
                         </div>
                         <!--end Icons-->
                     </div>
                 </div>
 
             </div>
-
             <div class="col-xl-8">
+                {% include 'messages.html' %}
 
                 <div class="card shadow">
                     <div class="card-body pt-3">
@@ -301,14 +301,14 @@
                                         </div>
                                     </div>
 
-                                    <div class="row mb-3">
+                                    {% comment %} <div class="row mb-3">
                                         <label for="Facebook" class="col-md-4 col-lg-3 col-form-label">Facebook
                                             Profile</label>
                                         <div class="col-md-8 col-lg-9">
                                             <input type="text" class="form-control" id="facebook" name="facebook"
                                                 value="{{ facebook }}">
                                         </div>
-                                    </div>
+                                    </div> {% endcomment %}
 
                                     <div class="row mb-3">
                                         <label for="Twitter" class="col-md-4 col-lg-3 col-form-label">Whatsapp
@@ -320,14 +320,14 @@
                                     </div>
 
 
-                                    <div class="row mb-3">
+                                    {% comment %} <div class="row mb-3">
                                         <label for="Instagram" class="col-md-4 col-lg-3 col-form-label">Instagram
                                             Profile</label>
                                         <div class="col-md-8 col-lg-9">
                                             <input type="text" class="form-control" id="instagram" name="instagram"
                                                 value="{{ instagram }}">
                                         </div>
-                                    </div>
+                                    </div> {% endcomment %}
 
                                     <div class="text-center">
                                         <button type="submit" class="btn btn-primary" name="update_profile">Save
@@ -349,8 +349,6 @@
 
 
                                 <!-- Change Password Form -->
-
-                                {% include 'messages.html' %}
 
                                 <form action="" method="POST">
                                     {% csrf_token %}

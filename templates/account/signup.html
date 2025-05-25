@@ -1,125 +1,59 @@
 {% extends 'reg_log.html' %} {% load static %} {% block content %}
+{% load crispy_forms_tags %}
+<!--Logo-->
+<div class="container my-5">
+  <!--Login Form-->
+  <div class="row justify-content-center mt-2">
+    <div class="col-md-6">
+      <div class="mb-2">
+        <a href="{% url 'home' %}">
+              <img
+                src="{% static 'logo22.png' %}"
+                class="rounded mx-auto d-block mt-2"
+                style="width: 100px"
+                alt="logo"
+                loading="lazy"
+            /></a>
+      </div>
+      <div class="card shadow">
+        <div class="card-body px-5">
+          <div class="pt-4 pb-2">
+            
+            <h5 class="card-title pb-0 fs-4">
+              Sign Up
+            </h5>
+            <hr>
+      <br>
 
-  <!--Register Form-->
-  <form method="POST" action="process_data" enctype="multipart/form-data">
-    {% csrf_token %}
-    <center>
-      <label class="pb-1 w-100"> {% include 'messages.html' %} </label>
-    </center>
-    <!-- <div class="row justify-content-center mt-2 mb-4 form-card" data-step="1"> -->
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <!-- <div class="card shadow"> -->
-        <div class="card shadow" data-step="1">
-          <div class="card-body px-5">
-            <div class="pt-4 pb-2">
-              <a href="{% url 'home' %}">
-                <img
-                  src="{% static 'logo22.png' %}"
-                  class="rounded mx-auto d-block"
-                  style="width: 100px"
-                  alt="logo"
-              /></a>
-              <h5 class="card-title text-center pb-0 fs-4">
-                Create an Account
-              </h5>
-              <br>
-            </div>
-
-   
-        <div class="mb-3">
-                        <input type="text" name="username" class="form-control" id="inputUsername"
-                            placeholder="Username" required>
-                    </div> 
-
-            <div class="mb-3">
-              <input
-                type="email"
-                name="email"
-                class="form-control"
-                id="inputEmail"
-                placeholder="Email"
-                required
-              />
-            </div>
-
-            <div class="mb-3">
-              <input
-                type="password"
-                name="password"
-                class="form-control"
-                id="inputPassword"
-                placeholder="Password"
-                minlength="8"
-                maxlength="20"
-                required
-              />
-              <small class="ps-2">(8-20 characters)</small>
-            </div>
-            <div class="mb-3">
-              <input
-                type="password"
-                name="confirmpassword"
-                class="form-control"
-                id="confirmPassword"
-                placeholder="Confirm Password"
-                minlength="8"
-                maxlength="20"
-                required
-              />
-            </div>
-            <!-- display match password msg -->
-            <div id="confirmPasswordMessage" class="mb-3"></div>
-            <!-- end -->
-            <div class="col-12">
-              <button class="btn btn-info w-100 mb-2" type="submit">
-                Signup
-              </button>
-              <a class="btn btn-outline-danger w-100" href=""
-                > <i class="bi bi-google" aria-hidden="true"></i> Login with Google</a
-              >
-            <div class="text-center mt-3">
-              <p>Already Have an Account? <a href="{% url 'loginform' %}">Login</a></p>
-            </div>
+            {% include 'messages.html' %}
           </div>
+          <form method="POST">
+            {% csrf_token %}
+            <!--USername-->
+            <div class="col-12">
+              
+            {{ form | crispy }}
+
+              <button class="btn btn-success w-100 mb-2" type="submit">
+                Sign Up
+              </button>
+             
+              <p>Already have an account?
+              <a href="{% url 'account_login' %}">Sign In</a>
+              </p>
+            </div>
+          </form>
+          {% comment %} <div class="text-center mt-3">
+            <a href="{% url 'fgt_pwd' %}">Forgot password?</a>
+          </div>
+          <div class=" mt-3">
+            <p>Don't have an account? <a class="" href="{% url 'registerform' %}"
+                >Signup</a></p>
+          </div> {% endcomment %}
         </div>
       </div>
     </div>
-  </form>
+  </div>
+</div>
 
-
-
-{% comment %} Password Check {% endcomment %}
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      var passwordInput = document.getElementById("inputPassword");
-      var confirmPasswordInput = document.getElementById("confirmPassword");
-      var confirmPasswordMessage = document.getElementById(
-        "confirmPasswordMessage"
-      );
-  
-      function checkPasswordMatch() {
-        var password = passwordInput.value;
-        var confirmPassword = confirmPasswordInput.value;
-  
-        if (confirmPassword.length > 0) {
-          if (password === confirmPassword) {
-            confirmPasswordMessage.textContent = "Passwords match!";
-            confirmPasswordMessage.style.color = "green";
-          } else {
-            confirmPasswordMessage.textContent = "Passwords do not match!";
-            confirmPasswordMessage.style.color = "red";
-          }
-        } else {
-          // Clear the message when confirm password field is empty
-          confirmPasswordMessage.textContent = "";
-        }
-      }
-  
-      // Attach the checkPasswordMatch function to both input fields
-      passwordInput.addEventListener("input", checkPasswordMatch);
-      confirmPasswordInput.addEventListener("input", checkPasswordMatch);
-    });
-  </script>
-  
 {% endblock content %}

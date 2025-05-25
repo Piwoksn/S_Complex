@@ -18,7 +18,7 @@ class NairaSubscriptionPlan(models.Model):
         ('ForeignSilver', 'Silver - Biannual Plan'),
         ('ForeignGold', 'Gold - Annual Plan'),
     )
-
+    
     plan_type = models.CharField(max_length=20, choices=PLAN_CHOICES)
     price = models.DecimalField(max_digits=10, decimal_places=2)
 

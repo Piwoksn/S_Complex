@@ -55,7 +55,7 @@ def record(businessname, moredesc, firstname, lastname, email, gender, phone, co
     t = time.ctime()
     file = open('records/'+f'{email}_record'+'.txt', 'a+')
 
-    file.write(f"\n\n\nDate: {t}\nBusiness Name: {businessname}\nDesc: {moredesc}\nfirstname: {firstname}\nLastname: {lastname}\nEmail: {email}\nGender: {gender}\nPhone: {phone}\nCountry: {country}\nState: {state}\nAddress: {address}\nMeans of Id: {meansofid}\nId Number: {idnumber}\nWhatsapp: {whatsapp}\nFacebook: {facebook}\nInstagram: {instagram}")
+    file.write(f"\n\n\nDate: {t}\nBusiness Name: {businessname}\nDesc: {moredesc}\nfirstname: {firstname}\nLastname: {lastname}\nEmail: {email}\nPhone: {phone}\nCountry: {country}\nState: {state}\nMeans of Id: {meansofid}\nId Number: {idnumber}\nWhatsapp: {whatsapp}")
 
     file.close()
 
@@ -126,17 +126,17 @@ def coins(request):
     return render(request, 'myapp/coins.html', context)
 
 
-@login_required(login_url='loginform')
+@login_required(login_url='account_login')
 def submethod(request):
     return render(request, 'myapp/submethod.html')
 
 
-@login_required(login_url='loginform')
+@login_required(login_url='account_login')
 def coinsub(request):
     return render(request, 'myapp/coinsub.html')
 
 
-@login_required(login_url='loginform')
+@login_required(login_url='account_login')
 def coinsub(request):
     if request.user.is_authenticated:
         user = request.user
@@ -478,7 +478,7 @@ def get_subscription_type_from_plan_id(plan_id):
 # More Info
 
 
-@login_required(login_url='loginform')
+@login_required(login_url='account_login')
 def info(request):
     user = request.user
     nairaGold = NairaSubscriptionPlan.objects.get(plan_type='Gold')
@@ -711,7 +711,7 @@ def superadminlogin(request):
                     return redirect('superadminlogin')
             else:
                 messages.warning(request, 'are you lost?')
-                return redirect('loginform')
+                return redirect('account_login')
         except:
             return redirect('home')
     return render(request, 'myapp/superadminlogin.html')
@@ -1227,7 +1227,7 @@ def changepassword(request, pk):
 
                         messages.success(
                             request, 'password changed successfully')
-                        return redirect('loginform')
+                        return redirect('account_login')
                     else:
                         messages.warning(request, 'passwords does not match')
                         return HttpResponseRedirect(request.path_info)
@@ -1239,12 +1239,12 @@ def changepassword(request, pk):
                 auth.logout(request)
                 messages.warning(
                     request, 'scurity bridged, password change not successful')
-                return redirect('loginform')
+                return redirect('account_login')
 
     except Exception as e:
         auth.logout(request)
         messages.warning(request, 'scurity bridged, can not proceed try again')
-        return redirect('loginform')
+        return redirect('account_login')
     return render(request, 'myapp/fgt_pwd.html', context)
 
 
@@ -1280,13 +1280,16 @@ def loginform(request):
                 return HttpResponseRedirect(request.path_info)
         except:
             messages.warning(request, 'An error occured. Please try again')
-            return redirect('loginform')
+            return redirect('account_login')
     else:
         return render(request, 'myapp/login.html')
 
-@login_required(login_url='loginform')
+@login_required(login_url='account_login')
 def more_info(request):
     if request.user.is_authenticated:
+        user = request.user
+        if user.businessname and user.idnumber and user.idpic:
+            return redirect('portal')
 
         if request.method == "POST":
 
@@ -1300,8 +1303,8 @@ def more_info(request):
             # address = request.POST['address']
 
             # More Info
-            securityquestion = request.POST['securityquestion']
-            securityanswer = request.POST['securityanswer']
+            # securityquestion = request.POST['securityquestion']
+            # securityanswer = request.POST['securityanswer']
             phone1 = request.POST['phone']
             phone = ''.join(phone1.split())
             meansofid = request.POST['identification']
@@ -1319,10 +1322,10 @@ def more_info(request):
             whatsap = ''.join(whatsap1.split())
 
             whatsapp = f"https://wa.me/{whatsap}"
-            facebookk = request.POST['facebook']
-            facebook = f"https://www.facebook.com/{facebookk}"
-            instagramm = request.POST['instagram']
-            instagram = f"https://www.instagram.com/{instagramm}"
+            # facebookk = request.POST['facebook']
+            # facebook = f"https://www.facebook.com/{facebookk}"
+            # instagramm = request.POST['instagram']
+            # instagram = f"https://www.instagram.com/{instagramm}"
             # ---------End of More_info-----------
 
             # Check if business name is already taken
@@ -1335,8 +1338,8 @@ def more_info(request):
                 # user = User.objects.latest('id')
                 user = User.objects.get(id=request.user.id)
                 # Update user profile
-                user.securityquestion = securityquestion
-                user.securityanswer = securityanswer
+                # user.securityquestion = securityquestion
+                # user.securityanswer = securityanswer
                 user.phone = phone
                 # user.profilepic = profilepic
                 user.idpic = idpic
@@ -1352,8 +1355,8 @@ def more_info(request):
                 user.identification = meansofid
                 user.moredesc = moredesc
                 user.whatsapp = whatsapp
-                user.facebook = facebook
-                user.instagram = instagram
+                # user.facebook = facebook
+                # user.instagram = instagram
                 
                 user.save()
                 
@@ -1375,10 +1378,10 @@ def more_info(request):
                 set_trial_dates(user)
 
                 # Password Recovery------------------
-                passwordreset = f"{user.securityanswer}{user.slug}"
-                passwordresetphone = f"{user.phone}{user.slug}"
-                user.passwordresetcode = passwordreset
-                user.passwordresetphone = passwordresetphone
+                # passwordreset = f"{user.securityanswer}{user.slug}"
+                # passwordresetphone = f"{user.phone}{user.slug}"
+                # user.passwordresetcode = passwordreset
+                # user.passwordresetphone = passwordresetphone
                 # ------------------------------------------
                 user.save()
 
@@ -1387,21 +1390,21 @@ def more_info(request):
         else:
             return render(request, 'myapp/more_info.html')
     else:
-        return redirect('loginform')
+        return redirect('account_login')
 
 
-@login_required(login_url='loginform')
+@login_required(login_url='account_login')
 def contact(request):
     user = request.user
 
-    facebookk = user.facebook
-    facebook = facebookk[25:]
+    # facebookk = user.facebook
+    # facebook = facebookk[25:]
 
     whatsap = user.whatsapp
     whatsapp = whatsap[14:]
 
-    instagramm = user.instagram
-    instagram = instagramm[26:]
+    # instagramm = user.instagram
+    # instagram = instagramm[26:]
     # Check the subscription status (and set user.slug)
     check_expired(request, user)
 
@@ -1424,13 +1427,12 @@ def contact(request):
                 messages.success(request, 'Updated Successfully')
             else:
                 messages.warning(request, 'Not Updated')
-        context = {'facebook': facebook, 'whatsapp': whatsapp, 'instagram': instagram,
-                   'contact_form': contact_form, 'carts': carts, }
+        context = {'whatsapp': whatsapp, 'contact_form': contact_form, 'carts': carts, }
 
     return render(request, 'myapp/contact.html', context)
 
 
-@login_required(login_url='loginform')
+@login_required(login_url='account_login')
 def portal(request):
     if request.user.is_authenticated:
         # Get the user
@@ -1521,29 +1523,28 @@ def portal(request):
         return render(request, 'myapp/portal.html', context)
 
     # Handle the case when the user is not authenticated
-    return redirect('loginform')
+    return redirect('account_login')
 
 
-@login_required(login_url='loginform')
+@login_required(login_url='account_login')
 def profile(request):
     context = {}
     if request.user.is_authenticated:
-        # user_form = UserForm(instance=request.user)
         password_form = ChangePasswordForm()  # Create ChangePasswordForm instance
         user = request.user
         # Check the subscription status (and set user.slug)
         check_expired(request, user)
         if request.method == 'POST':
             try:
-                if 'update_pic' in request.POST:
-                    profilepic = request.FILES.get('profilepic')
+                # if 'update_pic' in request.POST:
+                #     profilepic = request.FILES.get('profilepic')
 
-                    user.profilepic = profilepic
-                    user.save()
+                #     user.profilepic = profilepic
+                #     user.save()
 
-                    messages.success(request, 'Photo updated successfully')
-                    return redirect('profile')
-                elif 'update_logo' in request.POST:
+                #     messages.success(request, 'Photo updated successfully')
+                #     return redirect('profile')
+                if 'update_logo' in request.POST:
                     logo = request.FILES.get('logo')
 
                     user.logo = logo
@@ -1558,7 +1559,7 @@ def profile(request):
                     businesstype = request.POST.get('businesstype')
                     country = request.POST.get('country')
                     currency = request.POST.get('currency')
-                    address = request.POST.get('address')
+                    # address = request.POST.get('address')
                     phone1 = request.POST.get('phone')
                     phone = ''.join(phone1.split())
 
@@ -1570,13 +1571,11 @@ def profile(request):
                     whatsap1 = request.POST['whatsapp']
                     whatsap = ''.join(whatsap1.split())
                     whatsapp = f"https://wa.me/{whatsap}"
-                    facebookk = request.POST['facebook']
-                    facebook = f"https://www.facebook.com/{facebookk}"
-                    instagramm = request.POST['instagram']
-                    instagram = f"https://www.instagram.com/{instagramm}"
+                    # facebookk = request.POST['facebook']
+                    # facebook = f"https://www.facebook.com/{facebookk}"
+                    # instagramm = request.POST['instagram']
+                    # instagram = f"https://www.instagram.com/{instagramm}"
 
-                    # Record on txt
-                    record(businessname, moredesc, firstname, lastname, user.email, user.gender, phone, country, user.state, address, user.meansofid, user.idnumber, whatsapp, facebook, instagram)
                     
                     user.first_name = firstname
                     user.last_name = lastname
@@ -1585,15 +1584,16 @@ def profile(request):
                     user.businesstype = businesstype
                     user.country = country
                     user.currency = currency
-                    user.address = address
                     user.phone = phone
+                    print(phone)
                     user.email = email
-                    user.facebook = facebook
                     user.whatsapp = whatsapp
-                    user.instagram = instagram
-                    user.record = str(f'{user}_record')+'.txt'
-
                     
+                    # Record on txt
+                    # record(businessname, moredesc, firstname, lastname, user.email, user.gender, phone, country, user.state, user.meansofid, user.idnumber, whatsapp)
+                    
+                    # user.record = str(f'{user}_record')+'.txt'
+
                     
                     user.save()
                     messages.success(
@@ -1633,23 +1633,23 @@ def profile(request):
         carts = cart.values('phone').distinct()
 
         # -----------------------------------------------------------------
-        facebookk = user.facebook
-        if facebookk:
-            facebook = facebookk[25:]
-        else:
-            facebook = None
+        # facebookk = user.facebook
+        # if facebookk:
+        #     facebook = facebookk[25:]
+        # else:
+        #     facebook = None
 
         whatsap = user.whatsapp
         whatsapp = whatsap[14:]
 
-        instagramm = user.instagram
-        if instagramm:
-            instagram = instagramm[26:]
-        else:
-            instagram = None
+        # instagramm = user.instagram
+        # if instagramm:
+        #     instagram = instagramm[26:]
+        # else:
+        #     instagram = None
 
-        context = {'facebook': facebook, 'whatsapp': whatsapp,
-                   'instagram': instagram, 'password_form': password_form, 'carts': carts}
+        context = {'whatsapp': whatsapp,
+                   'password_form': password_form, 'carts': carts}
     return render(request, 'myapp/profile.html', context)
 
 
@@ -1791,13 +1791,13 @@ def process_data(request):
         return render(request, 'myapp/register.html')
 
 
-@login_required(login_url='loginform')
+@login_required(login_url='account_login')
 def logoutbutton(request):
     auth.logout(request)
     return redirect('/')
 
 
-@login_required(login_url='loginform')
+@login_required(login_url='account_login')
 def category(request):
 
     if request.user.is_authenticated:
@@ -1820,7 +1820,7 @@ def category(request):
     return render(request, 'myapp/category.html', context)
 
 
-@login_required(login_url='loginform')
+@login_required(login_url='account_login')
 def item(request, selected_category):
     if request.user.is_authenticated:
         shop = Product.objects.filter(
@@ -1839,7 +1839,7 @@ def item(request, selected_category):
     return render(request, 'myapp/category.html', context)
 
 
-@login_required(login_url='loginform')
+@login_required(login_url='account_login')
 def editproduct(request, pk):
     shop = Product.objects.get(id=pk)
     user = shop.owner
@@ -1937,7 +1937,7 @@ def editproduct(request, pk):
     return render(request, 'myapp/editproduct.html', context)
 
 
-@login_required(login_url='loginform')
+@login_required(login_url='account_login')
 def delete(request, pk):
     product = Product.objects.get(id=pk)
 
@@ -1958,7 +1958,7 @@ def delete(request, pk):
     return render(request, 'myapp/deleteproduct.html', context)
 
 
-@login_required(login_url='loginform')
+@login_required(login_url='account_login')
 def order(request, pk):
     context = {}
     if request.user.is_authenticated:
@@ -2005,7 +2005,7 @@ def order(request, pk):
     return render(request, 'myapp/order.html', context)
 
 
-@login_required(login_url='loginform')
+@login_required(login_url='account_login')
 def clear(request, pk):
     user = request.user.slug
     product = CartItem.objects.filter(phone=pk)

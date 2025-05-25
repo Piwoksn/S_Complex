@@ -21,7 +21,6 @@ import uuid
 
 
 class User(AbstractUser):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     profilepic = models.ImageField(upload_to= 'profilepic', null=True, blank=True, default="avatar.png")
     moredesc = models.TextField(null=True, blank=True)
     businessname = models.CharField(
@@ -29,10 +28,9 @@ class User(AbstractUser):
     slug = models.SlugField(unique=True, null=True, blank=True)
     # businesstype = models.CharField(max_length=100, null=True, blank=True)
     country = models.CharField(max_length=100, null=True, blank=True)
-    state = models.CharField(max_length=100, null=True, blank=True)
-    address = models.CharField(max_length=100, null=True, blank=True)
+    # state = models.CharField(max_length=100, null=True, blank=True)
+    # address = models.CharField(max_length=100, null=True, blank=True)
     phone = models.CharField(max_length=100, null=True, blank=True)
-    email = models.EmailField(unique=True)
     meansofid = models.CharField(max_length=100, null=True, blank=True)
     idnumber = models.CharField(max_length=100, null=True, blank=True)
     idpic = models.ImageField(upload_to= 'id', null=True, blank=True)
@@ -42,28 +40,26 @@ class User(AbstractUser):
     currency = models.CharField(max_length=10, null=True, blank=True)
     coins = models.IntegerField(blank=True, null=True, default=0)
     whatsapp = models.CharField(max_length=200, null=True, blank=True)
-    facebook = models.CharField(max_length=200, null=True, blank=True)
-    instagram = models.CharField(max_length=200, null=True, blank=True)
-    username = models.CharField(max_length=100, null=True, blank=True)
-    password = models.CharField(max_length=128, null=True, blank=True)
-    gender = models.CharField(max_length=100, null=True, blank=True)
+    # facebook = models.CharField(max_length=200, null=True, blank=True)
+    # instagram = models.CharField(max_length=200, null=True, blank=True)
+    # gender = models.CharField(max_length=100, null=True, blank=True)
     # dob = models.DateField(null=True, blank=True)
     updated = models.DateTimeField(auto_now=True, null=True)
     created = models.DateTimeField(auto_now_add=True, null=True)
     subscribed = models.BooleanField(default=False, null=True, blank=True)
-    passwordresetcode = models.CharField(max_length=200, null=True, blank=True)
-    passwordresetphone = models.CharField(
-        max_length=200, null=True, blank=True)
-    securityquestion = models.CharField(max_length=200, null=True, blank=True)
-    securityanswer = models.CharField(max_length=100, null=True, blank=True)
+    # passwordresetcode = models.CharField(max_length=200, null=True, blank=True)
+    # passwordresetphone = models.CharField(
+    #     max_length=200, null=True, blank=True)
+    # securityquestion = models.CharField(max_length=200, null=True, blank=True)
+    # securityanswer = models.CharField(max_length=100, null=True, blank=True)
     # FREE TRIAL
     date = models.DateTimeField(default=datetime.now())
     trial_start = models.DateTimeField(null=True, blank=True)
     trial_end = models.DateTimeField(null=True, blank=True)
-    record = models.FileField(upload_to="records/", blank=True, null=True)
+    # record = models.FileField(upload_to="records/", blank=True, null=True)
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username']
+    # USERNAME_FIELD = 'email'
+    # REQUIRED_FIELDS = ['username']
 
     def compress_image(self, image, max_size=(800, 800), img_format='JPEG', quality=80):
         try:
