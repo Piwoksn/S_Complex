@@ -14,13 +14,14 @@ from django.core.files.base import ContentFile
 from PIL import Image
 from io import BytesIO
 import os
+import uuid
 
 
 # # Create your models here.
 
 
 class User(AbstractUser):
-
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     profilepic = models.ImageField(upload_to= 'profilepic', null=True, blank=True, default="avatar.png")
     moredesc = models.TextField(null=True, blank=True)
     businessname = models.CharField(
@@ -136,14 +137,6 @@ class User(AbstractUser):
             self.slug = slugify(self.businessname)
 
 
-# @receiver(pre_save, sender=User)
-# def delete_old_images(sender, instance, **kwargs):
-#     if instance.pk:
-#         old_item = User.objects.get(pk=instance.pk)
-#         if old_item.profilepic != instance.profilepic:
-#             old_item.profilepic.delete(save=False)
-#         if old_item.logo != instance.logo:
-#             old_item.logo.delete(save=False)
 
 @receiver(pre_save, sender=User)
 def delete_old_images(sender, instance, **kwargs):
@@ -168,5 +161,3 @@ def delete_image(sender, instance, **kwargs):
 def delete_logo(sender, instance, **kwargs):
     instance.logo.delete(save=False)
 
-
-# -------------------------------COMMON.PY----------------------------------------------

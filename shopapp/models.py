@@ -16,6 +16,7 @@ from django.contrib.sessions.models import Session
 
 
 class Product(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     owner = models.ForeignKey(
         User, on_delete=models.CASCADE, null=True, blank=True)
     itemcategory = models.CharField(max_length=200, null=True, blank=True)
@@ -103,7 +104,7 @@ def delete_image(sender, instance, **kwargs):
 
 # ____________________________________
 class CartItem(models.Model):
-
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     product = models.ForeignKey(
         Product, on_delete=models.CASCADE, null=True, blank=True)
 

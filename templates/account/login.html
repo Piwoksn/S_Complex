@@ -1,4 +1,5 @@
 {% extends 'reg_log.html' %} {% load static %} {% block content %}
+{% load crispy_forms_tags %}
 <!--Logo-->
 <div class="container my-5">
   <!--Login Form-->
@@ -26,36 +27,9 @@
             {% csrf_token %}
             <!--USername-->
             <div class="col-12">
-              <label for="yourEmail" class="form-label">Email</label>
-              <div class="input-group has-validation">
-                <span class="input-group-text" id="inputGroupPrepend">@</span>
-                <input
-                  type="text"
-                  name="email"
-                  class="form-control"
-                  id="yourEmail"
-                  required
-                />
-                <div class="invalid-feedback">Please enter your email.</div>
-              </div>
-            </div>
-            <!--End Username-->
-            <!--Password-->
-            <div class="col-12 my-2 mb-5">
-              <label for="yourPassword" class="form-label">Password</label>
-              <input
-                type="password"
-                name="password"
-                class="form-control"
-                id="yourPassword"
-                autocomplete="password"
-                required
-              />
-              <div class="invalid-feedback">Please enter your password!</div>
-            </div>
-            <!--End Password-->
+              
+            {{ form | crispy }}
 
-            <div class="col-12">
               <button class="btn btn-primary w-100 mb-2" type="submit">
                 Login
               </button>

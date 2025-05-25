@@ -31,6 +31,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'allauth',
+    'allauth.account',
+    'crispy_forms',
+    'crispy_bootstrap5',
     'myapp',
     'shopapp',
     'subscription',
@@ -39,10 +43,15 @@ INSTALLED_APPS = [
     'chats',
 ]
 
+ALLOWED_CRISPY_TEMPLATE_PACKS = ['bootstrap5',]
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
+
+
 # My Abstract User
 AUTH_USER_MODEL = 'myapp.User'
 
 MIDDLEWARE = [
+    'allauth.account.middleware.AccountMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -164,7 +173,6 @@ SESSION_COOKIE_NAME = 'shopping_cart_session'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # ----------------------------------------------------------------------
 # SMTP Configuration
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_HOST = 'smtp.gmail.com'
 # EMAIL_PORT = 587
 # EMAIL_USE_TLS = True
@@ -172,6 +180,17 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # EMAIL_HOST_PASSWORD = 'kdwpazklznnhemxl'
 # EMAIL_USE_SSL = False
 
+AUTHENTICATION_BACKENDS =[
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AccountBackend",
+]
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+ACCOUNT_LOGOUT_REDIRECT = 'home'
+LOGIN_REDIRECT_URL = 'portal'
+ACCOUNT_LOGIN_METHOD = {'email'}
+ACCOUNT_SIGNUP_FIELDS = ['email*', 'password1']
 
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # # EMAIL_HOST = 'smtp.office365.com'
