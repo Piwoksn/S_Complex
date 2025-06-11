@@ -384,34 +384,34 @@ def shop(request, pk):
 def addProduct(request):
     user = request.user
     if request.method == 'POST':
-        try:
-            category = request.POST.get('category')
-            itemimage = request.FILES.get('itemimage')
-            itemimage2 = request.FILES.get('itemimage2')
-            itemimage3 = request.FILES.get('itemimage3')
-            itemvideo = request.FILES.get('itemvideo4')
-            itemname = request.POST.get('itemname')
-            itemprice = request.POST.get('itemprice')
-            itemdiscount = request.POST.get('itemdiscount')
-            itemcolours = request.POST.get('itemcolour')
-            itemsize = request.POST.get('itemsize')
-            itemdescription = request.POST.get('itemdescription')
+        # try:
+        category = request.POST.get('category')
+        itemimage = request.FILES.get('itemimage')
+        itemimage2 = request.FILES.get('itemimage2')
+        itemimage3 = request.FILES.get('itemimage3')
+        itemvideo = request.FILES.get('itemvideo4')
+        itemname = request.POST.get('itemname')
+        itemprice = request.POST.get('itemprice')
+        itemdiscount = request.POST.get('itemdiscount')
+        itemcolours = request.POST.get('itemcolour')
+        itemsize = request.POST.get('itemsize')
+        itemdescription = request.POST.get('itemdescription')
 
-            if itemdiscount != 0:
-                amount = float(itemprice)-float(itemdiscount)
+        if itemdiscount != 0:
+            amount = float(itemprice)-float(itemdiscount)
 
-            else:
-                amount = itemprice
+        else:
+            amount = itemprice
 
-            Product.objects.create(owner=user, itemcategory=category, itemimage=itemimage, itemimage2=itemimage2, itemimage3=itemimage3, itemvideo=itemvideo, itemname=itemname, itemprice=itemprice, itemdiscount=itemdiscount,
-                                   itemamount=amount, itemcolors=itemcolours, itemsize=itemsize, itemdescription=itemdescription)
+        Product.objects.create(owner=user, itemcategory=category, itemimage=itemimage, itemimage2=itemimage2, itemimage3=itemimage3, itemvideo=itemvideo, itemname=itemname, itemprice=itemprice, itemdiscount=itemdiscount,
+                                itemamount=amount, itemcolors=itemcolours, itemsize=itemsize, itemdescription=itemdescription)
 
-            messages.success(request, 'Successfully uploaded to shop')
-            return redirect('portal')
-        except:
-            messages.warning(
-                request, 'an error occured, field must not be empty')
-            return redirect('portal')
+        messages.success(request, 'Successfully uploaded to shop')
+        return redirect('portal')
+        # except:
+        #     messages.warning(
+        #         request, 'an error occured, field must not be empty')
+        #     return redirect('portal')
 
     else:
         messages.warning(request, 'Not Successful')

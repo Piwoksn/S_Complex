@@ -1124,7 +1124,7 @@ def home(request):
                 
         if not user.businessname:
             messages.success(
-                request, f"Welcome back {user.first_name} {user.last_name}, please complete your registration process")
+                request, f"please complete your registration process")
             return redirect('more_info')
         else:
             add_coins_daily(request, user)
