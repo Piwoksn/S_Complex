@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
     'rest_framework',
     'dj_rest_auth',
+    'rest_framework.authtoken',
     
     # local apps
     'subscription',
