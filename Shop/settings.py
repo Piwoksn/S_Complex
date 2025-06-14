@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     'rest_framework',
-    'django_rest_auth',
+    'dj_rest_auth',
     
     # local apps
     'subscription',
