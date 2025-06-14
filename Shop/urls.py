@@ -6,10 +6,13 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('myapp.urls')),
-    path('accounts/', include('allauth.urls')),
     path('', include('shopapp.urls')),
     path('', include('subscription.urls')),
     path('', include('chats.urls')),
+    path('api/', include('api.urls')),
+    # 3rd Party 
+    path('accounts/', include('allauth.urls')),
+    
 ]
 
 # Serve media files during development

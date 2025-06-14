@@ -33,16 +33,21 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    # 3rd Party
     'allauth',
     'allauth.account',
     'crispy_forms',
     'crispy_bootstrap5',
+    'rest_framework',
+    # 'paypal.standard.ipn',
+    
+    # local apps
+    'subscription',
     'myapp',
     'shopapp',
-    'subscription',
-    # 'paypal.standard.ipn',
-    'rest_framework',
     'chats',
+    'api',
 ]
 
 ALLOWED_CRISPY_TEMPLATE_PACKS = ['bootstrap5',]
