@@ -20,3 +20,7 @@ class ProductListView(generics.ListCreateAPIView):
 class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ProductSerializer
     queryset = Product.objects.all()
+
+class CartItemView(generics.ListCreateAPIView):
+    serializer_class = CartItemSerializer
+    queryset = CartItem.objects.all()
