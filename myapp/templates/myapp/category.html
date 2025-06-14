@@ -70,8 +70,14 @@
                                 <div class="card mb-3">
                                     <div class="row g-0">
                                         <div class="col-md-2 d-flex justify-content-center align-items-center">
+                                            
+                                            {% if irem.itemimage %}
+                                                
+                                            
                                             <img src="{{ item.itemimage.url }}" class="img-fluid rounded-start"
-                                                alt="{{ item.itemname }}">
+                                            alt="{{ item.itemname }}">
+                                            
+                                            {% endif %}
                                         </div>
                                         <div class="col-md-8">
                                             <div class="card-body">

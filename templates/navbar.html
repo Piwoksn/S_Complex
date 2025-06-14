@@ -14,7 +14,9 @@
             <div class="col-auto">
                 {% if user.is_authenticated %}
                 <a href="{% url 'portal' %}" class="navbar-brand text-white logo">
+                    {% if user.logo %}
                     <img src="{{user.logo.url}}" alt="logo">
+                    {% endif %}
                 </a>
                 {% else %}
                 <a href="{% url 'portal' %}" class="navbar-brand text-white">

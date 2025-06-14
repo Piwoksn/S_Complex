@@ -16,7 +16,13 @@
                 </a>
                 <input type="file" id="fileInput" name="itemimage" style="display: none;" accept="image/*" required>
                 <center>
+                    
+                    {% if shop.itemimage %}
+                        
+                    
                     <img src="{{shop.itemimage.url}}" alt="Item Image" id="selectedImage" style="max-width: 100px;">
+                    
+                    {% endif %}
                 </center>
                 <!-- Script for handling image upload -->
                 <script>

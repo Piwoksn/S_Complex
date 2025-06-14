@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     'rest_framework',
-    # 'paypal.standard.ipn',
+    'django_rest_auth',
     
     # local apps
     'subscription',
@@ -49,6 +49,13 @@ INSTALLED_APPS = [
     'chats',
     'api',
 ]
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.TokenAuthentication",
+    ]
+}
 
 ALLOWED_CRISPY_TEMPLATE_PACKS = ['bootstrap5',]
 CRISPY_TEMPLATE_PACK = 'bootstrap5'

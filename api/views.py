@@ -11,6 +11,12 @@ class UserView(generics.ListAPIView):
 class UserDetailView(generics.RetrieveUpdateAPIView):
     serializer_class = UserSerializer
     queryset = get_user_model().objects.all()
+    
+    def form_valid(self, form):
+        form.instance.logo = self.request.user.logo
+        form.save()
+        
+        return super().form_valid(self, form)
 
 
 class ProductListView(generics.ListCreateAPIView):

@@ -440,7 +440,9 @@
                                     <div class="card-body m-0 p-0">
                                         <small class="text-secondary">updated@{{item.updated |timesince}}</small>
                                         <p class="text-secondary"><b>{{item.itemname}}</b></p>
+                                        {% if item.itemimage %}
                                         <img src="{{item.itemimage.url}}" alt="image" style="width: 50px;">
+                                        {% endif %}
                                         <small
                                             class="text-secondary">{{user.currency}}{{item.itemamount|floatformat:2}}</small>
                                         <br>
