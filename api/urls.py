@@ -1,10 +1,19 @@
 from django.urls import path
-from .views import UserView, UserDetailView, ProductListView, ProductDetailView, CartItemView
+from .views import ShopView, ProductDetailView, AllCartItemView, UserCartItemView, UserListView
+from rest_framework.routers import SimpleRouter
+
+route  = SimpleRouter()
+
+route.register('user', UserListView, basename= ' user')
+
+
+
 
 urlpatterns = [
-    path('', UserView.as_view()),
-    path('<int:pk>/', UserDetailView.as_view()),
-    path('products/', ProductListView.as_view()),
+    path('shop/<slug:pk>/', ShopView.as_view()),
     path('products/<uuid:pk>/', ProductDetailView.as_view()),
-    path('cartitems/', CartItemView.as_view()),
-]
+    path('cartitems/', AllCartItemView.as_view()),
+    path('cartitems/<str:pk>/', UserCartItemView.as_view()),
+] 
+
+urlpatterns += route.urls

@@ -341,43 +341,6 @@ def shop(request, pk):
     except Exception:
         return HttpResponse('Page not available')
 
-# main view
-# def shop(request, pk):
-#     try:
-#         user = get_object_or_404(User, slug=pk)
-#         shop = Product.objects.filter(owner=user)
-#         categories = shop.values('itemcategory').distinct()
-
-#         # Initialize the cart as an empty list if it doesn't exist in the cookies
-#         cart = request.COOKIES.get('cart', '[]')
-#         cart = json.loads(cart)
-
-#         # Update the cart count in the context
-#         cart_count = len(cart)
-
-#         # Calculate discount price and percentage for each product in the shop
-#         # for item in shop:
-#         #     if item.itemdiscount:
-#         #         discountprice = item.itemprice-item.itemdiscount
-#         #         discountpercentage = int(
-#         #             (item.itemdiscount/item.itemprice)*100)
-#         #         print(discountpercentage)
-#         #     else:
-#         #         discountprice = None
-#         #         discountpercentage = None
-
-#         context = {
-#             'user': user,
-#             'shop': shop,
-#             'categories': categories,
-#             'cart_count': cart_count,
-#             # 'discountprice': discountprice,
-#             # 'discountpercentage': discountpercentage,
-#         }
-#     except Exception:
-#         return HttpResponse('Page not available')
-
-#     return render(request, 'shopapp/shop.html', context)
 
 
 @login_required(login_url='loginform')

@@ -12,6 +12,7 @@ urlpatterns = [
     path('api/', include('api.urls')),
     # 3rd Party 
     path('api/auth/', include('dj_rest_auth.urls')),
+    path('api/auth/register/', include('dj_rest_auth.registration.urls')),
     path('accounts/', include('allauth.urls')),
     
     
