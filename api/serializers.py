@@ -3,11 +3,30 @@ from django.contrib.auth import get_user_model
 from shopapp.models import Product, CartItem
 
 class UserSerializer(serializers.ModelSerializer):
-    
+    profilepic = serializers.ImageField(required=False, allow_null=True)
+    logo = serializers.ImageField(required=False, allow_null=True)
+    idpic = serializers.ImageField(required=False, allow_null=True)
     class Meta:
         model = get_user_model()
         fields = ("id", "profilepic", "moredesc",
                   "businessname", "slug", "country", "phone", "email", "meansofid", "idnumber", "idpic", "logo", "currency", "coins", "whatsapp", "username", "password", "updated", "created", "subscribed", "date", "trial_start", "trial_end")
+        
+        extra_kwargs = {
+            'password': {'write_only': True}
+        }
+        
+        def update(self, instance, validated_data):
+            # Preserve profilepic if not in request
+            if 'profilepic' not in validated_data:
+                validated_data['profilepic'] = instance.profilepic
+
+            if 'logo' not in validated_data:
+                validated_data['logo'] = instance.logo
+
+            if 'idpic' not in validated_data:
+                validated_data['idpic'] = instance.idpic
+
+            return super().update(instance, validated_data)
 
 class ProductSerializer(serializers.ModelSerializer):
     
