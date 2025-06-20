@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'dj_rest_auth',
     'rest_framework.authtoken',
+    'corsheaders',
     
     # local apps
     'subscription',
@@ -67,6 +68,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap5'
 MIDDLEWARE = [
     'allauth.account.middleware.AccountMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -74,6 +76,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CORS_ORIGIN_WHITELIST = (
+    "http://localhost:8000",
+)
 
 ROOT_URLCONF = 'Shop.urls'
 
